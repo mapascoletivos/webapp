@@ -1,0 +1,67 @@
+{
+	"name": "riversproject",
+	"description": "Collaborative river report mapping client",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/oeco/rivesrproject.git"
+	},
+	"version": "0.1.0",
+	"author": "Ecolab <gustavo.faleiros@gmail.com>",
+	"contributors": [
+		{
+			"name": "Miguel Peixe",
+			"email": "miguel@cardume.art.br"
+		},
+		{
+			"name": "Vitor George",
+			"email": "vitor.george@gmail.com"
+		}
+	],
+	"scripts": {
+		"build": "npm run bundle && ./node_modules/.bin/browserify -t brfs -r topojson app/app.js | ./node_modules/.bin/uglifyjs -mt > dist/app.js",
+		"bundle": "./node_modules/.bin/browserify app/vendor.js | ./node_modules/.bin/uglifyjs -mt > lib/vendor.js",
+		"install": "cp ./node_modules/maki/www/images/maki-sprite.png ./img/maki-sprite.png && ./node_modules/.bin/napa && npm run build"
+	},
+	"dependencies": {
+		"less": "latest",
+		"leaflet": "latest",
+		"leaflet-draw": "latest",
+		"mapbox.js": "latest",
+		"maki": "latest",
+		"brfs": "0.0.8",
+		"topojson": "1.4.5",
+		"togeojson": "0.5.0",
+		"csv2geojson": "3.6.1",
+		"osmtogeojson": "2.0.4",
+		"jquery": "latest",
+		"jquery-ui-browserify": "latest",
+		"markdown": "latest",
+		"grvtr": "latest",
+		"napa": "latest",
+		"browserify": "latest",
+		"uglify-js": "latest"
+	},
+	"napa": {
+		"angular": "angular/bower-angular",
+		"angular-route": "angular/bower-angular-route",
+		"angular-sanitize": "angular/bower-angular-sanitize",
+		"angular-resource": "angular/bower-angular-resource",
+		"angular-animate": "angular/bower-angular-animate",
+		"angular-elastic": "monospaced/angular-elastic",
+		"angular-fitvids": "jimmyhillis/angular-fitvids",
+		"angular-ui-utils": "angular-ui/ui-utils",
+		"angular-ui-router": "angular-ui/ui-router",
+		"angular-ui-sortable": "angular-ui/ui-sortable",
+		"angular-ui-slider": "angular-ui/ui-slider",
+		"angular-modal": "miguelpeixe/angular-modal",
+		"ngInfiniteScroll": "BinaryMuse/ngInfiniteScroll-bower",
+		"eventable": "madebymany/eventable",
+		"sir-trevor": "madebymany/sir-trevor-js",
+		"bootstrap-colorpicker": "buberdds/angular-bootstrap-colorpicker"
+	},
+	"keywords": [
+		"riversproject",
+		"mapascoletivos",
+		"openstreetmap"
+	]
+}
