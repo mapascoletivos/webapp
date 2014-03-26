@@ -15,6 +15,12 @@ exports.MapActionsCtrl = [
 	'MapShare',
 	function($rootScope, $scope, $q, $location, Message, Session, Map, MapShare) {
 
+		$scope.$session = Session;
+
+		$scope.$watch('$session.user()', function(user) {
+			$scope.user = user;
+		});
+
 		$scope.getUrl = function(map) {
 
 			var url = window.location.protocol + '//' + window.location.host + '/maps/' + map._id;
@@ -28,12 +34,12 @@ exports.MapActionsCtrl = [
 		 */
 		$scope.canEdit = function(map) {
 
-			if(!map || !Session.user)
+			if(!map || !$scope.user)
 				return false;
 
-			if(typeof map.creator == 'string' && map.creator == Session.user._id) {
+			if(typeof map.creator == 'string' && map.creator == $scope.user._id) {
 				return true;
-			} else if(typeof map.creator == 'object' && map.creator._id == Session.user._id) {
+			} else if(typeof map.creator == 'object' && map.creator._id == $scope.user._id) {
 				return true;
 			}
 

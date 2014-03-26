@@ -20,7 +20,9 @@
 	"scripts": {
 		"build": "npm run bundle && ./node_modules/.bin/browserify -t brfs -r topojson app/app.js | ./node_modules/.bin/uglifyjs -mt > dist/app.js",
 		"bundle": "./node_modules/.bin/browserify app/vendor.js | ./node_modules/.bin/uglifyjs -mt > lib/vendor.js",
-		"install": "cp ./node_modules/maki/www/images/maki-sprite.png ./img/maki-sprite.png && ./node_modules/.bin/napa && npm run build"
+		"install": "cp ./node_modules/maki/www/images/maki-sprite.png ./img/maki-sprite.png && [ ! -f ./app/config.js ] && cp ./app/config.example.js ./app/config.js && ./node_modules/.bin/napa && npm run build",
+		"watch": "./node_modules/.bin/watchify -t brfs -r topojson app/app.js -o dist/app.js"
+
 	},
 	"dependencies": {
 		"less": "latest",
@@ -39,7 +41,8 @@
 		"grvtr": "latest",
 		"napa": "latest",
 		"browserify": "latest",
-		"uglify-js": "latest"
+		"uglify-js": "latest",
+		"watchify": "0.6.2"
 	},
 	"napa": {
 		"angular": "angular/bower-angular",

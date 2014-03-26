@@ -9,7 +9,6 @@ require('./helpers');
  * Core modules
  */
 
-require('./core/session');
 require('./core/title');
 require('./core/index');
 require('./core/loading');
@@ -29,6 +28,7 @@ require('./common/mapView');
  * Apps
  */
 
+require('./session/app');
 require('./user/app');
 require('./import/app');
 require('./feature/app');
@@ -92,7 +92,8 @@ angular.module('mapasColetivos', [
 		$stateProvider
 			.state('home', {
 				url: '/',
-				controller: 'IndexCtrl'
+				controller: 'IndexCtrl',
+				templateUrl: '/views/landing.html'
 			});
 
 		$locationProvider.html5Mode(true);
@@ -100,7 +101,7 @@ angular.module('mapasColetivos', [
 		var interceptor = ['$rootScope', '$q', '$location', function(scope, $q, $location) {
 
 			function success(response) {
-				return response;''
+				return response;
 			}
 
 			function error(response) {
@@ -108,7 +109,7 @@ angular.module('mapasColetivos', [
 				var status = response.status;
 
 				if (status == 401) {
-					window.location = '/login';
+					$location.path('/login');
 					return;
 				}
 				// otherwise

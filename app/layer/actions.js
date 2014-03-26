@@ -10,12 +10,11 @@ exports.LayerActionsCtrl = [
 	'$q',
 	'$location',
 	'MessageService',
-	'SessionService',
 	'Layer',
 	'LayerShare',
 	'NewLayer',
 	'TileLayerEditor',
-	function($rootScope, $scope, $q, $location, Message, Session, Layer, LayerShare, NewLayerBox, TileLayerEditor) {
+	function($rootScope, $scope, $q, $location, Message, Layer, LayerShare, NewLayerBox, TileLayerEditor) {
 
 		$scope.getUrl = function(layer) {
 

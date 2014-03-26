@@ -33,6 +33,22 @@ exports.Layer = [
 						}
 					}
 				},
+				'userLayers': {
+					isArray: false,
+					method: 'GET',
+					url: apiPrefix + '/user/layers',
+					loadingMessage: 'Carregando camadas',
+					params: {
+						perPage: 10,
+						page: 1
+					},
+					interceptor: {
+						response: function(data) {
+							params = data.config.params;
+							return data.data;
+						}
+					}
+				},
 				'update': {
 					method: 'PUT',
 					loadingMessage: 'Atualizando camada'
@@ -100,12 +116,12 @@ exports.Layer = [
 			},
 			isOwner: function(layer) {
 
-				if(!layer || !Session.user)
+				if(!layer || !Session.user())
 					return false;
 
-				if(typeof layer.creator == 'string' && layer.creator == Session.user._id) {
+				if(typeof layer.creator == 'string' && layer.creator == Session.user()._id) {
 					return true;
-				} else if(typeof layer.creator == 'object' && layer.creator._id == Session.user._id) {
+				} else if(typeof layer.creator == 'object' && layer.creator._id == Session.user()._id) {
 					return true;
 				}
 
@@ -114,16 +130,16 @@ exports.Layer = [
 			},
 			isContributor: function(layer) {
 
-				if(!layer || !Session.user)
+				if(!layer || !Session.user())
 					return false;
 
 				var is = false;
 
 				if(layer.contributors && layer.contributors.length) {
 					angular.forEach(layer.contributors, function(contributor) {
-						if(typeof contributor == 'string' && contributor == Session.user._id)
+						if(typeof contributor == 'string' && contributor == Session.user()._id)
 							is = true;
-						else if(typeof contributor == 'object' && contributor._id == Session.user._id)
+						else if(typeof contributor == 'object' && contributor._id == Session.user()._id)
 							is = true;
 					});
 				}

@@ -6,11 +6,26 @@ angular.module('mapasColetivos.index', [])
 	'$scope',
 	'SessionService',
 	'$location',
-	function($scope, SessionService, $location) {
+	function($scope, Session, $location) {
 
-		if(SessionService.authenticated) {
-			$location.path('/dashboard');
-		}
+		$scope.$session = Session;
+
+		$scope.$watch('$session.authenticated()', function(auth) {
+			if(auth)
+				$location.path('/dashboard/');
+		});
+
+		$scope.$on('$stateChangeSuccess', function() {
+
+			if($location.path() == '/') {
+				angular.element('html').addClass('landing');
+			}
+
+		});
+
+		$scope.$on('$stateChangeStart', function() {
+			angular.element('html').removeClass('landing');
+		})
 
 	}
 ]);

@@ -19,6 +19,13 @@ exports.FeatureCtrl = [
 	'SessionService',
 	function($scope, $rootScope, $state, $stateParams, $location, Feature, Content, Message, MapService, Session) {
 
+		$scope.$session = Session;
+
+		$scope.$watch('$session.user()', function(user) {
+			$scope.user = user;
+		});
+
+
 		$scope.objType = 'feature';
 
 		$scope.$feature = Feature;
@@ -169,12 +176,12 @@ exports.FeatureCtrl = [
 				var featureCreatorId = feature.creator._id ? feature.creator._id : feature.creator;
 
 				// User is feature owner
-				if(featureCreatorId == Session.user._id) {
+				if(featureCreatorId == $scope.user._id) {
 					return true;
 				}
 
 				// User is layer owner
-				if(layer.creator._id == Session.user._id) {
+				if(layer.creator._id == $scope.user._id) {
 					return true;
 				}
 

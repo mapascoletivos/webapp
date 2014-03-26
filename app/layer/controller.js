@@ -16,11 +16,10 @@ exports.LayerCtrl = [
 	'Maki',
 	'Content',
 	'MessageService',
-	'SessionService',
 	'LoadingService',
 	'MapService',
 	'MapView',
-	function($scope, $rootScope, $location, $state, $stateParams, $q, Page, Layer, Feature, Maki, Content, Message, Session, Loading, MapService, MapView) {
+	function($scope, $rootScope, $location, $state, $stateParams, $q, Page, Layer, Feature, Maki, Content, Message, Loading, MapService, MapView) {
 
 		$scope.$layer = Layer;
 		$scope.$feature = Feature;
@@ -103,8 +102,6 @@ exports.LayerCtrl = [
 
 			Layer.resource.get({layerId: $stateParams.layerId}, function(layer) {
 
-				origLayer = layer;
-
 				if(!layer.styles) {
 					layer.styles = {
 						Point: {
@@ -127,15 +124,12 @@ exports.LayerCtrl = [
 					};
 				}
 
+				origLayer = angular.copy(layer);
 				$scope.layer = angular.copy(layer);
 
 				$scope.$watch('layer.styles', function() {
 					Layer.edit($scope.layer); // trigger digest
 				});
-
-				$scope.previewLayer = function() {
-					populateMap($scope.layer.features, $scope.layer, true, false);
-				};
 
 				$scope.baseUrl = '/layers/' + layer._id;
 
@@ -158,14 +152,9 @@ exports.LayerCtrl = [
 
 					var tilelayer = MapService.addTileLayer(layer.url);
 
-					Loading.show('Carregando camada');
-
 					if(layer.properties.service == 'mapbox') {
 						tilelayer.on('load', _.once(function() {
 							MapService.renderTileJSON(tilelayer.getTileJSON());
-							$rootScope.$apply(function() {
-								Loading.hide();
-							});
 						}));
 					}
 
@@ -215,12 +204,23 @@ exports.LayerCtrl = [
 				 */
 				if($location.path().indexOf('edit') !== -1) {
 
+					$scope.previewLayer = function() {
+						populateMap($scope.layer.features, $scope.layer, true, false);
+					};
+
 					var destroyConfirmation = $rootScope.$on('$stateChangeStart', function(event) {
-						if(!angular.equals($scope.layer, origLayer))
+						var editing = angular.copy($scope.layer);
+						var original = angular.copy(origLayer);
+						delete editing.features;
+						delete editing.contents;
+						delete original.features;
+						delete original.contents;
+						if(!angular.equals(editing, original)) {
 							if(!confirm('Deseja sair sem salvar alterações?'))
 								event.preventDefault();
 							else
-								Layer.deleteDraft(layer);
+								Layer.deleteDraft($scope.layer);
+						}
 					});
 
 					$scope.$on('$destroy', function() {
@@ -289,6 +289,10 @@ exports.LayerCtrl = [
 						$scope.layer.contents = contents;
 					});
 
+					$scope.$watch('$feature.get()', function(features) {
+						$scope.layer.features = features;
+					});
+
 					if($scope.layer.title == 'Untitled') {
 						$scope.layer.title = '';
 						Page.setTitle('Nova camada');
@@ -296,14 +300,14 @@ exports.LayerCtrl = [
 
 					$scope.$on('layer.save.success', function(event, layer) {
 						Page.setTitle(layer.title);
-						origLayer = layer;
+						origLayer = angular.copy(layer);
 						$scope.layer = angular.copy(layer);
 						populateMap($scope.layer.features, $scope.layer, true, false);
 					});
 					
 					$scope.close = function() {
 
-						if(Layer.isDraft(layer)) {
+						if(Layer.isDraft($scope.layer)) {
 							$location.path('/dashboard/layers').replace();
 						} else {
 							$location.path('/layers/' + layer._id);

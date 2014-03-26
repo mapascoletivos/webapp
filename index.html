@@ -22,35 +22,33 @@
 </head>
 <body>
 	<header id="mast-header">
-		<nav class="navbar" role="navigation">
-			<div class="container">
-				<div class="six columns">
-					<h1>
-						<a class="brand" href="/" target="_self">
-							InfoAmazonia Rios
-							<img alt="InfoAmazonia Rios" src="/img/logo-small.png" />
-						</a>
-					</h1>
-				</div>
-				<div class="six columns">
-					<ul id="mast-nav">
-						<li><a href="/explore" title="Explorar">Explorar</a></li>
-						<li><a href="/dashboard" title="Painel de Controle">
-							<span class="lsf">&#xe055;</span>
-							Painel de Controle
-						</a></li>
-						<li><a href="/logout" title="Sair">
-							<span class="lsf">&#xE088;</span>
-							Sair
-						</a></li>
-						<li><a href="/login" title="Entrar">
-							<span class="lsf">&#xE087;</span>
-							Entrar
-						</a></li>
-					</ul>
-				</div>
+		<div class="container">
+			<div class="five columns">
+				<h1>
+					<a class="brand" href="/">
+						InfoAmazonia Rios
+						<img alt="InfoAmazonia Rios" src="/img/logo-small.png" />
+					</a>
+				</h1>
 			</div>
-		</nav>
+			<div class="seven columns">
+				<ul id="mast-nav" ng-controller="LoginCtrl">
+					<li><a href="/explore" title="Explorar">Explorar</a></li>
+					<li ng-show="isAuthenticated"><a href="/dashboard" title="Painel de Controle">
+						<span class="lsf">&#xe055;</span>
+						Painel de Controle
+					</a></li>
+					<li ng-show="isAuthenticated"><a title="Sair" ng-click="logout()">
+						<span class="lsf">&#xE088;</span>
+						Sair
+					</a></li>
+					<li ng-hide="isAuthenticated"><a href="/login" title="Entrar">
+						<span class="lsf">&#xE087;</span>
+						Entrar
+					</a></li>
+				</ul>
+			</div>
+		</div>
 	</header>
 	<div id="messages" ng-controller="MessageCtrl">
 		<div class="message-content animte-show" ng-repeat="message in messages" ng-show="message.text">

@@ -32,16 +32,28 @@ angular.module('mapasColetivos.dashboard', [])
 	'User',
 	'Layer',
 	'Map',
-	function($scope, $rootScope, $timeout, $state, $stateParams, SessionService, $location, Page, User, Layer, Map) {
+	function($scope, $rootScope, $timeout, $state, $stateParams, Session, $location, Page, User, Layer, Map) {
 
 		Page.setTitle('Painel de Controle');
 
-		if(!SessionService.authenticated) {
-			window.location = '/login';
-		}
-		$scope.user = SessionService.user;
+		$scope.isDashboard = true;
 
-		$scope.user.grvtr = User.gravatar($scope.user.email, 100);
+		$scope.$session = Session;
+
+		$scope.$watch('$session.authenticated()', function(auth) {
+
+			if(!auth) {
+				$location.path('/login/');
+			}
+
+		});
+
+		$scope.$watch('$session.user()', function(user) {
+			if(user) {
+				$scope.user = user;
+				$scope.user.grvtr = User.gravatar($scope.user.email, 100);
+			}
+		});
 
 		var stateFunctions = function() {
 			if($state.current.name === 'dashboard') {
@@ -59,9 +71,7 @@ angular.module('mapasColetivos.dashboard', [])
 		});
 
 		$scope.$layer = Layer;
-		Layer.resource.query({
-			creatorOnly: true
-		}, function(res) {
+		Layer.resource.userLayers(function(res) {
 			$scope.totalLayer = res.layersTotal;
 			$scope.layers = res.layers;
 
@@ -80,9 +90,8 @@ angular.module('mapasColetivos.dashboard', [])
 		});
 
 		$scope.$map = Map;
-		Map.resource.query({
-			creatorOnly: true
-		}, function(res) {
+		Map.resource.userMaps(function(res) {
+			
 			$scope.totalMap = res.mapsTotal;
 			$scope.maps = res.maps;
 

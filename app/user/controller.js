@@ -106,6 +106,23 @@ exports.UserCtrl = [
 
 		}
 
+		$scope.profileUrl = function(user) {
+
+			if(typeof user !== 'undefined') {
+
+				var slug = user._id;
+
+				if(user.username)
+					slug =  user.username;
+	
+				return '/user/' + slug + '/';
+	
+			}
+
+			return '';
+
+		}
+
 		/* 
 		 * Profile page
 		 */

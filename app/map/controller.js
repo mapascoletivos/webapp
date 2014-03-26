@@ -22,7 +22,11 @@ exports.MapCtrl = [
 	'SessionService',
 	function($scope, $rootScope, $timeout, $location, $state, $stateParams, Page, Map, Layer, Content, Feature, MapService, MapView, Message, Session) {
 
-		$scope.user = Session.user;
+		$scope.$session = Session;
+
+		$scope.$watch('$session.user()', function(user) {
+			$scope.user = user;
+		});
 
 		$scope.$map = Map;
 

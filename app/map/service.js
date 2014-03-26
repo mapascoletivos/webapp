@@ -31,6 +31,22 @@ exports.Map = [
 						}
 					}
 				},
+				'userMaps': {
+					isArray: false,
+					method: 'GET',
+					url: apiPrefix + '/user/maps',
+					loadingMessage: 'Carregando mapas',
+					params: {
+						perPage: 10,
+						page: 1
+					},
+					interceptor: {
+						response: function(data) {
+							params = data.config.params;
+							return data.data;
+						}
+					}
+				},
 				'get': {
 					method: 'GET',
 					loadingMessage: 'Carregando mapa',
