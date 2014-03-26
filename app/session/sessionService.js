@@ -7,7 +7,8 @@ module.exports = [
 	'$rootScope',
 	'$location',
 	'apiPrefix',
-	function($window, $q, $http, $rootScope, $location, apiPrefix) {
+	'config',
+	function($window, $q, $http, $rootScope, $location, apiPrefix, config) {
 		return {
 			authenticate: function(credentials, callback) {
 				$http

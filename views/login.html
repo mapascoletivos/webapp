@@ -21,8 +21,14 @@
 		<div class="social-login">
 			<h2>Conecte-se via</h2>
 			<div class="social-networks">
-				<a href="/auth/facebook" target="_self" class="lsf facebook" title="Facebook">&#xE047;</a>
-				<a href="/auth/google" target="_self" class="lsf google" title="Google">&#xE05a;</a>
+				<form action="{{authFacebook}}" method="GET">
+					<input type="hidden" name="callback_url" value="{{local}}" /> 
+					<input type="submit" class="lsf facebook" title="Facebook" value="&#xE047;" />
+				</form>
+				<form action="{{authGoogle}}" method="POST">
+					<input type="hidden" name="callback_url" value="{{local}}" /> 
+					<input type="submit" class="lsf google" title="Google" value="&#xE05a;" />
+				</form>
 			</div>
 		</div>
 	</div>

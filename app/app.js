@@ -69,6 +69,7 @@ angular.module('mapasColetivos', [
 	'mapasColetivos.feature',
 	'mapasColetivos.content'
 ])
+.value('config', settings)
 .value('apiPrefix', (settings.server == 'local' ? '' : settings.server) + settings.apiPrefix)
 
 /*

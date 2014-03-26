@@ -4,7 +4,14 @@ module.exports = [
 	'$scope',
 	'SessionService',
 	'$location',
-	function($scope, Session, $location) {
+	'config',
+	'$sce',
+	function($scope, Session, $location, config, $sce) {
+
+		$scope.authFacebook = $sce.trustAsResourceUrl(config.server + '/auth/facebook');
+		$scope.authGoogle = $sce.trustAsResourceUrl(config.server + '/auth/google');
+
+		$scope.local = window.location.href;
 
 		$scope.$session = Session;
 
@@ -12,10 +19,16 @@ module.exports = [
 			$scope.isAuthenticated = auth;
 		});
 
-		$scope.login = function() {
-			Session.authenticate($scope.credentials, function(data) {
-				$location.path('/dashboard');
-			});
+		$scope.login = function(provider) {
+			if(provider == 'facebook') {
+
+			} else if(provider == 'google') {
+
+			} else {
+				Session.authenticate($scope.credentials, function(data) {
+					$location.path('/dashboard');
+				});	
+			}
 		};
 
 		$scope.logout = Session.logout;
