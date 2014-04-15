@@ -9,6 +9,7 @@ require('./helpers');
  * Core modules
  */
 
+require('./core/settings');
 require('./core/title');
 require('./core/index');
 require('./core/loading');
@@ -53,6 +54,7 @@ angular.module('mapasColetivos', [
 	'ngAnimate',
 	'infinite-scroll',
 	'colorpicker.module',
+	'yby.settings',
 	'mapasColetivos.mapView',
 	'mapasColetivos.user',
 	'mapasColetivos.pageTitle',
@@ -172,5 +174,18 @@ angular.module('mapasColetivos', [
 			window.mcHistory.push(window.location.pathname);
 		});
 
+	}
+])
+
+.controller('PageCtrl', [
+	'$scope',
+	'Page',
+	function($scope, Page) {
+		// Page title
+		$scope.page = Page;
+		// Detect iframe
+		if(window !== window.top) {
+			$scope.embedded = true;
+		}
 	}
 ]);

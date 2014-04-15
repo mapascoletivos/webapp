@@ -1,0 +1,20 @@
+<section id="login">
+	<div class="login-content">
+		<h1 translate>Password recovery</h1>
+		<div class="login-form">
+			<form class="form-horizontal" role="form" ng-submit="recoverPwd()">
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="name">Seu endreço de email ou nome de usuário:</label>
+
+					<div class="col-sm-10">
+						<input class="form-control" id="name" ng-model="user.emailOrUsername" placeholder="Email ou usuário" type="text" autocomplete="off">
+					</div>
+				</div>
+
+				<input class="btn btn-primary" type="submit" value="Recuperar">
+
+			</form>
+		</div>
+	</div>
+</section>

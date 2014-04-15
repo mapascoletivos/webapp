@@ -2,3 +2,5 @@ node_modules
 app/config.js
 dist/app.js
 lib/vendor.js
+
+.htaccess

@@ -6,12 +6,8 @@ module.exports = [
 	'$location',
 	'config',
 	'$sce',
-	function($scope, Session, $location, config, $sce) {
-
-		$scope.authFacebook = $sce.trustAsResourceUrl(config.server + '/auth/facebook');
-		$scope.authGoogle = $sce.trustAsResourceUrl(config.server + '/auth/google');
-
-		$scope.local = window.location.href;
+	'Facebook',
+	function($scope, Session, $location, config, $sce, Facebook) {
 
 		$scope.$session = Session;
 
@@ -19,17 +15,73 @@ module.exports = [
 			$scope.isAuthenticated = auth;
 		});
 
+		$scope.$watch(function() {
+			return Facebook.isReady();
+		}, function(ready) {
+			$scope.facebookReady = ready;
+		});
+
+		var auth = function(provider, token) {
+
+			Session.tokenAuth(token, provider, function(data) {
+				$location.path('/dashboard');
+			});
+
+		}
+
+		$scope.googleClientID = config.oauth.google;
+
+		$scope.$on('event:google-plus-signin-success', function(event, response) {
+			auth('google', response.access_token);
+		});
+
 		$scope.login = function(provider) {
+
 			if(provider == 'facebook') {
 
-			} else if(provider == 'google') {
+				Facebook.getLoginStatus(function(response) {
+
+					if(response.status == 'connected') {
+
+						auth('facebook', response.authResponse.accessToken);
+
+					} else {
+
+						Facebook.login(function(response) {
+
+							if(response.status == 'connected') {
+
+								auth('facebook', response.authResponse.accessToken);
+
+							}
+
+						}, {scope: 'email'});
+
+					}
+
+				});
 
 			} else {
+
 				Session.authenticate($scope.credentials, function(data) {
 					$location.path('/dashboard');
-				});	
+				});
+
 			}
+
 		};
+
+		$scope.register = function() {
+
+			Session.register($scope.user);
+
+		}
+
+		$scope.recoverPwd = function() {
+
+			Session.recoverPwd($scope.user);
+
+		}
 
 		$scope.logout = Session.logout;
 

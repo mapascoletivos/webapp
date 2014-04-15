@@ -6,19 +6,26 @@
 
 exports.User = [
 	'$resource',
+	'config',
 	'apiPrefix',
-	function($resource, apiPrefix) {
+	function($resource, config, apiPrefix) {
 
 		var gravatar = function(email, size) {
 
 			if(typeof size === 'undefined')
 				size = 100;
 
-			return grvtr.create(email, {
-				size: size,
-				defaultImage: 'mm',
-				rating: 'g'
-			});
+			if(typeof email !== 'undefined') {
+
+				return grvtr.create(email, {
+					size: size,
+					defaultImage: 'mm',
+					rating: 'g'
+				});
+
+			}
+
+			return '';
 		}
 
 		return {
@@ -39,7 +46,23 @@ exports.User = [
 				'update': {
 					method: 'PUT',
 					loadingMessage: 'Atualizando usuário',
-					url: apiPrefix + '/users'
+					url: apiPrefix + '/users',
+					transformRequest: function(data) {
+						if(data.email)
+							delete data.email;
+						return JSON.stringify(data);
+					}
+				},
+				'updateEmail': {
+					method: 'PUT',
+					loadingMessage: 'Atualizando email',
+					url: apiPrefix + '/users',
+					transformRequest: function(data) {
+						if(data.email) {
+							data.callback_url = config.siteUrl;
+						}
+						return JSON.stringify(data);
+					}
 				},
 				'updatePwd': {
 					method: 'PUT',

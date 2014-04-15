@@ -15,12 +15,4 @@ angular.module('mapasColetivos.pageTitle', [])
 			}
 		}
 	}
-])
-
-.controller('PageCtrl', [
-	'$scope',
-	'Page',
-	function($scope, Page) {
-		$scope.page = Page;
-	}
 ]);

@@ -10,11 +10,6 @@ angular.module('mapasColetivos.index', [])
 
 		$scope.$session = Session;
 
-		$scope.$watch('$session.authenticated()', function(auth) {
-			if(auth)
-				$location.path('/dashboard/');
-		});
-
 		$scope.$on('$stateChangeSuccess', function() {
 
 			if($location.path() == '/') {

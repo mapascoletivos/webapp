@@ -1,12 +1,12 @@
 <div class="regular-page dashboard-page">
-	<div class="page-header dashboard-header row">
+	<div class="page-header dashboard-header row" ng-controller="UserCtrl">
 		<div class="container">
 			<div class="six columns">
 				<h1>
-					<img src="{{user.grvtr}}" alt="{{user.name}}" />
+					<img src="{{user.gravatar()}}" alt="{{userName}}" />
 					Painel de controle
-					<span class="user-name">{{user.name}}</span>
-					<a href="/user/{{user.username}}/" class="profile-link">Visualizar perfil</a>
+					<span class="user-name">{{userName}}</span>
+					<a href="{{profileUrl(user)}}" class="profile-link">Visualizar perfil</a>
 				</h1>
 			</div>
 			<div class="six columns">

@@ -1,24 +1,15 @@
-# InfoAmazonia Rios
+# YBY Client
 
-## Current dependecies
+This a default YBY client. Built on Angular.js, it's an application that connects to a Yby server.
 
- - Running installation of Mapas Coletivos
+## How to Install
 
-## Installation
+Install Node.js, setup a Yby server and clone this repository.
 
-Edit `app/config.js` to set the URL for the Mapas Coletivos server.
+At the repository root directory, install the dependencies running:
 
-Add your client server for InfoAmazonia Rios to the list of allowed domains on your Mapas Coletivos server.
+    npm install
 
-Run:
+Using `app/config.example.js` as a template, create a configuration file called `app/config.js` and set the URL and other options for the Mapas Coletivos server.
 
-```
-npm install
-```
-
-Serve:
-
-```
-npm install -g serve
-serve -p 8000
-```
+Visit your application URL (http://localhost:8000).

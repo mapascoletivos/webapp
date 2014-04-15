@@ -14,21 +14,14 @@
 				<input type="submit" value="Entrar" />
 				<div class="form-group action-group">
 					<a class="signup" href="/signup">Cadastre-se</a>
-					<a href="/forgot_password">Recuperar senha</a>
+					<a href="/forgot-password">Recuperar senha</a>
 				</div>
 			</form>
 		</div>
 		<div class="social-login">
-			<h2>Conecte-se via</h2>
 			<div class="social-networks">
-				<form action="{{authFacebook}}" method="GET">
-					<input type="hidden" name="callback_url" value="{{local}}" /> 
-					<input type="submit" class="lsf facebook" title="Facebook" value="&#xE047;" />
-				</form>
-				<form action="{{authGoogle}}" method="POST">
-					<input type="hidden" name="callback_url" value="{{local}}" /> 
-					<input type="submit" class="lsf google" title="Google" value="&#xE05a;" />
-				</form>
+				<a ng-show="facebookReady" class="facebook" title="Facebook" href="javascript:void(0);" ng-click="login('facebook')"><span class="lsf">&#xE047;</span> Entrar com o Facebook</a>
+				<google-plus-signin clientid="{{googleClientID}}" language="pt-BR"></google-plus-signin>
 			</div>
 		</div>
 	</div>

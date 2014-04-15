@@ -1,8 +1,11 @@
 'use strict';
 
-var config = {
+module.exports = {
+	siteUrl: 'http://localhost',
 	server: 'local',
-	apiPrefix: '/api/v1'
+	apiPrefix: '/api/v1',
+	oauth: {
+		facebook: '', // Facebook Client ID
+		google: '' // Google client ID
+	}
 };
-
-module.exports = config;

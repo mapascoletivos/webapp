@@ -1,5 +1,4 @@
-var topojson = require('topojson'),
-    toGeoJSON = require('togeojson'),
+var toGeoJSON = require('togeojson'),
     csv2geojson = require('csv2geojson'),
     osmtogeojson = require('osmtogeojson');
 
@@ -120,17 +119,7 @@ function readFile(f, text, callback) {
     } else if (fileType === 'geojson') {
         try {
             gj = JSON.parse(text);
-            if (gj && gj.type === 'Topology' && gj.objects) {
-                var collection = { type: 'FeatureCollection', features: [] };
-                for (var o in gj.objects) {
-                    var ft = topojson.feature(gj, gj.objects[o]);
-                    if (ft.features) collection.features = collection.features.concat(ft.features);
-                    else collection.features = collection.features.concat([ft]);
-                }
-                return callback(null, collection);
-            } else {
-                return callback(null, gj);
-            }
+            return callback(null, gj);
         } catch(err) {
             alert('Invalid JSON file: ' + err);
             return;
@@ -164,7 +153,7 @@ function readFile(f, text, callback) {
             return 'kml';
         }
         if (ext('.gpx')) return 'gpx';
-        if (ext('.geojson') || ext('.json') || ext('.topojson')) return 'geojson';
+        if (ext('.geojson') || ext('.json')) return 'geojson';
         if (f.type === 'text/csv' || ext('.csv') || ext('.tsv') || ext('.dsv')) {
             return 'dsv';
         }

@@ -20,6 +20,8 @@ exports.UserCtrl = [
 
 				$rootScope.$broadcast('user.save.success', user);
 
+				Session.user(user);
+
 			}, function(err) {
 
 				$rootScope.$broadcast('user.save.error', err);

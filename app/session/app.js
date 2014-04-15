@@ -1,10 +1,14 @@
 'use strict';
 
 angular
-	.module('mapasColetivos.session', [])
+	.module('mapasColetivos.session', [
+		'facebook',
+		'directive.g+signin'
+	])
 	.config([
 		'$stateProvider',
-		function($stateProvider) {
+		'FacebookProvider',
+		function($stateProvider, FacebookProvider) {
 
 			$stateProvider
 				.state('login', {
@@ -12,6 +16,26 @@ angular
 					controller: 'LoginCtrl',
 					templateUrl: '/views/login.html'
 				});
+
+			$stateProvider
+				.state('signup', {
+					url: '/signup/',
+					controller: 'LoginCtrl',
+					templateUrl: '/views/signup.html'
+				});
+
+			$stateProvider
+				.state('forgotPwd', {
+					url: '/forgot-password/',
+					controller: 'LoginCtrl',
+					templateUrl: '/views/forgot_pwd.html'
+				});
+
+			var config = require('../config');
+
+			if(config.oauth && config.oauth.facebook)
+				FacebookProvider.init(config.oauth.facebook);
+
 		}
 	])
 	.factory('SessionService', require('./sessionService'))
@@ -23,17 +47,12 @@ angular
 		function($rootScope, $q, $window) {
 			return {
 				request: function(config) {
-					config.params = config.params || {};
+					config.headers = config.headers || {};
 					if ($window.sessionStorage.accessToken) {
-						config.params.access_token = $window.sessionStorage.accessToken;
+						//config.withCredentials = true;
+						config.headers.Authorization = 'Bearer ' + $window.sessionStorage.accessToken;
 					}
-					return config;
-				},
-				responseError: function(rejection) {
-					if (rejection.status === 401) {
-						// handle the case where the user is not authenticated
-					}
-					return $q.reject(rejection);
+					return config || $q.when(config);
 				}
 			};
 		}
