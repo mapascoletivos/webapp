@@ -45,7 +45,7 @@ var settings = angular.extend({
 /*
  * App
  */
-angular.module('mapasColetivos', [
+angular.module('yby', [
 	'ui.router',
 	'ui.keypress',
 	'ui.slider',
@@ -55,21 +55,21 @@ angular.module('mapasColetivos', [
 	'infinite-scroll',
 	'colorpicker.module',
 	'yby.settings',
-	'mapasColetivos.mapView',
-	'mapasColetivos.user',
-	'mapasColetivos.pageTitle',
-	'mapasColetivos.directives',
-	'mapasColetivos.session',
-	'mapasColetivos.index',
-	'mapasColetivos.dashboard',
-	'mapasColetivos.explore',
-	'mapasColetivos.loadingStatus',
-	'mapasColetivos.messageStatus',
-	'mapasColetivos.dataImport',
-	'mapasColetivos.map',
-	'mapasColetivos.layer',
-	'mapasColetivos.feature',
-	'mapasColetivos.content'
+	'yby.mapView',
+	'yby.user',
+	'yby.pageTitle',
+	'yby.directives',
+	'yby.session',
+	'yby.index',
+	'yby.dashboard',
+	'yby.explore',
+	'yby.loadingStatus',
+	'yby.messageStatus',
+	'yby.dataImport',
+	'yby.map',
+	'yby.layer',
+	'yby.feature',
+	'yby.content'
 ])
 .value('config', settings)
 .value('apiPrefix', (settings.server == 'local' ? '' : settings.server) + settings.apiPrefix)
@@ -96,7 +96,47 @@ angular.module('mapasColetivos', [
 			.state('home', {
 				url: '/',
 				controller: 'IndexCtrl',
-				templateUrl: '/views/landing.html'
+				templateUrl: '/views/landing.html',
+				resolve: {
+					'MapData': [
+						'$q',
+						'Map',
+						function($q, Map) {
+
+							var deferred = $q.defer();
+
+							Map.resource.query({
+								perPage: 4
+							}, function(res) {
+
+								deferred.resolve(res.maps);
+
+							});
+
+							return deferred.promise;
+
+						}
+					],
+					'ContentData': [
+						'$q',
+						'Content',
+						function($q, Content) {
+
+							var deferred = $q.defer();
+
+							Content.resource.query({
+								perPage: 4
+							}, function(res) {
+
+								deferred.resolve(res.contents);
+
+							});
+
+							return deferred.promise;
+
+						}
+					]
+				}
 			});
 
 		$locationProvider.html5Mode(true);
@@ -180,12 +220,22 @@ angular.module('mapasColetivos', [
 .controller('PageCtrl', [
 	'$scope',
 	'Page',
-	function($scope, Page) {
+	'SiteSettings',
+	function($scope, Page, Site) {
 		// Page title
 		$scope.page = Page;
 		// Detect iframe
 		if(window !== window.top) {
 			$scope.embedded = true;
 		}
+
+		$scope.siteTitle = 'YBY';
+
+		Site.get().then(function(settings) {
+			$scope.ybySettings = settings;
+			console.log(settings);
+			$scope.siteTitle = settings.general.title;
+			Page.setBaseTitle($scope.siteTitle);
+		});
 	}
 ]);

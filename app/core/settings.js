@@ -3,24 +3,29 @@
 angular.module('yby.settings', [])
 
 .factory('SiteSettings', [
+	'$q',
 	'$http',
 	'apiPrefix',
-	function($http, apiPrefix) {
+	function($q, $http, apiPrefix) {
 
 		var settings = false;
 
 		return {
 			'get': function() {
 
+				var deferred = $q.defer();
+
 				if(settings)
-					return settings;
+					deferred.resolve(settings);
 
 				$http
 					.get(apiPrefix + '/settings')
 					.success(function(data) {
 						settings = data;
-						return settings;
+						deferred.resolve(data);
 					});
+
+				return deferred.promise;
 
 			}
 		}

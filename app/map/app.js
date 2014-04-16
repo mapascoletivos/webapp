@@ -4,11 +4,11 @@
  * Map module
  */
 angular
-	.module('mapasColetivos.map', [
+	.module('yby.map', [
 		'btford.modal',
 		'ui.sortable',
-		'mapasColetivos.leaflet',
-		'mapasColetivos.layer'
+		'yby.leaflet',
+		'yby.layer'
 	])
 	.config([
 		'$stateProvider',

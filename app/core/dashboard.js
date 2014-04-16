@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mapasColetivos.dashboard', [])
+angular.module('yby.dashboard', [])
 
 .config([
 	'$stateProvider',

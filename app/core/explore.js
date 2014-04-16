@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mapasColetivos.explore', [])
+angular.module('yby.explore', [])
 
 .config([
 	'$stateProvider',

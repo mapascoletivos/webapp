@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mapasColetivos.directives', [
+angular.module('yby.directives', [
 	'ngSanitize',
 	'fitVids'
 ])

@@ -3,13 +3,13 @@
 require('../common/geocode');
 
 angular
-	.module('mapasColetivos.layer', [
+	.module('yby.layer', [
 		'ngResource',
 		'btford.modal',
 		'infinite-scroll',
-		'mapasColetivos.geocode',
-		'mapasColetivos.feature',
-		'mapasColetivos.content'
+		'yby.geocode',
+		'yby.feature',
+		'yby.content'
 	])
 	.config([
 		'$stateProvider',

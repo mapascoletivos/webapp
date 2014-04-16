@@ -4,7 +4,7 @@
  * Sir Trevor
  */
 
-angular.module('mapasColetivos.sirTrevor', [])
+angular.module('yby.sirTrevor', [])
 
 .directive('sirTrevorEditor', [
 	'apiPrefix',

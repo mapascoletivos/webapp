@@ -4,7 +4,7 @@
  * Geocode service
  */
 
-angular.module('mapasColetivos.geocode', [])
+angular.module('yby.geocode', [])
 
 .factory('GeocodeService', [
 	'$http',

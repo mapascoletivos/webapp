@@ -4,7 +4,7 @@
  * Map View controller
  */
 
-angular.module('mapasColetivos.mapView', [])
+angular.module('yby.mapView', [])
 
 .factory('MapView', [
 	'MapService',

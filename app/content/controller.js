@@ -150,6 +150,17 @@ exports.ContentCtrl = [
 
 		};
 
+		$scope.getUrl = function(content) {
+
+			if($rootScope.baseUrl)
+				$scope.baseUrl = $rootScope.baseUrl;
+			else
+				$scope.baseUrl = '/layers/' + content.layer;
+
+			return $scope.baseUrl + '/content/' + content._id;
+
+		}
+
 		$rootScope.$on('$stateChangeSuccess', function() {
 
 			if(!viewState() && viewing) {

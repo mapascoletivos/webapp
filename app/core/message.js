@@ -3,7 +3,7 @@
 /*
  * Message module
  */
-angular.module('mapasColetivos.messageStatus', [])
+angular.module('yby.messageStatus', [])
 
 .config([
 	'$httpProvider',

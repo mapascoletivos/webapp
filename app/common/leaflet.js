@@ -4,7 +4,7 @@
  * Leaflet service
  */
 
-angular.module('mapasColetivos.leaflet', [])
+angular.module('yby.leaflet', [])
 
 .factory('MapService', [
 	function() {

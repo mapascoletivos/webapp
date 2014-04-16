@@ -4,7 +4,7 @@
  * User module
  */
 angular
-	.module('mapasColetivos.user', [
+	.module('yby.user', [
 		'btford.modal'
 	])
 	.config([

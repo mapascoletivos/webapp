@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-	.module('mapasColetivos.session', [
+	.module('yby.session', [
 		'facebook',
 		'directive.g+signin'
 	])

@@ -3,7 +3,7 @@
 /*
  * Loading module
  */
-angular.module('mapasColetivos.loadingStatus', [])
+angular.module('yby.loadingStatus', [])
 
 .config([
 	'$httpProvider',

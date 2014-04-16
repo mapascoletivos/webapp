@@ -1,14 +1,24 @@
 'use strict';
 
-angular.module('mapasColetivos.index', [])
+angular.module('yby.index', [])
 
 .controller('IndexCtrl', [
 	'$scope',
 	'SessionService',
 	'$location',
-	function($scope, Session, $location) {
+	'MapData',
+	'ContentData',
+	function($scope, Session, $location, MapData, ContentData) {
 
 		$scope.$session = Session;
+
+		$scope.$watch(function() {
+			return Session.authenticated();
+		}, function(isAuth) {
+			$scope.isAuth = isAuth;
+		});
+
+		$scope.loggedin = Session.authenticated;
 
 		$scope.$on('$stateChangeSuccess', function() {
 
@@ -20,7 +30,12 @@ angular.module('mapasColetivos.index', [])
 
 		$scope.$on('$stateChangeStart', function() {
 			angular.element('html').removeClass('landing');
-		})
+		});
+
+		console.log(MapData);
+
+		$scope.maps = MapData;
+		$scope.contents = ContentData;
 
 	}
 ]);

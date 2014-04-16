@@ -80,7 +80,7 @@ exports.MapCtrl = [
 
 				$scope.map = angular.copy(map);
 
-				$scope.baseUrl = '/maps/' + map._id;
+				$rootScope.baseUrl = '/maps/' + map._id;
 
 				var mapOptions = {
 					center: $scope.map.center ? $scope.map.center : [0,0],

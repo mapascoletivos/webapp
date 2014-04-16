@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-	.module('mapasColetivos.feature', [])
+	.module('yby.feature', [])
 	.factory('Feature', require('./service').Feature)
 	.factory('Maki', require('./makiService').Maki)
 	.controller('FeatureCtrl', require('./controller').FeatureCtrl)

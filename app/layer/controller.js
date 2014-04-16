@@ -131,7 +131,7 @@ exports.LayerCtrl = [
 					Layer.edit($scope.layer); // trigger digest
 				});
 
-				$scope.baseUrl = '/layers/' + layer._id;
+				$rootScope.baseUrl = '/layers/' + layer._id;
 
 				Page.setTitle(layer.title);
 

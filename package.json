@@ -1,9 +1,9 @@
 {
-	"name": "mapascoletivos",
-	"description": "Collaborative mapping client for YBY",
+	"name": "yby-client",
+	"description": "Just another YBY client",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/oeco/rivesrproject.git"
+		"url": "git://github.com/oeco/yby-client.git"
 	},
 	"version": "0.1.0",
 	"author": "Ecolab <gustavo.faleiros@gmail.com>",
@@ -74,8 +74,8 @@
 		"bootstrap-colorpicker": "buberdds/angular-bootstrap-colorpicker"
 	},
 	"keywords": [
-		"riversproject",
-		"mapascoletivos",
+		"yby",
+		"angular",
 		"openstreetmap"
 	]
 }
