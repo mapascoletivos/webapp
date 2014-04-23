@@ -23,11 +23,19 @@
 <body>
 	<header id="mast-header">
 		<div class="container">
-			<div class="five columns">
+			<div class="four columns">
 				<h1><a class="brand" href="/">{{siteTitle}}</a>
 				</h1>
 			</div>
-			<div class="seven columns">
+			<!-- <div class="three columns">
+				<div id="lang" ng-controller="TranslateCtrl">
+					<ul>
+						<li ng-click="changeLanguage('en-US')">English</li>
+						<li ng-click="changeLanguage('pt-BR')">Português</li>
+					</ul>
+				</div>
+			</div> -->
+			<div class="eight columns">
 				<ul id="mast-nav" ng-controller="LoginCtrl">
 					<li><a href="/explore" title="Explorar">Explorar</a></li>
 					<li ng-show="isAuthenticated"><a href="/dashboard" title="Painel de Controle">

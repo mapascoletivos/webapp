@@ -111,8 +111,8 @@ exports.MapCtrl = [
 						destroyConfirmation();
 					});
 
-					Layer.resource.query({
-						creatorOnly: true
+					Layer.resource.userLayers({
+						perPage: null
 					}, function(res) {
 
 						$scope.userLayers = res.layers;

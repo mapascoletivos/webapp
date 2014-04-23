@@ -46,6 +46,8 @@ var settings = angular.extend({
  * App
  */
 angular.module('yby', [
+	'ngCookies',
+	'pascalprecht.translate',
 	'ui.router',
 	'ui.keypress',
 	'ui.slider',
@@ -73,6 +75,23 @@ angular.module('yby', [
 ])
 .value('config', settings)
 .value('apiPrefix', (settings.server == 'local' ? '' : settings.server) + settings.apiPrefix)
+
+/*
+ * Translation
+ */
+
+.config(require('./core/i18n'))
+.controller('TranslateCtrl', [
+	'$scope',
+	'$translate',
+	function($scope, $translate) {
+
+		$scope.changeLanguage = function(key) {
+			$translate.use(key);
+		}
+
+	}
+])
 
 /*
  * Core routes

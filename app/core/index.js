@@ -32,8 +32,6 @@ angular.module('yby.index', [])
 			angular.element('html').removeClass('landing');
 		});
 
-		console.log(MapData);
-
 		$scope.maps = MapData;
 		$scope.contents = ContentData;
 
