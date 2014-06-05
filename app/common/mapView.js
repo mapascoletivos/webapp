@@ -50,7 +50,7 @@ angular.module('yby.mapView', [])
 		$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 
 			if(from.name.indexOf('singleMap') == -1 && from.name.indexOf('singleLayer') == -1) {
-				MapView.backLink(window.mcHistory[window.mcHistory.length-2]);
+				MapView.backLink(window.ybyHistory[window.ybyHistory.length-2]);
 			}
 
 		});

@@ -83,7 +83,7 @@ exports.FeatureCtrl = [
 
 			$scope.feature = feature;
 
-			if(window.mcHistory.length == 1) {
+			if(window.ybyHistory.length == 1) {
 				setTimeout(function() {
 					var lFeature = featureToMapObj(feature);
 					MapService.get().fitBounds(L.featureGroup([lFeature]).getBounds());

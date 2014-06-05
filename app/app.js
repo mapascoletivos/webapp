@@ -225,12 +225,12 @@ angular.module('yby', [
 		/*
 		 * Store nav history
 		 */
-		window.mcHistory = [];
+		window.ybyHistory = [];
 		$rootScope.$on('$stateChangeSuccess', function() {
 			if(window._gaq) {
 				window._gaq.push(['_trackPageview', $location.path()]);
 			}
-			window.mcHistory.push(window.location.pathname);
+			window.ybyHistory.push(window.location.pathname);
 		});
 
 	}

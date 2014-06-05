@@ -3,9 +3,9 @@
 		<div id="editor">
 			<div class="editor-content">
 				<div class="edit-header layer-head">
-					<h2>Camada</h2>
+					<h2 translate>Layer</h2>
 					<div ng-show="isOwner(layer)">
-						<textarea class="edit-title no-canvas" type="text" ng-model="layer.title" placeholder="Título da camada" disable-enter-key="$event" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
+						<textarea class="edit-title no-canvas" type="text" ng-model="layer.title" placeholder="{{'Layer title' | translate}}" disable-enter-key="$event" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
 					</div>
 					<div ng-hide="isOwner(layer)">
 						<h3>{{layer.title}}</h3>
@@ -16,78 +16,86 @@
 					<div id="layer-edit">
 						<ul class="map-editor-tabs layer-objects-nav">
 							<li ng-class="layerObj('settings')" ng-show="isOwner(layer)" ng-click="setLayerObj('settings')">
-								<a title="Configurações" href="javascript:void(0);">
-									<span class="lsf">&#xE055;</span>
-									<span class="label" ng-show="layerObj('settings')">
-										Configurações
-									</span>
-								</a>
+								<div class="tab-content">
+									<a title="{{'Settings' | translate}}" href="javascript:void(0);">
+										<span class="lsf">&#xE055;</span>
+										<span class="label" ng-show="layerObj('settings')" translate>
+											Settings
+										</span>
+									</a>
+								</div>
 							</li>
 							<li ng-class="layerObj('feature')" ng-click="setLayerObj('feature')">
-								<a title="Locais" href="javascript:void(0);">
-									<span class="mcf">&#xe600;</span>
-									<span class="label" ng-show="layerObj('feature')">
-										Locais
-									</span>
-									<span class="feature-length tab-tip" ng-show="layer.features.length">
-										{{layer.features.length}}
-									</span>
-								</a>
+								<div class="tab-content">
+									<a title="{{'Locations' | translate}}" href="javascript:void(0);">
+										<span class="mcf">&#xe600;</span>
+										<span class="label" ng-show="layerObj('feature')" translate>
+											Locations
+										</span>
+										<span class="feature-length tab-tip" ng-show="layer.features.length">
+											{{layer.features.length}}
+										</span>
+									</a>
+								</div>
 							</li>
 							<li ng-class="layerObj('content')" ng-click="setLayerObj('content')">
-								<a title="Conteúdo" href="javascript:void(0);">
-									<span class="lsf">&#xE101;</span>
-									<span class="label" ng-show="layerObj('content')">
-										Conteúdo
-									</span>
-									<span class="content-length tab-tip" ng-show="layer.contents.length">
-										{{layer.contents.length}}
-									</span>
-								</a>
+								<div class="tab-content">
+									<a title="{{'Content' | translate}}" href="javascript:void(0);">
+										<span class="lsf">&#xE101;</span>
+										<span class="label" ng-show="layerObj('content')" translate>
+											Content
+										</span>
+										<span class="content-length tab-tip" ng-show="layer.contents.length">
+											{{layer.contents.length}}
+										</span>
+									</a>
+								</div>
 							</li>
 							<li ng-class="layerObj('styles')" ng-show="isOwner(layer)" ng-click="setLayerObj('styles')">
-								<a title="Configurações" href="javascript:void(0);">
-									<span class="lsf">&#xE033;</span>
-									<span class="label" ng-show="layerObj('styles')">
-										Estilos
-									</span>
-								</a>
+								<div class="tab-content">
+									<a title="{{'Styles' | translate}}" href="javascript:void(0);">
+										<span class="lsf">&#xE033;</span>
+										<span class="label" ng-show="layerObj('styles')" translate>
+											Styles
+										</span>
+									</a>
+								</div>
 							</li>
 						</ul>
 						<div ng-show="layerObj('settings') && isOwner(layer)">
 							<div id="settings">
 								<table class="options-table">
 									<tr>
-										<th>Descrição</th>
+										<th translate>Description</th>
 										<td>
-											<textarea class="edit-description no-canvas" type="text" ng-model="layer.description" disable-enter-key="$event" placeholder="Descrição" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
+											<textarea class="edit-description no-canvas" type="text" ng-model="layer.description" disable-enter-key="$event" placeholder="{{'Description' | translate}}" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
 										</td>
 									<tr>
-										<th>Tags</th>
-										<td><input type="text" ng-model="layer.tags" placeholder="Separe as tags por vírgula" /></td>
+										<th translate>Tags</th>
+										<td><input type="text" ng-model="layer.tags" placeholder="{{'Comma separated tags' | translate}}" /></td>
 									</tr>
 									<tr>
-										<th>Colaboradores</th>
+										<th translate>Collaborators</th>
 										<td>
-											<input type="text" placeholder="Insira o email de um usuário cadastrado" ng-model="newContributor" ui-keypress="{'enter':'addContributor(newContributor, layer)'}" />
+											<input type="text" placeholder="{{'Enter your collaborator email' | translate}}" ng-model="newContributor" ui-keypress="{'enter':'addContributor(newContributor, layer)'}" />
 											<ul ng-show="layer.contributors.length" class="contributor-list multiple-selection">
 												<li ng-repeat="contributor in layer.contributors">
 													{{contributor.email}}
-													<a href="javascript:void(0);" title="Remover colaborador" ng-click="removeContributor(contributor, layer)" class="lsf remove">&#xE10f;</span>
+													<a href="javascript:void(0);" title="{{'Remover colaborador' | translate}}" ng-click="removeContributor(contributor, layer)" class="lsf remove">&#xE10f;</span>
 												</li>
 											</ul>
 										</td>
 									<tr>
-										<th>Privacidade</th>
+										<th translate>Privacy</th>
 										<td>
 											<ul class="radio-list">
 												<li ng-class="{active: layer.visibility == 'Visible'}" ng-click="layer.visibility = 'Visible'">
 													<span class="lsf">&#xE134;</span>
-													Público
+													<span translate>Public</span>
 												</li>
 												<li ng-class="{active: layer.visibility == 'Private'}" ng-click="layer.visibility = 'Private'">
 													<span class="lsf">&#xE086;</span>
-													Privado
+													<span translate>Private</span>
 												</li>
 											</ul>
 										</td>
@@ -95,7 +103,7 @@
 								</table>
 								<a href="javascript:void(0);" class="button button-red button-delete" ng-click="delete(layer)" ng-hide="layer.isDraft">
 									<span class="lsf">&#xE12c;</span>
-									Remover esta camada permanentemente.
+									<span translate>Remove this layer permanently</span>
 								</a>
 							</div>
 						</div>
@@ -103,29 +111,29 @@
 							<div id="layer-styles" class="feature-style map-editor-subcontent">
 								<div class="button-group">
 									<div class="button-item">
-										<a href="javascript:void(0);" class="button" ng-click="editingStyle = 'Point'" ng-class="{active: editingStyle == 'Point' || !editingStyle}"><span class="mcf">&#xe600;</span> Pontos</a>
+										<a href="javascript:void(0);" class="button" ng-click="editingStyle = 'Point'" ng-class="{active: editingStyle == 'Point' || !editingStyle}"><span class="mcf">&#xe600;</span> <span translate>Points</span></a>
 									</div>
 									<div class="button-item">
-										<a href="javascript:void(0);" class="button" ng-click="editingStyle = 'LineString'" ng-class="{active: editingStyle == 'LineString'}"><span class="mcf">&#xe601;</span> Linhas</a>
+										<a href="javascript:void(0);" class="button" ng-click="editingStyle = 'LineString'" ng-class="{active: editingStyle == 'LineString'}"><span class="mcf">&#xe601;</span> <span translate>Lines</span></a>
 									</div>
 									<div class="button-item">
-										<a href="javascript:void(0);" class="button" ng-click="editingStyle = 'Polygon'" ng-class="{active: editingStyle == 'Polygon'}"><span class="mcf">&#xe602;</span> Polígonos</a>
+										<a href="javascript:void(0);" class="button" ng-click="editingStyle = 'Polygon'" ng-class="{active: editingStyle == 'Polygon'}"><span class="mcf">&#xe602;</span> <span translate>Polygons</span></a>
 									</div>
 								</div>
-								<a class="button preview" ng-click="previewLayer()">Visualizar alterações</a>
+								<a class="button preview" ng-click="previewLayer()" translate>Preview changes</a>
 								<div class="marker-styles" ng-show="editingStyle == 'Point' || !editingStyle">
 									<div class="style-editor">
-										<p class="label">Cor do marcador</p>
+										<p class="label" translate>Marker color</p>
 										<div class="colorpicker-container">
 											<div colorpicker class="colorpicker-box" colorpicker-parent="true" style="background:{{layer.styles.Point['marker-color']}};" ng-model="layer.styles.Point['marker-color']"></div>
 										</div>
-										<p class="label">Tamanho</p>
+										<p class="label" translate>Size</p>
 										<div class="size-picker">
 											<span ng-click="layer.styles.Point['marker-size'] = 'small'" title="Pequeno"><img src="http://a.tiles.mapbox.com/v3/marker/pin-s+444.png" /></span>
 											<span ng-click="layer.styles.Point['marker-size'] = 'medium'" title="Médio"><img src="http://a.tiles.mapbox.com/v3/marker/pin-m+444.png" /></span>
 											<span ng-click="layer.styles.Point['marker-size'] = 'large'" title="Grande"><img src="http://a.tiles.mapbox.com/v3/marker/pin-l+444.png" /></span>
 										</div>
-										<p class="label">Ícone</p>
+										<p class="label" translate>Icon</p>
 										<div class="marker-icon clearfix">
 											<ul>
 												<li>
@@ -140,31 +148,31 @@
 								</div>
 								<div class="polygon-styles" ng-show="editingStyle == 'Polygon'">
 									<div class="style-editor">
-										<p class="label">Cor da área</p>
+										<p class="label" translate>Area color</p>
 										<div class="colorpicker-container">
 											<div colorpicker class="colorpicker-box" colorpicker-parent="true" style="background:{{layer.styles.Polygon.fill}};" ng-model="layer.styles.Polygon.fill"></div>
 										</div>
-										<p class="label">Opacidade da área</p>
+										<p class="label" translate>Area opacity</p>
 										<div ui-slider min="0.00" max="1.00" step="0.01" use-decimals ng-model="layer.styles.Polygon['fill-opacity']"></div>
-										<p class="label">Cor da borda</p>
+										<p class="label" translate>Border color</p>
 										<div class="colorpicker-container">
 											<div colorpicker class="colorpicker-box" colorpicker-parent="true" style="background:{{layer.styles.Polygon.stroke}};" ng-model="layer.styles.Polygon.stroke"></div>
 										</div>
-										<p class="label">Opacidade da borda</p>
+										<p class="label" translate>Border opacity</p>
 										<div ui-slider min="0.00" max="1.00" step="0.01" use-decimals ng-model="layer.styles.Polygon['stroke-opacity']"></div>
-										<p class="label">Espessura da borda</p>
+										<p class="label" translate>Border size</p>
 										<div ui-slider min="0" max="20" step="1" ng-model="layer.styles.Polygon['stroke-width']"></div>
 									</div>
 								</div>
 								<div class="line-styles" ng-show="editingStyle == 'LineString'">
 									<div class="style-editor">
-										<p class="label">Cor da linha</p>
+										<p class="label" translate>Line color</p>
 										<div class="colorpicker-container">
 											<div colorpicker class="colorpicker-box" colorpicker-parent="true" style="background:{{layer.styles.LineString.stroke}};" ng-model="layer.styles.LineString.stroke"></div>
 										</div>
-										<p class="label">Opacidade da linha</p>
+										<p class="label" translate>Line opacity</p>
 										<div ui-slider min="0.00" max="1.00" step="0.01" use-decimals ng-model="layer.styles.LineString['stroke-opacity']"></div>
-										<p class="label">Espessura da linha</p>
+										<p class="label" translate>Line width</p>
 										<div ui-slider min="0" max="20" step="1" ng-model="layer.styles.LineString['stroke-width']"></div>
 									</div>
 								</div>
@@ -177,21 +185,21 @@
 										<div class="button-item">
 											<a href="javascript:void(0);" class="button add-new" ng-click="new()">
 												<span class="lsf">&#xE108;</span>
-												Adicionar novo
+												<span translate>Add new location</span>
 											</a>
 										</div>
 										<div class="button-item" ng-controller="DataImportCtrl">
 											<a href="javascript:void(0);" class="button import" import-input-trigger="import-data-input">
 												<span class="img-container"><span class="lsf">&#xE115;</span></span>
-												<span>Importar dados</span>
-												<span class="tip">(GeoJSON, TopoJSON, KML, CSV, GPX e arquivos XML do OSM)</span>
+												<span translate>Import data</span>
+												<span class="tip" translate>(GeoJSON, TopoJSON, KML, CSV, GPX and OSM XML files)</span>
 											</a>
 											<div style="position:absolute;height:0;visibility:hidden;">
 												<input type="file" id="import-data-input" import-input />
 											</div>
 										</div>
 									</div>
-									<input class="filter" type="text" ng-model="search" placeholder="Encontrar na lista" />
+									<input class="filter" type="text" ng-model="search" placeholder="{{'Find on the list' | translate}}" />
 									<ul class="obj-list">
 										<li ng-repeat="feature in features | filter:search" ng-class="{disabled: !canEdit(feature, layer)}" ng-click="edit(feature, layer)" class="clearfix">
 											<span class="type mcf" ng-show="feature.geometry.type == 'Point'">&#xe600;</span>
@@ -199,7 +207,7 @@
 											<span class="type mcf" ng-show="feature.geometry.type == 'LineString'">&#xe601;</span>
 											<span class="locked lsf" ng-show="!canEdit(feature, layer)">&#xE086;</span>
 											<h4>{{feature.title}}</h4>
-											<p class="author" ng-show="layer.contributors.length">por {{feature.creator.name}}</p>
+											<p class="author" ng-show="layer.contributors.length"><span translate>by</span> {{feature.creator.name}}</p>
 										</li>
 									</ul>
 								</div>
@@ -209,14 +217,14 @@
 							<div id="layer-content" class="map-editor-subcontent">
 								<a href="javascript:void(0);" class="button add-new" ng-click="new()">
 									<span class="lsf">&#xE108;</span>
-									Adicionar novo
+									<span translate>Add new content</span>
 								</a>
-								<input class="filter" type="text" ng-model="search" placeholder="Encontrar na lista" />
+								<input class="filter" type="text" ng-model="search" placeholder="{{'Find on the list' | translate}}" />
 								<ul class="obj-list">
 									<li ng-repeat="item in contents | filter:search" ng-class="{disabled: !canEdit(item, layer)}" ng-click="edit(item, layer)">
 										<span class="locked lsf" ng-show="!canEdit(item, layer)">&#xE086;</span>
 										<h4>{{item.title}}</h4>
-										<p class="author" ng-show="layer.contributors.length">por {{item.creator.name}}</p>
+										<p class="author" ng-show="layer.contributors.length"><span translate>by</span> {{item.creator.name}}</p>
 									</li>
 								</ul>
 							</div>
@@ -227,12 +235,12 @@
 		</div>
 		<form class="primary-actions" ng-submit="save(layer)">
 			<a href="javascript:void(0);" class="button button-secondary" ng-click="close()">
-				<span ng-hide="layer.isDraft">Ver camada</span>
-				<span ng-show="layer.isDraft">Cancelar</span>
+				<span ng-hide="layer.isDraft" translate>View layer</span>
+				<span ng-show="layer.isDraft" translate>Cancel</span>
 			</a>
 			<a href="javascript:void(0);" class="button" ng-click="save(layer)" ng-show="isOwner(layer)">
-				<span ng-hide="layer.isDraft">Salvar alterações</span>
-				<span ng-show="layer.isDraft">Publicar camada</span>
+				<span ng-hide="layer.isDraft" translate>Save changes</span>
+				<span ng-show="layer.isDraft" translate>Publish layer</span>
 			</a>
 		</form>
 	</div>
@@ -240,33 +248,33 @@
 		<div class="new-feature" ng-hide="!editing || editing.geometry.type">
 			<div class="available-types">
 				<div class="new-type">
-					<p>Escolha o tipo de geometria que gostaria de adicionar ao seu mapa:</p>
+					<p translate>Choose the type of geometry you would like to add:</p>
 					<ul>
 						<li ng-click="newFeature('Point')">
 							<span class="mcf">&#xe600;</span>
-							Ponto
+							<span translate>Point</span>
 						</li>
 						<li ng-click="newFeature('LineString')">
 							<span class="mcf">&#xe601;</span>
-							Linha
+							<span translate>Line</span>
 						</li>
 						<li ng-click="newFeature('Polygon')">
 							<span class="mcf">&#xe602;</span>
-							Polígono (área)
+							<span translate>Polygon (area)</span>
 						</li>
 					</ul>
 				</div>
 				<div class="geocode">
-					<p>Ou busque e utilize uma localização:</p>
+					<p translate>Or search and use a location:</p>
 					<div class="location-editor">
-						<input class="geocode" type="text" ui-keypress="{'enter': 'geocode()'}" ng-model="_data.geocode" placeholder="Digite uma localização" />
-						<a href="javascript:void(0);" ng-click="geocode()" class="search-button button button-small"><span class="lsf">&#xE116;</span> Buscar</a>
+						<input class="geocode" type="text" ui-keypress="{'enter': 'geocode()'}" ng-model="_data.geocode" placeholder="{{'Type a location' | translate}}" />
+						<a href="javascript:void(0);" ng-click="geocode()" class="search-button button button-small"><span class="lsf">&#xE116;</span> <span translate>Search</span></a>
 						<div class="geocode-results">
 							<ul>
 								<li ng-repeat="result in _data.geocodeResults">
-									<a href="javascript:void(0);" class="mcf" title="Utilizar esta localização como ponto" ng-click="setNominatimFeature(result)">&#xe600;</a>
-									<a href="javascript:void(0);" class="mcf" title="Utilizar esta localização como polígono (área)" ng-show="result.geojson.type === 'Polygon'" ng-click="setNominatimFeature(result, 'geojson')">&#xe602;</a>
-									<a href="javascript:void(0);" class="mcf" title="Utilizar esta localização como linha" ng-show="result.geojson.type === 'LineString'" ng-click="setNominatimFeature(result, 'geojson')">&#xe601;</a>
+									<a href="javascript:void(0);" class="mcf" title="{{'Use this location as a point' | translate}}" ng-click="setNominatimFeature(result)">&#xe600;</a>
+									<a href="javascript:void(0);" class="mcf" title="{{'Use this location as a polygon' | translate}}" ng-show="result.geojson.type === 'Polygon'" ng-click="setNominatimFeature(result, 'geojson')">&#xe602;</a>
+									<a href="javascript:void(0);" class="mcf" title="{{'Use this location as a line' | translate}}" ng-show="result.geojson.type === 'LineString'" ng-click="setNominatimFeature(result, 'geojson')">&#xe601;</a>
 									{{result.display_name}}
 								</li>
 							</ul>
@@ -276,48 +284,48 @@
 			</div>
 		</div>
 		<div class="start-tip" ng-show="editing.geometry.type == 'Point' && !editing.geometry.coordinates">
-			<span ng-show="editing.geometry.type == 'Point'">Clique no mapa para adicionar um marcador</span>
+			<span ng-show="editing.geometry.type == 'Point'" translate>Click on the map to add your marker</span>
 		</div>
 		<div id="edit-feature" ng-show="editing.geometry.coordinates" ng-animate="'top-down'">
 			<form ng-submit="save()">
 				<div class="feature-settings">
-					<h3>Local</h3>
-					<textarea class="edit-title no-canvas" placeholder="Título do local" ng-model="editing.title" disable-enter-key="$event" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
-					<textarea class="edit-description no-canvas" placeholder="Descrição da feature" ng-model="editing.description" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
+					<h3 translate>Location</h3>
+					<textarea class="edit-title no-canvas" placeholder="{{'Location title' | translate}}" ng-model="editing.title" disable-enter-key="$event" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
+					<textarea class="edit-description no-canvas" placeholder="{{'Location description' | translate}}" ng-model="editing.description" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
 				</div>
 				<div class="editing-tools" ng-class="{editing: tool}">
 					<ul class="tools-list">
-						<li class="feature-data-label" ng-class="{active: tool == 'feature-data'}"><a href="javascript:void(0);" title="Dados do local" ng-click="setTool('feature-data')"><span class="lsf">&#xE127;</span></a></li>
-						<li class="feature-style-label" ng-class="{active: tool == 'feature-style'}"><a href="javascript:void(0);" title="Estilo do local" ng-click="setTool('feature-style')"><span class="lsf">&#xE033;</span></a></li>
-						<li class="remove-label" ng-show="editing._id"><a href="javascript:void(0);" title="Remover esta feature" ng-click="delete()"><span class="lsf">&#xE12c;</span></a></li>
-						<li class="save-label"><a href="javascript:void(0);" title="Salvar alterações desta feature" ng-click="save()"><span class="lsf">&#xE029;</span></a></li>
+						<li class="feature-data-label" ng-class="{active: tool == 'feature-data'}"><a href="javascript:void(0);" title="{{'Location data' | translate}}" ng-click="setTool('feature-data')"><span class="lsf">&#xE127;</span></a></li>
+						<li class="feature-style-label" ng-class="{active: tool == 'feature-style'}"><a href="javascript:void(0);" title="{{'Location style' | translate}}" ng-click="setTool('feature-style')"><span class="lsf">&#xE033;</span></a></li>
+						<li class="remove-label" ng-show="editing._id"><a href="javascript:void(0);" title="{{'Remove this feature' | translate}}" ng-click="delete()"><span class="lsf">&#xE12c;</span></a></li>
+						<li class="save-label"><a href="javascript:void(0);" title="{{'Save' | translate}}" ng-click="save()"><span class="lsf">&#xE029;</span></a></li>
 					</ul>
 					<div class="tools-editor" ng-show="tool">
 						<div class="feature-data" ng-show="tool == 'feature-data'">
-							<p>Adicione/edite dados do seu local</p>
+							<p translate>Add/edit data</p>
 							<table>
 								<tr ng-repeat="prop in properties track by prop._id" ng-hide="isReservedProperty(prop.key)">
 									<td class="prop-key"><input ng-model="prop.key" /></td>
 									<td class="prop-value"><input ng-model="prop.val" /></td>
-									<td class="action action-remove" ng-click="removeProperty(prop._id)" title="Remover propriedade"><span class="lsf">&#xE10f;</span></td>
+									<td class="action action-remove" ng-click="removeProperty(prop._id)" title="{{'Remove property' | translate}}"><span class="lsf">&#xE10f;</span></td>
 								</tr>
 							</table>
-							<a class="button" ng-click="addProperty()">Nova propriedade</a>
+							<a class="button" ng-click="addProperty()" translate>New property</a>
 						</div>
 						<div class="feature-style" ng-show="tool == 'feature-style'">
-							<a class="button" href="javascript:void(0);" ng-click="editing.styles = false" ng-show="editing.properties.customStyle">Utilizar padrão da camada</a>
+							<a class="button" href="javascript:void(0);" ng-click="editing.styles = false" ng-show="editing.properties.customStyle" translate>Use layer styles</a>
 							<div class="marker-styles" ng-show="editing.geometry.type == 'Point'">
-								<p class="label">Cor do marcador</p>
+								<p class="label" translate>Marker color</p>
 								<div class="colorpicker-container">
 									<div colorpicker class="colorpicker-box" colorpicker-parent="true" style="background:{{editing.styles['marker-color']}};" ng-model="editing.styles['marker-color']"></div>
 								</div>
-								<p class="label">Tamanho</p>
+								<p class="label" translate>Size</p>
 								<div class="size-picker">
 									<span ng-click="editing.styles['marker-size'] = 'small'" title="Pequeno"><img src="http://a.tiles.mapbox.com/v3/marker/pin-s+444.png" /></span>
 									<span ng-click="editing.styles['marker-size'] = 'medium'" title="Médio"><img src="http://a.tiles.mapbox.com/v3/marker/pin-m+444.png" /></span>
 									<span ng-click="editing.styles['marker-size'] = 'large'" title="Grande"><img src="http://a.tiles.mapbox.com/v3/marker/pin-l+444.png" /></span>
 								</div>
-								<p class="label">Ícone</p>
+								<p class="label" translate>Icon</p>
 								<div class="marker-icon">
 									<ul>
 										<li>
@@ -330,21 +338,21 @@
 								</div>
 							</div>
 							<div class="polygon-styles" ng-show="editing.geometry.type == 'Polygon'">
-								<p class="label">Cor da área</p>
+								<p class="label" translate>Area color</p>
 								<div class="colorpicker-container">
 									<div colorpicker class="colorpicker-box" colorpicker-parent="true" style="background:{{editing.styles.fill}};" ng-model="editing.styles.fill"></div>
 								</div>
-								<p class="label">Opacidade da área</p>
+								<p class="label" translate>Area opacity</p>
 								<div ui-slider min="0.00" max="1.00" step="0.01" use-decimals ng-model="editing.styles['fill-opacity']"></div>
 							</div>
 							<div class="line-styles" ng-show="editing.geometry.type == 'Polygon' || editing.geometry.type == 'LineString'">
-								<p class="label">Cor da borda</p>
+								<p class="label" translate>Border color</p>
 								<div class="colorpicker-container">
 									<div colorpicker class="colorpicker-box" colorpicker-parent="true" style="background:{{editing.styles.stroke}};" ng-model="editing.styles.stroke"></div>
 								</div>
-								<p class="label">Opacidade da borda</p>
+								<p class="label" translate>Border opacity</p>
 								<div ui-slider min="0.00" max="1.00" step="0.01" use-decimals ng-model="editing.styles['stroke-opacity']"></div>
-								<p class="label">Espessura da borda</p>
+								<p class="label" translate>Border width</p>
 								<div ui-slider min="0" max="20" step="1" ng-model="editing.styles['stroke-width']"></div>
 							</div>
 						</div>
@@ -365,20 +373,20 @@
 						</a>
 					</li>
 					<li class="remove-label" ng-show="editing._id">
-						<a href="javascript:void(0);" title="Remover este conteúdo permanentemente" ng-click="delete()"><span class="lsf">&#xE12c;</span></a>
+						<a href="javascript:void(0);" title="{{'Remove permanently' | translate}}" ng-click="delete()"><span class="lsf">&#xE12c;</span></a>
 					</li>
 					<li class="save-label">
-						<a href="javascript:void(0);" title="Salvar alterações deste conteúdo" ng-click="save()"><span class="lsf">&#xE029;</span></a>
+						<a href="javascript:void(0);" title="{{'Save' | translate}}" ng-click="save()"><span class="lsf">&#xE029;</span></a>
 					</li>
 					<li class="revert-label" ng-show="isRevertable()">
-						<a href="javascript:void(0);" title="Reverter alterações" ng-click="revert()"><span class="lsf">&#xE133;</span></a>
+						<a href="javascript:void(0);" title="{{'Revert changes' | translate}}" ng-click="revert()"><span class="lsf">&#xE133;</span></a>
 					</li>
 				</ul>
 				<div class="tools-editor" ng-show="tool">
 					<div class="content-features" ng-show="tool == 'content-features'">
-						<p>Selecione a(s) feature(s) relacionadas a este conteúdo</p>
-						<input class="filter" type="text" ng-model="filterFeature" placeholder="Filtrar features da lista" />
-						<a href="javascript:void(0);" ng-click="clearFeatures()" class="clear-selection" ng-show="editing.features">Limpar seleção</a>
+						<p translate>Select one or more locations related to this content</p>
+						<input class="filter" type="text" ng-model="filterFeature" placeholder="{{'Filter from the list' | translate}}" />
+						<a href="javascript:void(0);" ng-click="clearFeatures()" class="clear-selection" ng-show="editing.features" translate>Clear selection</a>
 						<ul class="feature-list">
 							<li ng-repeat="feature in layer.features | filter:filterFeature" ng-class="{selected:hasFeature(feature._id)}" ng-click="toggleFeature(feature._id)">{{feature.title}}</li>
 						</ul>
@@ -387,7 +395,7 @@
 			</div>
 			<div id="content-edit-body" class="content-settings">
 				<div class="content-title">
-					<h3>Conteúdo</h3>
+					<h3 translate>Content</h3>
 					<textarea class="edit-title no-canvas" placeholder="Título" ng-model="editing.title" disable-enter-key="$event" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
 				</div>
 				<div class="content-body">

@@ -1,12 +1,12 @@
 <div class="regular-page dashboard-page">
-	<div class="page-header dashboard-header row" ng-controller="UserCtrl">
+	<div class="page-header dashboard-header row">
 		<div class="container">
 			<div class="six columns">
-				<h1>
+				<h1 ng-controller="UserCtrl">
 					<img src="{{user.gravatar()}}" alt="{{userName}}" />
-					Painel de controle
+					<span translate>Dashboard</span>
 					<span class="user-name">{{userName}}</span>
-					<a href="{{profileUrl(user)}}" class="profile-link">Visualizar perfil</a>
+					<a href="{{profileUrl(user)}}/" class="profile-link" translate>View profile</a>
 				</h1>
 			</div>
 			<div class="six columns">
@@ -14,19 +14,19 @@
 					<li ng-class="{active: currentState === 'layers'}">
 						<a href="/dashboard/layers">
 							<span class="lsf">&#xE129;</span>
-							Camadas
+							<span translate>Layers</span>
 						</a>
 					</li>
-					<li ng-class="{active: currentState === 'maps'}">
+					<li ng-class="{active: currentState === 'maps'}" ng-show="canCreate">
 						<a href="/dashboard/maps">
 							<span class="lsf">&#xE08b;</span>
-							Mapas
+							<span translate>Maps</span>
 						</a>
 					</li>
 					<li ng-class="{active: currentState === 'profile'}">
 						<a href="/dashboard/profile">
 							<span class="lsf">&#xE137;</span>
-							Meu perfil
+							<span translate>My profile</span>
 						</a>
 					</li>
 				</ul>

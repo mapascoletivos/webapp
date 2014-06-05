@@ -1426,6 +1426,9 @@ input.no-canvas {
   width: 100%;
   position: relative;
 }
+.map-editor-container .editor-container .options-table td .relative-input {
+  position: relative;
+}
 .map-editor-container .editor-container .options-table td input,
 .map-editor-container .editor-container .options-table td textarea {
   width: 100%;
@@ -1435,9 +1438,9 @@ input.no-canvas {
 }
 .map-editor-container .editor-container .options-table td .auto-input {
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  right: -15px;
+  top: -15px;
+  bottom: -15px;
   padding: 15px;
   line-height: 27px;
   font-size: 20px;
@@ -1607,7 +1610,10 @@ input.no-canvas {
 .map-editor-container #editor .map-editor-tabs li.active .tab-tip {
   background: #2f7ac0;
 }
-.map-editor-container #editor .map-editor-tabs li.active:before {
+.map-editor-container #editor .map-editor-tabs li.active .tab-content {
+  position: relative;
+}
+.map-editor-container #editor .map-editor-tabs li.active .tab-content:before {
   content: '';
   background: #4e93d4;
   width: 15px;
@@ -1616,6 +1622,9 @@ input.no-canvas {
   left: 21px;
   bottom: -7px;
   -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 .map-editor-container #editor .map-editor-tabs li.active a {
   color: #fff;

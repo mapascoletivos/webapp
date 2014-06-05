@@ -147,6 +147,14 @@ exports.Layer = [
 				return is;
 
 			},
+			canCreate: function() {
+
+				if(Session.user() && Session.user().role == 'collaborator')
+					return false;
+
+				return false;
+
+			},
 			canEdit: function(layer) {
 
 				if(this.isOwner(layer) || this.isContributor(layer))

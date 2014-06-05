@@ -3,63 +3,69 @@
 		<div id="editor">
 			<div class="editor-content">
 				<div class="edit-header map-head">
-					<h2>Mapa</h2>
-					<textarea class="edit-title no-canvas" type="text" ng-model="map.title" placeholder="Título do mapa" disable-enter-key="$event" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
+					<h2 translate>Map</h2>
+					<textarea class="edit-title no-canvas" type="text" ng-model="map.title" placeholder="{{'Map title' | translate}}" disable-enter-key="$event" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
 				</div>
 				<div class="content">
 					<div id="map-edit">
 						<ul class="map-editor-tabs layer-objects-nav">
 							<li ng-class="mapObj('settings')" ng-click="setMapObj('settings')">
-								<a title="Configurações" href="javascript:void(0);">
-									<span class="lsf">&#xE055;</span>
-									<span class="label" ng-show="mapObj('settings')">
-										Configurações
-									</span>
-								</a>
+								<div class="tab-content">
+									<a title="{{'Settings' | translate}}" href="javascript:void(0);">
+										<span class="lsf">&#xE055;</span>
+										<span class="label" ng-show="mapObj('settings')">
+											<span translate>Settings</span>
+										</span>
+									</a>
+								</div>
 							</li>
 							<li ng-class="mapObj('layer')" ng-click="setMapObj('layer')">
-								<a title="Camadas" href="javascript:void(0);">
-									<span class="lsf">&#xE129;</span>
-									<span class="label" ng-show="mapObj('layer')">
-										Camadas
-									</span>
-									<span class="layer-length tab-tip" ng-show="map.layers.length">
-										{{map.layers.length}}
-									</span>
-								</a>
+								<div class="tab-content">
+									<a title="{{'Layers' | translate}}" href="javascript:void(0);">
+										<span class="lsf">&#xE129;</span>
+										<span class="label" ng-show="mapObj('layer')">
+											<span translate>Layers</span>
+										</span>
+										<span class="layer-length tab-tip" ng-show="map.layers.length">
+											{{map.layers.length}}
+										</span>
+									</a>
+								</div>
 							</li>
 							<li ng-class="mapObj('mapOptions')" ng-click="setMapObj('mapOptions')">
-								<a title="Opções do mapa" href="javascript:void(0);">
-									<span class="lsf">&#xE08b;</span>
-									<span class="label" ng-show="mapObj('mapOptions')">
-										Opções do mapa
-									</span>
-								</a>
+								<div class="tab-content">
+									<a title="{{'Map options' | translate}}" href="javascript:void(0);">
+										<span class="lsf">&#xE08b;</span>
+										<span class="label" ng-show="mapObj('mapOptions')">
+											<span translate>Map options</span>
+										</span>
+									</a>
+								</div>
 							</li>
 						</ul>
 						<div ng-show="mapObj('settings')" ng-controller="MapActionsCtrl">
 							<div id="settings">
 								<table class="options-table">
 									<tr>
-										<th>Descrição</th>
+										<th translate>Description</th>
 										<td>
-											<textarea class="edit-description no-canvas" type="text" ng-model="map.description" disable-enter-key="$event" placeholder="Descrição" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
+											<textarea class="edit-description no-canvas" type="text" ng-model="map.description" disable-enter-key="$event" placeholder="{{'Description' | translate}}" spellcheck="false" autocorrect="off" autocapitalize="off" msd-elastic></textarea>
 										</td>
 									<tr>
-										<th>Tags</th>
-										<td><input type="text" ng-model="map.tags" placeholder="Separe as tags por vírgula" /></td>
+										<th translate>Tags</th>
+										<td><input type="text" ng-model="map.tags" placeholder="{{'Comma separated tags' | translate}}" /></td>
 									</tr>
 									<tr>
-										<th>Privacidade</th>
+										<th translate>Privacy</th>
 										<td>
 											<ul class="radio-list">
 												<li ng-class="{active: map.visibility == 'Visible'}" ng-click="map.visibility = 'Visible'">
 													<span class="lsf">&#xE134;</span>
-													Público
+													<span translate>Public</span>
 												</li>
 												<li ng-class="{active: map.visibility == 'Private'}" ng-click="map.visibility = 'Private'">
 													<span class="lsf">&#xE086;</span>
-													Privado
+													<span translate>Private</span>
 												</li>
 											</ul>
 										</td>
@@ -67,7 +73,7 @@
 								</table>
 								<a href="javascript:void(0);" class="button button-red button-delete" ng-click="delete(map)" ng-hide="map.isDraft">
 									<span class="lsf">&#xE12c;</span>
-									Remover este mapa permanentemente.
+									<span translate>Remove this map permanently</span>
 								</a>
 							</div>
 						</div>
@@ -75,30 +81,30 @@
 							<div id="map-layers" class="map-editor-subcontent">
 								<div class="layers-list">
 									<div class="map-layers" ng-show="layers.length">
-										<p class="tip">Arraste as camadas para alterar a ordem de exibição.</p>
+										<p class="tip" translate>Drag the layers to change the order of exhibition.</p>
 										<ul class="obj-list" ui-sortable="sortLayer" ng-model="layers">
 											<li ng-repeat="layer in layers" ng-click="focusLayer(layer)" class="sortable">
 												<p class="actions">
-													<a href="/layers/{{layer._id}}" target="_blank" class="lsf view-layer" title="Ver camada">&#xE13a;</a>
-													<a href="javascript:void(0);" class="lsf remove-layer" title="Remover camada" ng-click="toggleLayer(layer)">&#xE12c;</a>
+													<a href="/layers/{{layer._id}}" target="_blank" class="lsf view-layer" title="{{'View layer' | translate}}">&#xE13a;</a>
+													<a href="javascript:void(0);" class="lsf remove-layer" title="{{'Remove layer' | translate}}" ng-click="toggleLayer(layer)">&#xE12c;</a>
 												</p>
 												{{layer.title}}
-												<span class="author" ng-show="layer.creator._id != user._id">por {{layer.creator.name}}</span>
+												<span class="author" ng-show="layer.creator._id != user._id"><span translate>by</span> {{layer.creator.name}}</span>
 											</li>
 										</ul>
 									</div>
-									<input class="filter" type="text" ng-model="layerSearch" placeholder="Busque camadas públicas da comunidade" />
+									<input class="filter" type="text" ng-model="layerSearch" placeholder="{{'Search public layers in the community' | translate}}" />
 									<ul class="obj-list available-layers" ng-show="availableLayers.length">
 										<li ng-repeat="layer in availableLayers | filter:layerSearch" class="add" ng-hide="hasLayer(layer)">
 											<p class="actions">
-												<a href="/layers/{{layer._id}}" target="_blank" class="lsf view-layer" title="Ver camada">&#xE13a;</a>
-												<a href="javascript:void(0);" class="lsf add-button" ng-click="toggleLayer(layer)" title="Adicionar camada">&#xE108;</a>
+												<a href="/layers/{{layer._id}}" target="_blank" class="lsf view-layer" title="{{'View layer' | translate}}">&#xE13a;</a>
+												<a href="javascript:void(0);" class="lsf add-button" ng-click="toggleLayer(layer)" title="{{'Add layer' | translate}}">&#xE108;</a>
 											</p>
 											{{layer.title}}
-											<span class="author" ng-show="layer.creator._id != user._id">por {{layer.creator.name}}</span>
+											<span class="author" ng-show="layer.creator._id != user._id"><span translate>by</span> {{layer.creator.name}}</span>
 										</li>
 									</ul>
-									<p class="tip" ng-hide="availableLayers.length">Nenhuma camada foi encontrada</p>
+									<p class="tip" ng-hide="availableLayers.length" translate>No layers were found</p>
 								</div>
 							</div>
 						</div>
@@ -106,41 +112,51 @@
 							<div id="map-options" class="map-editor-subcontent">
 								<table class="options-table">
 									<tr>
-										<th>Centro</th>
+										<th translate>Center</th>
 										<td>
-											<input type="text" ng-model="map.center" disabled />
-											<a class="lsf auto-input" href="javascript:void(0);" ng-click="autoInput.center()" title="Utilizar centro atual">&#xE038;</a>
+											<div class="relative-input">
+												<input type="text" ng-model="map.center" disabled />
+												<a class="lsf auto-input" href="javascript:void(0);" ng-click="autoInput.center()" title="{{'Use current center' | translate}}">&#xE038;</a>
+											</div>
 										</td>
 									</tr>
 									<tr>
-										<th>Zoom</th>
+										<th translate>Zoom</th>
 										<td>
-											<input type="number" ng-model="map.zoom" />
-											<a class="lsf auto-input" href="javascript:void(0);" ng-click="autoInput.zoom()" title="Utilizar zoom atual">&#xE038;</a>
+											<div class="relative-input">
+												<input type="number" ng-model="map.zoom" />
+												<a class="lsf auto-input" href="javascript:void(0);" ng-click="autoInput.zoom()" title="{{'Use current zoom' | translate}}">&#xE038;</a>
+											</div>
 										</td>
 									</tr>
 									<tr>
-										<th>Limites de navegação</th>
+										<th translate>Bounds</th>
 										<td>
-											<input type="text" ng-model="map.bounds" disabled />
-											<a class="lsf auto-input" href="javascript:void(0);" ng-click="autoInput.bounds()" title="Utilizar visualização atual">&#xE038;</a>
+											<div class="relative-input">
+												<input type="text" ng-model="map.bounds" disabled />
+												<a class="lsf auto-input" href="javascript:void(0);" ng-click="autoInput.bounds()" title="{{'Use current bounds' | translate}}">&#xE038;</a>
+											</div>
 										</td>
 									<tr>
-										<th>Zoom máximo</th>
+										<th translate>Max zoom</th>
 										<td>
-											<input type="text" ng-model="map.maxZoom" />
-											<a class="lsf auto-input" href="javascript:void(0);" ng-click="autoInput.maxZoom()" title="Utilizar zoom atual">&#xE038;</a>
+											<div class="relative-input">
+												<input type="text" ng-model="map.maxZoom" />
+												<a class="lsf auto-input" href="javascript:void(0);" ng-click="autoInput.maxZoom()" title="{{'Use current zoom' | translate}}">&#xE038;</a>
+											</div>
 										</td>
 									</tr>
 									<tr>
-										<th>Zoom mínimo</th>
+										<th translate>Min zoom</th>
 										<td>
-											<input type="text" ng-model="map.minZoom" />
-											<a class="lsf auto-input" href="javascript:void(0);" ng-click="autoInput.minZoom()" title="Utilizar zoom atual">&#xE038;</a>
+											<div class="relative-input">
+												<input type="text" ng-model="map.minZoom" />
+												<a class="lsf auto-input" href="javascript:void(0);" ng-click="autoInput.minZoom()" title="{{'Use current zoom' | translate}}">&#xE038;</a>
+											</div>
 										</td>
 									</tr>
 								</table>
-								<a href="javascript:void(0);" class="button" ng-click="autoInput.all()">Travar mapa na visualização atual</a>
+								<a href="javascript:void(0);" class="button" ng-click="autoInput.all()" translate>Lock map in current view</a>
 							</div>
 						</div>
 					</div>
@@ -149,12 +165,12 @@
 		</div>
 		<form class="primary-actions" ng-controller="MapActionsCtrl" ng-submit="save(map)">
 			<a href="javascript:void(0);" class="button button-secondary" ng-click="close()">
-				<span ng-hide="map.isDraft">Ver mapa</span>
-				<span ng-show="map.isDraft">Cancelar</span>
+				<span ng-hide="map.isDraft" translate>View map</span>
+				<span ng-show="map.isDraft" translate>Cancel</span>
 			</a>
 			<a href="javascript:void(0);" class="button" ng-click="save(map)">
-				<span ng-hide="map.isDraft">Salvar alterações</span>
-				<span ng-show="map.isDraft">Publicar mapa</span>
+				<span ng-hide="map.isDraft" translate>Save changes</span>
+				<span ng-show="map.isDraft" translate>Publish map</span>
 			</a>
 		</form>
 	</div>

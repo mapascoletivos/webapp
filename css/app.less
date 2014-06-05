@@ -1444,6 +1444,9 @@ input.no-canvas {
 				padding: 15px;
 				width: 100%;
 				position: relative;
+				.relative-input {
+					position: relative;
+				}
 				input,
 				textarea {
 					width: 100%;
@@ -1453,9 +1456,9 @@ input.no-canvas {
 				}
 				.auto-input {
 					position: absolute;
-					right:0;
-					top: 0;
-					bottom: 0;
+					right:-15px;
+					top: -15px;
+					bottom: -15px;
 					padding: 15px;
 					line-height: 27px;
 					font-size: 20px;
@@ -1626,15 +1629,21 @@ input.no-canvas {
 					.tab-tip {
 						background: @dark-blue;
 					}
-					&:before {
-						content: '';
-						background: @blue;
-						width: 15px;
-						height: 15px;
-						position: absolute;
-						left: 21px;
-						bottom: -7px;
-						-webkit-transform: rotate(45deg);
+					.tab-content {
+						position: relative;
+						&:before {
+							content: '';
+							background: @blue;
+							width: 15px;
+							height: 15px;
+							position: absolute;
+							left: 21px;
+							bottom: -7px;
+							-webkit-transform: rotate(45deg);
+							-moz-transform: rotate(45deg);
+							-o-transform: rotate(45deg);
+							transform: rotate(45deg);
+						}
 					}
 					a {
 						color: #fff;
