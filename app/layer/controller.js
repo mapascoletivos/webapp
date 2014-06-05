@@ -10,6 +10,7 @@ exports.LayerCtrl = [
 	'$state',
 	'$stateParams',
 	'$q',
+	'$translate',
 	'Page',
 	'Layer',
 	'Feature',
@@ -19,7 +20,7 @@ exports.LayerCtrl = [
 	'LoadingService',
 	'MapService',
 	'MapView',
-	function($scope, $rootScope, $location, $state, $stateParams, $q, Page, Layer, Feature, Maki, Content, Message, Loading, MapService, MapView) {
+	function($scope, $rootScope, $location, $state, $stateParams, $q, $translate, Page, Layer, Feature, Maki, Content, Message, Loading, MapService, MapView) {
 
 		$scope.$layer = Layer;
 		$scope.$feature = Feature;
@@ -216,7 +217,7 @@ exports.LayerCtrl = [
 						delete original.features;
 						delete original.contents;
 						if(!angular.equals(editing, original)) {
-							if(!confirm('Deseja sair sem salvar alterações?'))
+							if(!confirm($translate.instant('Leave without saving changes?')))
 								event.preventDefault();
 							else
 								Layer.deleteDraft($scope.layer);
@@ -235,7 +236,7 @@ exports.LayerCtrl = [
 						$location.path('/layers/' + layer._id);
 						Message.add({
 							status: 'error',
-							text: 'Sem permissões para editar esta camada'
+							text: $translate.instant("You don't have permissions to edit this layer")
 						});
 					}
 
@@ -295,7 +296,7 @@ exports.LayerCtrl = [
 
 					if($scope.layer.title == 'Untitled') {
 						$scope.layer.title = '';
-						Page.setTitle('Nova camada');
+						Page.setTitle($translate.instant('New layer'));
 					}
 
 					$scope.$on('layer.save.success', function(event, layer) {
@@ -351,7 +352,7 @@ exports.LayerCtrl = [
 		// All layers
 		} else {
 
-			Page.setTitle('Camadas');
+			Page.setTitle($translate.instant('Layers'));
 
 			Layer.resource.query(function(res) {
 				$scope.layers = res.layers;

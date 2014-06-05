@@ -6,11 +6,12 @@
 exports.Layer = [
 	'$resource',
 	'$rootScope',
+	'$translate',
 	'apiPrefix',
 	'SessionService',
 	'LoadingService',
 	'MessageService',
-	function($resource, $rootScope, apiPrefix, Session, Loading, Message) {
+	function($resource, $rootScope, $translate, apiPrefix, Session, Loading, Message) {
 
 		var editing = false;
 
@@ -21,7 +22,7 @@ exports.Layer = [
 				'query': {
 					isArray: false,
 					method: 'GET',
-					loadingMessage: 'Carregando camadas',
+					loadingMessage: $translate.instant('Loading layers'),
 					params: {
 						perPage: 10,
 						page: 1
@@ -37,7 +38,7 @@ exports.Layer = [
 					isArray: false,
 					method: 'GET',
 					url: apiPrefix + '/user/layers',
-					loadingMessage: 'Carregando camadas',
+					loadingMessage: $translate.instant('Loading layers'),
 					params: {
 						perPage: 10,
 						page: 1
@@ -51,20 +52,20 @@ exports.Layer = [
 				},
 				'update': {
 					method: 'PUT',
-					loadingMessage: 'Atualizando camada'
+					loadingMessage: $translate.instant('Updating layer')
 				},
 				'get': {
 					method: 'GET',
-					loadingMessage: 'Carregando camada'
+					loadingMessage: $translate.instant('Loading layer')
 				},
 				'delete': {
 					method: 'DELETE',
-					loadingMessage: 'Removendo camada'
+					loadingMessage: $translate.instant('Removing layer')
 				},
 				'addContributor': {
 					url: apiPrefix + '/layers/:layerId/contributors/add',
 					method: 'PUT',
-					loadingMessage: 'Adicionando colaborador',
+					loadingMessage: $translate.instant('Adding collaborator'),
 					params: {
 						layerId: '@layerId',
 						email: '@email'
@@ -73,7 +74,7 @@ exports.Layer = [
 				'removeContributor': {
 					url: apiPrefix + '/layers/:layerId/contributors/remove',
 					method: 'DELETE',
-					loadingMessage: 'Removendo colaborador',
+					loadingMessage: $translate.instant('Removing collaborator'),
 					params: {
 						layerId: '@layerId',
 						contributorId: '@contributorId'

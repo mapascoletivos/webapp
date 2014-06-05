@@ -1,10 +1,10 @@
 <div class="page-subheader anti-row row">
 	<div class="container">
 		<div class="twelve columns">
-			<h2>Mapas</h2>
-			<input ng-show="maps.length" class="filter" type="text" ng-model="search" placeholder="Busque mapas" />
-			<p ng-show="maps.length">{{user.name}} possui <strong>{{totalMap}}</strong> mapas cadastrados.</p>
-			<p ng-hide="maps.length">{{user.name}} ainda não criou mapas.</p>
+			<h2 translate>Maps</h2>
+			<input ng-show="maps.length" class="filter" type="text" ng-model="search" placeholder="{{'Type your search' | translate}}" />
+			<p ng-show="layers.length" translate="profileTotalMaps" translate-values="{userName: user.name, total: totalMap}"></p>
+			<p ng-hide="maps.length">{{user.name}} <span translate>haven't created any maps.</span></p>
 		</div>
 	</div>
 </div>
@@ -24,7 +24,7 @@
 	<div class="container">
 		<div class="twelve columns">
 			<div class="info-box">
-				<p>{{user.name}} ainda não criou mapas.</p>
+				<p>{{user.name}} <span translate>haven't created any maps.</span></p>
 			</div>
 		</div>
 	</div>

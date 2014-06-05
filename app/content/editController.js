@@ -7,12 +7,13 @@
 exports.ContentEditCtrl = [
 	'$scope',
 	'$rootScope',
+	'$translate',
 	'Content',
 	'Layer',
 	'MessageService',
 	'SirTrevor',
 	'MapService',
-	function($scope, $rootScope, Content, Layer, Message, SirTrevor, MapService) {
+	function($scope, $rootScope, $translate, Content, Layer, Message, SirTrevor, MapService) {
 
 		var original,
 			layer;
@@ -76,7 +77,7 @@ exports.ContentEditCtrl = [
 
 					Message.message({
 						status: 'ok',
-						text: 'Conteúdo salvo.'
+						text: $translate.instant('Content saved')
 					});
 
 				});
@@ -100,7 +101,7 @@ exports.ContentEditCtrl = [
 
 					Message.message({
 						status: 'ok',
-						text: 'Conteúdo adicionado.'
+						text: $translate.instant('Content published')
 					});
 
 				}, function(err) {
@@ -110,7 +111,7 @@ exports.ContentEditCtrl = [
 					if(err.status == 400 && err.data.message) {
 						message.text = err.data.message;
 					} else {
-						message.text = 'Ocorreu um erro interno.';
+						message.text = $translate.instant('Internal error');
 					}
 
 					Message.message(message, false);
@@ -123,7 +124,7 @@ exports.ContentEditCtrl = [
 
 		$scope.delete = function() {
 
-			if(confirm('Você tem certeza que deseja remover este conteúdo?')) {
+			if(confirm($translate.instant('Are you sure you want to remove this content?'))) {
 
 				Content.resource.delete({contentId: $scope.editing._id}, function() {
 
@@ -134,7 +135,7 @@ exports.ContentEditCtrl = [
 
 					Message.message({
 						status: 'ok',
-						text: 'Conteúdo removido.'
+						text: $translate.instant('Content removed')
 					});
 
 				}, function(err) {
@@ -144,7 +145,7 @@ exports.ContentEditCtrl = [
 					if(err.status == 400 && err.data.message) {
 						message.text = err.data.message;
 					} else {
-						message.text = 'Ocorreu um erro interno.';
+						message.text = $translate.instant('Internal error');
 					}
 
 					Message.message(message, false);

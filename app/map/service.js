@@ -7,10 +7,11 @@
 exports.Map = [
 	'$resource',
 	'$rootScope',
+	'$translate',
 	'apiPrefix',
 	'LoadingService',
 	'MessageService',
-	function($resource, $rootScope, apiPrefix, Loading, Message) {
+	function($resource, $rootScope, $translate, apiPrefix, Loading, Message) {
 
 		var params = {};
 
@@ -19,7 +20,7 @@ exports.Map = [
 				'query': {
 					isArray: false,
 					method: 'GET',
-					loadingMessage: 'Carregando mapas',
+					loadingMessage: $translate.instant('Loading maps'),
 					params: {
 						perPage: 10,
 						page: 1
@@ -35,7 +36,7 @@ exports.Map = [
 					isArray: false,
 					method: 'GET',
 					url: apiPrefix + '/user/maps',
-					loadingMessage: 'Carregando mapas',
+					loadingMessage: $translate.instant('Loading maps'),
 					params: {
 						perPage: 10,
 						page: 1
@@ -49,7 +50,7 @@ exports.Map = [
 				},
 				'get': {
 					method: 'GET',
-					loadingMessage: 'Carregando mapa',
+					loadingMessage: $translate.instant('Loading map'),
 					interceptor: {
 						response: function(data) {
 							var map = data.data;
@@ -64,11 +65,11 @@ exports.Map = [
 				},
 				'update': {
 					method: 'PUT',
-					loadingMessage: 'Atualizando mapa'
+					loadingMessage: $translate.instant('Updating map')
 				},
 				'delete': {
 					method: 'DELETE',
-					loadingMessage: 'Removendo mapa'
+					loadingMessage: $translate.instant('Removing map')
 				}
 			}),
 			busy: false,

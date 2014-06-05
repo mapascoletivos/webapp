@@ -6,8 +6,9 @@
  
 exports.Content = [
 	'$resource',
+	'$translate',
 	'apiPrefix',
-	function($resource, apiPrefix) {
+	function($resource, $translate, apiPrefix) {
 
 		var contents = [];
 		var editing = false;
@@ -17,15 +18,15 @@ exports.Content = [
 				'query': {
 					method: 'GET',
 					isArray: false,
-					loadingMessage: 'Carregando conteúdos'
+					loadingMessage: $translate.instant('Loading stories')
 				},
 				'get': {
 					method: 'GET',
-					loadingMessage: 'Carregando conteúdo'
+					loadingMessage: $translate.instant('Loading story')
 				},
 				'save': {
 					method: 'POST',
-					loadingMessage: 'Criando conteúdo',
+					loadingMessage: $translate.instant('Creating content'),
 					url: apiPrefix + '/contents',
 					params: {
 						layer: '@id'
@@ -33,12 +34,12 @@ exports.Content = [
 				},
 				'delete': {
 					method: 'DELETE',
-					loadingMessage: 'Removendo conteúdo',
+					loadingMessage: $translate.instant('Removing content'),
 					url: apiPrefix + '/contents/:contentId'
 				},
 				'update': {
 					method: 'PUT',
-					loadingMessage: 'Atualizando conteúdo'
+					loadingMessage: $translate.instant('Saving content')
 				}
 			}),
 			// Object sharing between controllers methods

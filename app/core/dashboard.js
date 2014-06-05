@@ -28,13 +28,14 @@ angular.module('yby.dashboard', [])
 	'$stateParams',
 	'SessionService',
 	'$location',
+	'$translate',
 	'Page',
 	'User',
 	'Layer',
 	'Map',
-	function($scope, $rootScope, $timeout, $state, $stateParams, Session, $location, Page, User, Layer, Map) {
+	function($scope, $rootScope, $timeout, $state, $stateParams, Session, $location, $translate, Page, User, Layer, Map) {
 
-		Page.setTitle('Painel de Controle');
+		Page.setTitle($translate.instant('Painel de Controle'));
 
 		$scope.isDashboard = true;
 

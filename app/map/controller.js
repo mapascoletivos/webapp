@@ -11,6 +11,7 @@ exports.MapCtrl = [
 	'$location',
 	'$state',
 	'$stateParams',
+	'$translate',
 	'Page',
 	'Map',
 	'Layer',
@@ -20,7 +21,7 @@ exports.MapCtrl = [
 	'MapView',
 	'MessageService',
 	'SessionService',
-	function($scope, $rootScope, $timeout, $location, $state, $stateParams, Page, Map, Layer, Content, Feature, MapService, MapView, Message, Session) {
+	function($scope, $rootScope, $timeout, $location, $state, $stateParams, $translate, Page, Map, Layer, Content, Feature, MapService, MapView, Message, Session) {
 
 		$scope.$session = Session;
 
@@ -101,7 +102,7 @@ exports.MapCtrl = [
 
 					var destroyConfirmation = $rootScope.$on('$stateChangeStart', function(event) {
 						if(!angular.equals($scope.map, origMap))
-							if(!confirm('Deseja sair sem salvar alterações?'))
+							if(!confirm($translate.instant('Leave without saving changes?')))
 								event.preventDefault();
 							else
 								Map.deleteDraft($scope.map);
@@ -158,7 +159,7 @@ exports.MapCtrl = [
 					var mapLayers = angular.copy($scope.map.layers);
 
 					if($scope.hasLayer(layer)) {
-						if($scope.isEditing() && confirm('Tem certeza que gostaria de remover esta camada do seu mapa?'))
+						if($scope.isEditing() && confirm($translate.instant("Are you sure you'd like to remove this layer from your map?")))
 							mapLayers = mapLayers.filter(function(layerId) { return layerId !== layer._id; });
 					} else {
 						mapLayers.push(layer._id);
@@ -430,7 +431,7 @@ exports.MapCtrl = [
 				if($location.path().indexOf('edit') !== -1) {
 					if($scope.map.title == 'Untitled') {
 						$scope.map.title = '';
-						Page.setTitle('Novo mapa');
+						Page.setTitle($translate.instant('New map'));
 					}
 				}
 
@@ -438,7 +439,7 @@ exports.MapCtrl = [
 
 		} else {
 
-			Page.setTitle('Mapas');
+			Page.setTitle($translate.instant('Maps'));
 
 			Map.resource.query(function(res) {
 				$scope.maps = res.maps;

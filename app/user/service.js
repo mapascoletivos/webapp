@@ -6,9 +6,10 @@
 
 exports.User = [
 	'$resource',
+	'$translate',
 	'config',
 	'apiPrefix',
-	function($resource, config, apiPrefix) {
+	function($resource, $translate, config, apiPrefix) {
 
 		var gravatar = function(email, size) {
 
@@ -32,7 +33,7 @@ exports.User = [
 			resource: $resource(apiPrefix + '/users/:userId', {}, {
 				'get': {
 					method: 'GET',
-					loadingMessage: 'Carregando usuário',
+					loadingMessage: $translate.instant('Loading user'),
 					interceptor: {
 						response: function(data) {
 							var res = data.data;
@@ -45,7 +46,7 @@ exports.User = [
 				},
 				'update': {
 					method: 'PUT',
-					loadingMessage: 'Atualizando usuário',
+					loadingMessage: $translate.instant('Updating user'),
 					url: apiPrefix + '/users',
 					transformRequest: function(data) {
 						if(data.email)
@@ -55,7 +56,7 @@ exports.User = [
 				},
 				'updateEmail': {
 					method: 'PUT',
-					loadingMessage: 'Atualizando email',
+					loadingMessage: $translate.instant('Updating email'),
 					url: apiPrefix + '/users',
 					transformRequest: function(data) {
 						if(data.email) {
@@ -66,7 +67,7 @@ exports.User = [
 				},
 				'updatePwd': {
 					method: 'PUT',
-					loadingMessage: 'Alterando senha'
+					loadingMessage: $translate.instant('Updating password')
 				}
 			}),
 			gravatar: gravatar

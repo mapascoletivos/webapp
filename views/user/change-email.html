@@ -3,9 +3,9 @@
 		<div class="modal-content">
 			<a href="javascript:void(0);" class="close-button lsf" ng-click="closeEmailModal()" title="Fechar">&#xE10f;</a>
 			<div class="change-email-form">
-				<h4>Alteração de email</h4>
-				<input type="text" placeholder="Digite o novo email" ng-model="user.newEmail" />
-				<a class="button" ng-click="changeEmail(user)">Enviar confirmação de endereço</a>
+				<h4 translate>Email change</h4>
+				<input type="text" placeholder="{{'Type your new email' | translate}}" ng-model="user.newEmail" />
+				<a class="button" ng-click="changeEmail(user)" translate>Send email confirmation</a>
 			</div>
 		</div>
 	</div>

@@ -3,27 +3,27 @@
 		<div id="layer-info" class="map-info" ng-class="{withBackButton: mapView.backLink()}">
 			<a class="back lsf" title="Voltar" href="javascript:void(0);" ng-click="mapView.goBack()" ng-show="mapView.backLink()"><span>&#xE133;</span></a>
 			<h1>{{layer.title}}</h1>
-			<p class="author">por <a href="/user/{{layer.creator.username}}/">{{layer.creator.name}}</a></p>
+			<p class="author" ng-controller="UserCtrl"><span translate>by</span> <a href="{{profileUrl(layer.creator)}}">{{layer.creator.name}}</a></p>
 		</div>
 	</div>
 	<div id="layer-controls" class="map-controls" ng-controller="LayerActionsCtrl">
 		<ul>
 			<li ng-show="canEdit(layer)">
-				<a href="javascript:void(0);" ng-click="edit(layer)" title="Editar">
+				<a href="javascript:void(0);" ng-click="edit(layer)" title="{{'Edit' | translate}}">
 					<span class="lsf">&#xE09f;</span>
-					<span class="label">Editar</span>
+					<span class="label" translate>Edit</span>
 				</a>
 			</li>
 			<li ng-show="canEdit(layer)">
-				<a href="javascript:void(0);" ng-click="delete(layer)" title="Editar">
+				<a href="javascript:void(0);" ng-click="delete(layer)" title="{{'Delete permanently' | translate}}">
 					<span class="lsf">&#xE12c;</span>
-					<span class="label">Remover</span>
+					<span class="label" translate>Delete</span>
 				</a>
 			</li>
 			<li ng-show="layer.visibility !== 'Private' || canEdit(layer)">
-				<a href="javascript:void(0);" ng-click="share(layer)" title="Compartilhar">
+				<a href="javascript:void(0);" ng-click="share(layer)" title="{{'Share' | translate}}">
 					<span class="lsf">&#xE118;</span>
-					<span class="label">Compartilhar</span>
+					<span class="label" translate>Share</span>
 				</a>
 			</li>
 		</ul>
@@ -35,25 +35,25 @@
 		<div id="map-sidebar" ng-controller="ContentCtrl" ng-show="mapView.sidebar()">
 			<div class="map-sidebar-content">
 				<div id="layer-info" class="sidebar-block main-info" ng-show="layer.description && !feature && !content">
-					<p class="label">Sobre esta camada</p>
+					<p class="label" translate>About this layer</p>
 					<p dynamic="layer.description"></p>
 				</div>
 				<div ng-show="feature" ng-controller="FeatureCtrl">
 					<div class="sidebar-block label-block">
-						<h3>Local <a class="close" href="{{baseUrl}}">Voltar para o mapa</a></h3>
+						<h3><span translate>Location</span> <a class="close" href="{{baseUrl}}" translate>Return to the map</a></h3>
 					</div>
 					<div id="feature-info" class="single-feature sidebar-block" ng-include="templates.show"></div>
 				</div>
 				<div id="posts" ng-show="contents.length">
 					<div ng-show="content">
 						<div class="sidebar-block label-block">
-							<h3>Conteúdo <a class="close" href="{{baseUrl}}">Voltar para o mapa</a></h3>
+							<h3><span translate>Content</span> <a class="close" href="{{baseUrl}}" translate>Return to the map</a></h3>
 						</div>
 						<div class="single-post sidebar-block active" ng-include="templates.show"></div>
 					</div>
 					<div ng-hide="content">
 						<div class="sidebar-block label-block">
-							<h3>Conteúdo da camada</h3>
+							<h3 translate>Layer stories</h3>
 						</div>
 						<ul class="content-list">
 							<li class="sidebar-block" ng-repeat="content in contents" ng-include="templates.list"></li>
@@ -62,7 +62,7 @@
 				</div>
 				<div id="features" ng-show="!contents.length && !feature && features.length" ng-controller="FeatureCtrl">
 					<div class="sidebar-block label-block">
-						<h3>Locais</h3>
+						<h3 translate>Locations</h3>
 					</div>
 					<ul class="feature-list">
 						<li class="sidebar-block" ng-repeat="feature in features" ng-include="templates.list"></li>

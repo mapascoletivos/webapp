@@ -10,13 +10,14 @@ exports.FeatureEditCtrl = [
 	'$scope',
 	'$rootScope',
 	'$timeout',
+	'$translate',
 	'Feature',
 	'Maki',
 	'Layer',
 	'MessageService',
 	'GeocodeService',
 	'MapService',
-	function($scope, $rootScope, $timeout, Feature, Maki, Layer, Message, Geocode, MapService) {
+	function($scope, $rootScope, $timeout, $translate, Feature, Maki, Layer, Message, Geocode, MapService) {
 
 		var layer;
 
@@ -130,7 +131,7 @@ exports.FeatureEditCtrl = [
 						if($scope.editing.geometry.type == 'Point') {
 
 							$scope.marker
-								.bindPopup('<p class="tip">Arraste para alterar a localização.</p>')
+								.bindPopup('<p class="tip">' + $translate.instant('Drag to alter the location') + '</p>')
 								.on('dragstart', function() {
 									$scope.marker.closePopup();
 								})
@@ -239,7 +240,7 @@ exports.FeatureEditCtrl = [
 					if(silent !== true) {
 						Message.message({
 							status: 'ok',
-							text: 'Feature salva.'
+							text: $translate.instant('Location saved')
 						});
 						Feature.edit(false);
 					} else {
@@ -265,7 +266,7 @@ exports.FeatureEditCtrl = [
 
 					Message.message({
 						status: 'ok',
-						text: 'Feature adicionada.'
+						text: $translate.instant('Location published')
 					});
 
 				});
@@ -276,7 +277,7 @@ exports.FeatureEditCtrl = [
 
 		$scope.delete = function() {
 
-			if(confirm('Você tem certeza que deseja remover esta feature?')) {
+			if(confirm($translate.instant('Are you sure you want to remove this location?'))) {
 
 				Feature.resource.delete({featureId: $scope.editing._id, layerId: layer._id}, function(res) {
 
@@ -288,7 +289,7 @@ exports.FeatureEditCtrl = [
 
 					Message.message({
 						status: 'ok',
-						text: 'Feature removida.'
+						text: $translate.instant('Location removed')
 					});
 					
 					Feature.edit(false);

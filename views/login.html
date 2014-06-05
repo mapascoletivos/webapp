@@ -1,26 +1,26 @@
 <section id="login">
 	<div class="login-content">
-		<h1>Entrar</h1>
+		<h1 translate>Login</h1>
 		<div class="login-form">
 			<form class="form-horizontal" role="form" ng-submit="login()">
 				<div class="form-group">
-					<label for="email">Email</label>
-					<input id="email" type="email" ng-model="credentials.email" placeholder="Email" />
+					<label for="email" translate>Email</label>
+					<input id="email" type="email" ng-model="credentials.email" placeholder="{{'Email' | translate}}" />
 				</div>
 				<div class="form-group">
-					<label for="password">Senha</label>
-					<input id="password" type="password" placeholder="Senha" ng-model="credentials.password" />
+					<label for="password" translate>Password</label>
+					<input id="password" type="password" placeholder="{{'Password' | translate}}" ng-model="credentials.password" />
 				</div>
-				<input type="submit" value="Entrar" />
+				<input type="submit" value="{{'Login' | translate}}" />
 				<div class="form-group action-group">
-					<a class="signup" href="/signup">Cadastre-se</a>
-					<a href="/forgot-password">Recuperar senha</a>
+					<a class="signup" href="/signup" translate ng-hide="ybySettings.general.onlyInvitedUsers">Register</a>
+					<a href="/forgot-password" translate>Forgot my password</a>
 				</div>
 			</form>
 		</div>
-		<div class="social-networks">
-			<a ng-show="facebookReady" class="facebook" title="Facebook" href="javascript:void(0);" ng-click="login('facebook')"><span class="lsf">&#xE047;</span> Entrar com o Facebook</a>
-			<google-plus-signin clientid="{{googleClientID}}" language="pt-BR"></google-plus-signin>
+		<div class="social-networks" ng-hide="ybySettings.general.onlyInvitedUsers">
+			<a ng-show="facebookReady" class="facebook" title="Facebook" href="javascript:void(0);" ng-click="login('facebook')"><span class="lsf">&#xE047;</span> <span translate>Login with facebook</span></a>
+			<google-plus-signin clientid="{{googleClientID}}" language="{{ybySettings.language}}"></google-plus-signin>
 		</div>
 	</div>
 </section>

@@ -12,12 +12,13 @@ exports.FeatureCtrl = [
 	'$state',
 	'$stateParams',
 	'$location',
+	'$translate',
 	'Feature',
 	'Content',
 	'MessageService',
 	'MapService',
 	'SessionService',
-	function($scope, $rootScope, $state, $stateParams, $location, Feature, Content, Message, MapService, Session) {
+	function($scope, $rootScope, $state, $stateParams, $location, $translate, Feature, Content, Message, MapService, Session) {
 
 		$scope.$session = Session;
 
@@ -213,7 +214,7 @@ exports.FeatureCtrl = [
 
 					Message.add({
 						'status': 'error',
-						'text': 'Você não tem permissão para editar este local'
+						'text': $translate.instant("You don't have permission to edit this location")
 					});
 
 				}

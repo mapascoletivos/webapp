@@ -1,13 +1,13 @@
 <div class="single-feature">
 	<h2>{{feature.title}}</h2>
 	<div class="meta clearfix">
-		<p class="author" title="Usuário">
-			<a href="/user/{{feature.creator.username}}/">{{feature.creator.name}}</a>
+		<p class="author" title="{{'Author' | translate}}" ng-controller="UserCtrl">
+			<a href="/user/{{profileUrl(feature.creator)}}/">{{feature.creator.name}}</a>
 		</p>
-		<p class="layer" ng-show="map" title="Camada">
+		<p class="layer" ng-show="map" title="{{'Layer' | translate}}">
 			<a href="/layers/{{feature.layer._id}}/">{{feature.layer.title}}</a>
 		</p>
-		<p class="features" ng-show="feature.featureObjs.length" title="Features">
+		<p class="features" ng-show="feature.featureObjs.length" title="{{'Locations' | translate}}">
 			<span class="feature" ng-repeat="feature in feature.featureObjs">
 				<a href="{{baseUrl}}/feature/{{feature._id}}">{{feature.title}}</a>
 			</span>

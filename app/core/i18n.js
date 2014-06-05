@@ -11,7 +11,7 @@ module.exports = [
 		$translateProvider.translations('en-US', require('../languages/en-US'));
 		$translateProvider.translations('pt-BR', require('../languages/pt-BR'));
 
-		$translateProvider.preferredLanguage('en-US');
+		$translateProvider.preferredLanguage(ybySettings.language);
 		//$translateProvider.useLocalStorage();
 
 	}

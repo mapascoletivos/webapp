@@ -1,46 +1,46 @@
 <section id="login">
 	<div class="login-content">
-		<h1>Cadastro</h1>
+		<h1 translate>Registration</h1>
 		<div class="login-form">
 			<form class="form-horizontal" role="form" ng-submit="register()">
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="name">Nome completo</label>
+					<label class="col-sm-2 control-label" for="name" translate>Name</label>
 
 					<div class="col-sm-10">
-						<input class="form-control" id="name" ng-model="user.name" placeholder="Nome completo" type="text" autocomplete="off">
+						<input class="form-control" id="name" ng-model="user.name" placeholder="{{'Your display name' | translate}}" type="text" autocomplete="off">
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="email">Email</label>
+					<label class="col-sm-2 control-label" for="email" translate>Email</label>
 
 					<div class="col-sm-10">
-						<input class="form-control" id="email" ng-model="user.email" placeholder="Email" type="text" autocomplete="off">
+						<input class="form-control" id="email" ng-model="user.email" placeholder="{{'Email' | translate}}" type="text" autocomplete="off">
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="password">Senha</label>
+					<label class="col-sm-2 control-label" for="password" translate>Password</label>
 
 					<div class="col-sm-10">
-						<input class="form-control" id="password" ng-model="user.password" placeholder="Senha" type="password" autocomplete="off">
+						<input class="form-control" id="password" ng-model="user.password" placeholder="{{'Password' | translate}}" type="password" autocomplete="off">
 					</div>
 				</div>
 
-				<p>Ao clicar em Cadastrar ou fazer login via redes sociais, você concorda com nossos <a href="/terms-of-use">termos de uso</a>.</p>
+				<!--<p>Ao clicar em Cadastrar ou fazer login via redes sociais, você concorda com nossos <a href="/terms-of-use">termos de uso</a>.</p>-->
 
-				<input class="btn btn-primary" type="submit" value="Cadastrar">
+				<input class="btn btn-primary" type="submit" value="{{'Register' | translate}}">
 
 				<div class="form-group action-group">
-					<a class="show-signup" href="/login">Fazer login</a><a href="/forgot-password">Recuperar senha</a>
+					<a class="show-signup" href="/login" translate>Login</a><a href="/forgot-password" translate>Forgot my password</a>
 				</div>
 			</form>
 		</div>
 		<div class="social-login">
 			<div class="social-networks">
-				<a ng-show="facebookReady" class="facebook" title="Facebook" href="javascript:void(0);" ng-click="login('facebook')"><span class="lsf">&#xE047;</span> Entrar com o Facebook</a>
-				<google-plus-signin clientid="{{googleClientID}}" language="pt-BR"></google-plus-signin>
+				<a ng-show="facebookReady" class="facebook" title="Facebook" href="javascript:void(0);" ng-click="login('facebook')"><span class="lsf">&#xE047;</span> <span translate>Login with Facebook</span></a>
+				<google-plus-signin clientid="{{googleClientID}}" language="ybySettings.language"></google-plus-signin>
 			</div>
 		</div>
 	</div>

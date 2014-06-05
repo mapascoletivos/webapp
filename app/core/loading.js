@@ -12,46 +12,50 @@ angular.module('yby.loadingStatus', [])
 	}
 ])
 
-.service('LoadingService', function() {
+.service('LoadingService', [
+	'$translate',
+	function($translate) {
 
-	var active = false;
-	var message = 'Carregando...';
-	var enabled = true;
+		var active = false;
+		var dfltMessage = $translate.instant('Loading');
+		var message = angular.copy(dfltMessage);
+		var enabled = true;
 
-	return {
-		show: function(text) {
-			if(enabled) {
-				if(typeof text !== 'undefined')
-					message = text;
-				active = true;
+		return {
+			show: function(text) {
+				if(enabled) {
+					if(typeof text !== 'undefined')
+						message = text;
+					active = true;
+					return active;
+				}
+			},
+			hide: function() {
+				if(enabled) {
+					message = dfltMessage;
+					active = false;
+					return active;
+				}
+			},
+			get: function() {
 				return active;
+			},
+			setMessage: function(text) {
+				message = text;
+			},
+			getMessage: function() {
+				return message;
+			},
+			disable: function() {
+				enabled = false;
+			},
+			enable: function() {
+				enabled = true;
 			}
-		},
-		hide: function() {
-			if(enabled) {
-				message = 'Carregando...';
-				active = false;
-				return active;
-			}
-		},
-		get: function() {
-			return active;
-		},
-		setMessage: function(text) {
-			message = text;
-		},
-		getMessage: function() {
-			return message;
-		},
-		disable: function() {
-			enabled = false;
-		},
-		enable: function() {
-			enabled = true;
 		}
-	}
 
-})
+	}
+])
 
 .directive('loadingStatusMessage', [
 	'LoadingService',
@@ -80,9 +84,10 @@ angular.module('yby.loadingStatus', [])
 	'$q',
 	'$rootScope',
 	'$timeout',
+	'$translate',
 	'LoadingService',
-	function($q, $rootScope, $timeout, service) {
-		var loadingMessage = 'Carregando...';
+	function($q, $rootScope, $timeout, $translate, service) {
+		var loadingMessage = $translate.instant('Loading');
 		var activeRequests = 0;
 		var started = function() {
 			if(activeRequests==0) {
@@ -105,7 +110,7 @@ angular.module('yby.loadingStatus', [])
 				if(config.loadingMessage)
 					loadingMessage = config.loadingMessage;
 				else
-					loadingMessage = 'Carregando...';
+					loadingMessage = $translate.instant('Loading');
 
 				started();
 				return config || $q.when(config);

@@ -5,8 +5,9 @@
  */
 exports.Feature = [
 	'$resource',
+	'$translate',
 	'apiPrefix',
-	function($resource, apiPrefix) {
+	function($resource, $translate, apiPrefix) {
 
 		var features = [],
 			filter = false,
@@ -17,31 +18,31 @@ exports.Feature = [
 				'query': {
 					method: 'GET',
 					isArray: false,
-					loadingMessage: 'Carregando locais'
+					loadingMessage: $translate.instant('Loading locations')
 				},
 				'get': {
 					method: 'GET',
-					loadingMessage: 'Carregando local'
+					loadingMessage: $translate.instant('Loading location')
 				},
 				'import': {
 					method: 'POST',
 					isArray: true,
-					loadingMessage: 'Importando dados',
+					loadingMessage: $translate.instant('Importing data'),
 					url: apiPrefix + '/layers/:layerId/features/import'
 				},
 				'save': {
 					method: 'POST',
-					loadingMessage: 'Criando local',
+					loadingMessage: $translate.instant('Creating location'),
 					url: apiPrefix + '/layers/:layerId/features'
 				},
 				'delete': {
 					method: 'DELETE',
-					loadingMessage: 'Removendo local',
+					loadingMessage: $translate.instant('Removing location'),
 					url: apiPrefix + '/layers/:layerId/features/:featureId'
 				},
 				'update': {
 					method: 'PUT',
-					loadingMessage: 'Atualizando local'
+					loadingMessage: $translate.instant('Updating location')
 				}
 			}),
 			// Object sharing between controllers methods

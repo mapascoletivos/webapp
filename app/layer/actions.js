@@ -9,12 +9,13 @@ exports.LayerActionsCtrl = [
 	'$scope',
 	'$q',
 	'$location',
+	'$translate',
 	'MessageService',
 	'Layer',
 	'LayerShare',
 	'NewLayer',
 	'TileLayerEditor',
-	function($rootScope, $scope, $q, $location, Message, Layer, LayerShare, NewLayerBox, TileLayerEditor) {
+	function($rootScope, $scope, $q, $location, $translate, Message, Layer, LayerShare, NewLayerBox, TileLayerEditor) {
 
 		$scope.getUrl = function(layer) {
 
@@ -141,7 +142,7 @@ exports.LayerActionsCtrl = [
 
 		$scope.delete = function(layer, callback) {
 
-			if(confirm('Você tem certeza que deseja remover esta camada?')) {
+			if(confirm($translate.instant('Are you sure you want to remove this layer?'))) {
 				Layer.resource.delete({layerId: layer._id}, function(res) {
 					$rootScope.$broadcast('layer.delete.success', layer);
 				});

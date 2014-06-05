@@ -5,6 +5,7 @@ exports.UserCtrl = [
 	'$rootScope',
 	'$state',
 	'$stateParams',
+	'$translate',
 	'User',
 	'ChangePwd',
 	'ChangeEmail',
@@ -12,7 +13,7 @@ exports.UserCtrl = [
 	'Map',
 	'Page',
 	'MessageService',
-	function($scope, $rootScope, $state, $stateParams, User, ChangePwd, ChangeEmail, Layer, Map, Page, Message) {
+	function($scope, $rootScope, $state, $stateParams, $translate, User, ChangePwd, ChangeEmail, Layer, Map, Page, Message) {
 
 		$scope.save = function(user) {
 
@@ -67,7 +68,7 @@ exports.UserCtrl = [
 			if(!chPwd.userPwd) {
 				Message.message({
 					status: 'error',
-					text: 'Você deve inserir sua senha atual.'
+					text: $translate.instant('You must enter your current password.')
 				});
 				return false;
 			}
@@ -75,7 +76,7 @@ exports.UserCtrl = [
 			if(!chPwd.newPwd) {
 				Message.message({
 					status: 'error',
-					text: 'Você deve inserir uma nova senha.'
+					text: $translate.instant('You must enter a new password.')
 				});
 				return false;
 			}
@@ -83,7 +84,7 @@ exports.UserCtrl = [
 			if(chPwd.newPwd != chPwd.validatePwd) {
 				Message.message({
 					status: 'error',
-					text: 'As senhas não são compatíveis'
+					text: $translate.instant("The new password doesn't match.")
 				})
 				return false;
 			}
@@ -97,7 +98,7 @@ exports.UserCtrl = [
 			if(!user.newEmail) {
 				Message.message({
 					status: 'error',
-					text: 'Você deve inserir um email.'
+					text: $translate.instant('You must enter an email.')
 				});
 				return false;
 			}
@@ -117,7 +118,7 @@ exports.UserCtrl = [
 				if(user.username)
 					slug =  user.username;
 	
-				return '/user/' + slug + '/';
+				return '/user/' + slug;
 	
 			}
 
@@ -142,7 +143,7 @@ exports.UserCtrl = [
 
 				Message.message({
 					status: 'error',
-					text: 'Ocorreu um erro.'
+					text: $translate.instant('An unknown error occured')
 				});
 
 			});

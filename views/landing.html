@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="four columns">
 			<div class="highlight-block publish">
-				<img alt="Publique seus dados" class="icon" src="/img/icon_publish.png">
+				<img alt="{{ 'Publish your data' | translate }}" class="icon" src="/img/icon_publish.png">
 
 				<h2 translate>Publish your data</h2>
 
@@ -12,7 +12,7 @@
 
 		<div class="four columns">
 			<div class="highlight-block publish">
-				<img alt="Conte suas histórias" class="icon" src="/img/icon_story.png">
+				<img alt="{{'Tell your stories' | translate}}" class="icon" src="/img/icon_story.png">
 
 				<h2 translate>Tell your stories</h2>
 
@@ -22,7 +22,7 @@
 
 		<div class="four columns">
 			<div class="highlight-block publish">
-				<img alt="Visualize" class="icon" src="/img/icon_view.png">
+				<img alt="{{ 'Visualize' | translate }}" class="icon" src="/img/icon_view.png">
 
 				<h2 translate>Visualize</h2>
 
@@ -32,18 +32,18 @@
 	</div>
 
 	<div class="links" ng-hide="ybySettings.general.onlyInvitedUsers || isAuth">
-		<a class="register" href="/signup"><strong>Cadastre-se</strong> e comece a mapear!</a>
+		<a class="register" href="/signup"><strong translate>Register</strong> <span translate>and start mapping!</span></a>
 	</div>
 </section>
 <div class="container row">
 	<div class="six columns" ng-show="maps">
 		<section id="latest-maps" class="home-list" ng-controller="MapActionsCtrl">
-			<h2>Últimos mapas enviados</h2>
+			<h2 translate>Latest maps</h2>
 			<div ng-repeat="map in maps">
 				<article class="home-list-item map-item row">
 					<h3><a href="/maps/{{map._id}}">{{map.title}}</a></h3>
-					<div class="meta">
-						<p class="author"><a href="/user/{{map.creator.username}}">{{map.creator.name}}</a></p>
+					<div class="meta clearfix">
+						<p class="author" ng-controller="UserCtrl"><a href="{{profileUrl(map.creator)}}">{{map.creator.name}}</a></p>
 					</div>
 					<p ng-show="map.description" dynamic="map.description"></p>
 				</article>
@@ -52,7 +52,7 @@
 	</div>
 	<div class="six columns" ng-show="contents">
 		<section id="latest-stories" class="home-list" ng-controller="ContentCtrl">
-			<h2>Últimas histórias</h2>
+			<h2 translate>Latest stories</h2>
 			<div ng-repeat="content in contents">
 				<article class="home-list-item content-item" ng-include="templates.list" autoscroll="false"></article>
 			</div>

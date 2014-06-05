@@ -37,18 +37,18 @@
 			</div> -->
 			<div class="eight columns">
 				<ul id="mast-nav" ng-controller="LoginCtrl">
-					<li><a href="/explore" title="Explorar">Explorar</a></li>
-					<li ng-show="isAuthenticated"><a href="/dashboard" title="Painel de Controle">
+					<li><a href="/explore" title="Explorar" translate>Explore</a></li>
+					<li ng-show="isAuthenticated"><a href="/dashboard" title="{{'Dashboard' | translate}}">
 						<span class="lsf">&#xe055;</span>
-						Painel de Controle
+						<span translate>Dashboard</span>
 					</a></li>
 					<li ng-show="isAuthenticated"><a title="Sair" ng-click="logout()">
 						<span class="lsf">&#xE088;</span>
-						Sair
+						<span translate>Logout</span>
 					</a></li>
 					<li ng-hide="isAuthenticated"><a href="/login" title="Entrar">
 						<span class="lsf">&#xE087;</span>
-						Entrar
+						<span translate>Login</span>
 					</a></li>
 				</ul>
 			</div>
@@ -56,15 +56,27 @@
 	</header>
 	<div id="messages" ng-controller="MessageCtrl">
 		<div class="message-content animte-show" ng-repeat="message in messages" ng-show="message.text">
-			<a class="close-button" ng-click="close(message)" href="javascript:void(0);">Fechar</a>
+			<a class="close-button" ng-click="close(message)" href="javascript:void(0);" translate>Close</a>
 			<p ng-class="message.status">{{message.text}}</p>
 		</div>
 	</div>
 	<div class="ui-view" autoscroll="false">
 	</div>
 	<div id="loading" loading-status-message>
-		<div class="loading-message">Carregando...</div>
+		<div class="loading-message" translate>Loading</div>
 	</div>
+	<footer id="colophon" class="clearfix">
+		<div class="container">
+			<div class="twelve columns">
+				<nav class="institutional">
+					<a href="http://github.com/oeco/yby" target="_blank" title="YBY" translate>Developed with YBY</a>
+				</nav>
+				<div class="license">
+					<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative Commons CC BY-NC-SA 3.0</a>
+				</div>
+			</div>
+		</div>
+	</footer>
 	<script type="text/javascript" src="/lib/vendor.js"></script>
 	<script type="text/javascript" src="/dist/app.js"></script>
 </body>

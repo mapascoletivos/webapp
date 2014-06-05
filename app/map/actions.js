@@ -9,11 +9,12 @@ exports.MapActionsCtrl = [
 	'$scope',
 	'$q',
 	'$location',
+	'$translate',
 	'MessageService',
 	'SessionService',
 	'Map',
 	'MapShare',
-	function($rootScope, $scope, $q, $location, Message, Session, Map, MapShare) {
+	function($rootScope, $scope, $q, $location, $translate, Message, Session, Map, MapShare) {
 
 		$scope.$session = Session;
 
@@ -71,14 +72,14 @@ exports.MapActionsCtrl = [
 				}
 				Message.message({
 					status: 'ok',
-					text: 'Mapa atualizado'
+					text: $translate.instant('Map updated')
 				});
 				$rootScope.$broadcast('map.save.success', map);
 				deferred.resolve(map);
 			}, function(err){
 				Message.message({
 					status: 'error',
-					text: 'Ocorreu um erro.'
+					text: $translate.instant('Internal error')
 				});
 				$rootScope.$broadcast('map.save.error', err);
 				deferred.resolve(err);
@@ -90,7 +91,7 @@ exports.MapActionsCtrl = [
 
 		$scope.delete = function(map, callback) {
 
-			if(confirm('Você tem certeza que deseja remover este mapa?')) {
+			if(confirm($translate.instant('Are you sure you want to remove this map?'))) {
 				Map.resource.delete({mapId: map._id}, function(res) {
 					$rootScope.$broadcast('map.delete.success', map);
 				});

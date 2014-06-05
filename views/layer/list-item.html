@@ -1,19 +1,19 @@
 <div class="default-item row" ng-controller="LayerActionsCtrl">
 	<h3><a href="/layers/{{layer._id}}">{{layer.title}}</a></h3>
-	<p class="author" ng-show="!user"><a href="/user/{{layer.creator.username}}">por {{layer.creator.name}}</a></p>
+	<p class="author" ng-show="!user" ng-controller="UserCtrl"><a href="{{profileUrl(layer.creator)}}"><span translate>by</span> {{layer.creator.name}}</a></p>
 	<p ng-show="layer.description" dynamic="layer.description"></p>
 	<div class="actions">
-		<a href="javascript:void(0);" ng-click="edit(layer)" title="Editar" ng-show="canEdit(layer)">
+		<a href="javascript:void(0);" ng-click="edit(layer)" title="{{'Edit' | translate}}" ng-show="canEdit(layer)">
 			<span class="lsf">&#xE09f;</span>
-			<span class="label">Editar</span>
+			<span class="label" translate>Edit</span>
 		</a>
-		<a href="/layers/{{layer._id}}" title="Visualizar">
+		<a href="/layers/{{layer._id}}" title="{{'View' | translate}}">
 			<span class="lsf">&#xE13a;</span>
-			<span class="label">Visualizar</span>
+			<span class="label" translate>View</span>
 		</a>
-		<a href="javascript:void(0);" ng-click="delete(layer)" title="Remover permanentemente" ng-show="canDelete(layer)">
+		<a href="javascript:void(0);" ng-click="delete(layer)" title="{{'Remove permanently' | translate}}" ng-show="canDelete(layer)">
 			<span class="lsf">&#xE12c;</span>
-			<span class="label">Deletar</span>
+			<span class="label" translate>Delete</span>
 		</a>
 	</div>
 </div>

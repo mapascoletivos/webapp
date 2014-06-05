@@ -18,12 +18,13 @@ angular.module('yby.explore', [])
 
 .controller('ExploreCtrl', [
 	'$scope',
+	'$translate',
 	'Page',
 	'Layer',
 	'Map',
-	function($scope, Page, Layer, Map) {
+	function($scope, $translate, Page, Layer, Map) {
 
-		Page.setTitle('Explore a comunidade');
+		Page.setTitle($translate.instant('Explore the community'));
 
 		Layer.resource.get({
 			perPage: 4

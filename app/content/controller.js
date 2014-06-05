@@ -8,12 +8,13 @@ exports.ContentCtrl = [
 	'$scope',
 	'$rootScope',
 	'$stateParams',
+	'$translate',
 	'SirTrevor',
 	'Content',
 	'Feature',
 	'SessionService',
 	'MessageService',
-	function($scope, $rootScope, $stateParams, SirTrevor, Content, Feature, Session, Message) {
+	function($scope, $rootScope, $stateParams, $translate, SirTrevor, Content, Feature, Session, Message) {
 
 		$scope.$session = Session;
 
@@ -149,7 +150,7 @@ exports.ContentCtrl = [
 
 				Message.add({
 					'status': 'error',
-					'text': 'Você não tem permissão para editar este conteúdo'
+					'text': $translate.instant("You don't have permission to edit this content")
 				});
 
 			}

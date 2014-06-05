@@ -2,8 +2,8 @@
 	<h3><a href="{{getUrl(content)}}">{{content.title}}</a></h3>
 	<div class="meta clearfix">
 		<div class="clearfix">
-			<p class="author">
-				<a href="/user/{{content.creator.username}}/">{{content.creator.name}}</a>
+			<p class="author" ng-controller="UserCtrl">
+				<a href="{{profileUrl(content.creator)}}">{{content.creator.name}}</a>
 			</p>
 			<p class="layer" ng-show="map">
 				<a href="/layers/{{content.layer._id}}/">{{content.layer.title}}</a>
@@ -11,5 +11,5 @@
 		</div>
 	</div>
 	<div class="excerpt" dynamic="renderBlock(content.sirTrevorData[0])"></div>
-	<p class="readmore"><a href="{{getUrl(content)}}">Leia mais</a></p>
+	<p class="readmore"><a href="{{getUrl(content)}}" translate>Read more</a></p>
 </div>

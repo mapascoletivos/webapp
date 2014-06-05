@@ -37,9 +37,10 @@ require('./content/app');
 require('./layer/app');
 require('./map/app');
 
-var settings = angular.extend({
+var settings = window.ybySettings = angular.extend({
 	server: 'local',
-	apiPrefix: '/api/v1'
+	apiPrefix: '/api/v1',
+	language: 'en-US'
 }, require('./config'));
 
 /*

@@ -1,10 +1,10 @@
 <div class="page-subheader anti-row row">
 	<div class="container">
 		<div class="twelve columns">
-			<h2>Camadas</h2>
-			<input ng-show="layers.length" class="filter" type="text" ng-model="search" placeholder="Busque camadas" />
-			<p ng-show="layers.length">{{user.name}} possui <strong>{{totalLayer}}</strong> camadas cadastradas.</p>
-			<p ng-hide="layers.length">{{user.name}} ainda não criou camadas.</p>
+			<h2 translate>Layers</h2>
+			<input ng-show="layers.length" class="filter" type="text" ng-model="search" placeholder="{{'Type your search' | translate}}" />
+			<p ng-show="layers.length" translate="profileTotalLayers" translate-values="{userName: user.name, total: totalLayer}"></p>
+			<p ng-hide="layers.length">{{user.name}} <span translate>haven't created any layers.</span></p>
 		</div>
 	</div>
 </div>
@@ -24,7 +24,7 @@
 	<div class="container">
 		<div class="twelve columns">
 			<div class="info-box">
-				<p>{{user.name}} ainda não criou camadas.</p>
+				<p>{{user.name}} <span translate>haven't created any layers.</span></p>
 			</div>
 		</div>
 	</div>
