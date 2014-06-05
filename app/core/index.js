@@ -8,7 +8,8 @@ angular.module('yby.index', [])
 	'$location',
 	'MapData',
 	'ContentData',
-	function($scope, Session, $location, MapData, ContentData) {
+	'Page',
+	function($scope, Session, $location, MapData, ContentData, Page) {
 
 		$scope.$session = Session;
 
@@ -23,6 +24,7 @@ angular.module('yby.index', [])
 		$scope.$on('$stateChangeSuccess', function() {
 
 			if($location.path() == '/') {
+				Page.setTitle('');
 				angular.element('html').addClass('landing');
 			}
 
