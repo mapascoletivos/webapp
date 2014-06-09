@@ -83,7 +83,7 @@ exports.Map = [
 				if(!self.busy) {
 					self.busy = true;
 					this.resource[req](_.extend(params, {
-						page: params.page + 1
+						page: (params.page || 1) + 1
 					}), function(res) {
 						if(res.maps.length) {
 							self.busy = false;

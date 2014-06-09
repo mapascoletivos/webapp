@@ -23,10 +23,15 @@ angular.module('yby.loadingStatus', [])
 
 		return {
 			show: function(text) {
+				var self = this;
 				if(enabled) {
 					if(typeof text !== 'undefined')
 						message = text;
 					active = true;
+					setTimeout(function() {
+						if(active)
+							self.hide();
+					}, 3000);
 					return active;
 				}
 			},
