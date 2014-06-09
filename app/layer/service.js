@@ -120,6 +120,10 @@ exports.Layer = [
 				if(!layer || !Session.user())
 					return false;
 
+				// User is admin
+				if(Session.user().role == 'admin')
+					return true;
+
 				if(typeof layer.creator == 'string' && layer.creator == Session.user()._id) {
 					return true;
 				} else if(typeof layer.creator == 'object' && layer.creator._id == Session.user()._id) {
@@ -158,6 +162,10 @@ exports.Layer = [
 			},
 			canEdit: function(layer) {
 
+				// User is admin
+				if(Session.user() && Session.user().role == 'admin')
+					return true;
+
 				if(this.isOwner(layer) || this.isContributor(layer))
 					return true;
 
@@ -165,6 +173,10 @@ exports.Layer = [
 
 			},
 			canDelete: function(layer) {
+
+				// User is admin
+				if(Session.user() && Session.user().role == 'admin')
+					return true;
 
 				if(this.isOwner(layer))
 					return true;

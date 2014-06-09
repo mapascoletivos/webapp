@@ -29,6 +29,10 @@ angular.module('yby.leaflet', [])
 					map.addLayer(baseLayer);
 					map.addLayer(featureLayer);
 					map.addControl(legendControl);
+					if(!map.infoControl) {
+						map.infoControl = L.mapbox.infoControl();
+						map.addControl(map.infoControl);
+					}
 					map.infoControl.addInfo('<a href="https://www.mapbox.com/map-feedback/" target="_blank" class="mapbox-improve-map">' + $translate.instant('Improve this map') + '</a>');
 				});
 				return map;

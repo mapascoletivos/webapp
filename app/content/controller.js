@@ -121,6 +121,10 @@ exports.ContentCtrl = [
 
 			var contentCreatorId = content.creator._id ? content.creator._id : content.creator;
 
+			// User is admin
+			if($scope.user.role == 'admin')
+				return true;
+
 			// User is content owner
 			if(contentCreatorId == $scope.user._id) {
 				return true;

@@ -63,14 +63,17 @@ angular.module('yby.dashboard', [])
 
 				$scope.canCreate = !(user.role == 'collaborator');
 
-				// Check user role
-				if(user.role == 'admin') {
-					var layerReq = Layer.resource.query;
-					var mapReq = Map.resource.query;
-				} else {
-					var layerReq = Layer.resource.userLayers;
-					var mapReq = Map.resource.userMaps;
-				}
+				// Check user role to show all layers if admin
+				// if(user.role == 'admin') {
+				// 	var layerReq = Layer.resource.query;
+				// 	var mapReq = Map.resource.query;
+				// } else {
+				// 	var layerReq = Layer.resource.userLayers;
+				// 	var mapReq = Map.resource.userMaps;
+				// }
+
+				var layerReq = Layer.resource.userLayers;
+				var mapReq = Map.resource.userMaps;
 
 				// Get layers
 				$scope.$layer = Layer;

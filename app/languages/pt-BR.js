@@ -170,5 +170,8 @@ module.exports = {
 	'Creating location': 'Criando local',
 	'Removing location': 'Removendo local',
 	'Updating location': 'Atualizando local',
-	"Are you sure you'd like to remove this layer from your map?": 'Você tem certeza que gostaria de remover esta camada do seu mapa?'
+	"Are you sure you'd like to remove this layer from your map?": 'Você tem certeza que gostaria de remover esta camada do seu mapa?',
+	'Email change': 'Alteração de email',
+	'Type your new email': 'Digite seu novo endereço de email',
+	'Password change': 'Alteração de senha'
 };
