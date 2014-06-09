@@ -7,6 +7,8 @@ app.get('/*', function(req, res){
 	res.sendfile('index.html');
 });
 
+app.use(require('prerender-node'));
+
 // Start the app by listening on <port>
 var port = process.env.PORT || 8000
 app.listen(port)

@@ -160,6 +160,7 @@ angular.module('yby', [
 			});
 
 		$locationProvider.html5Mode(true);
+		$locationProvider.hashPrefix('!');
 
 		var interceptor = ['$rootScope', '$q', '$location', function(scope, $q, $location) {
 

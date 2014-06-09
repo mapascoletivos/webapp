@@ -47,6 +47,7 @@
 		"eventablejs": "latest",
 		"napa": "latest",
 		"express": "latest",
+		"prerender-node": "latest",
 		"nodemon": "latest"
 	},
 	"devDependencies": {

@@ -174,5 +174,13 @@ module.exports = {
 	'Email change': 'Alteração de email',
 	'Type your new email': 'Digite seu novo endereço de email',
 	'Password change': 'Alteração de senha',
-	'Explore narratives mapped by the community': 'Explore as narrativas mapeadas pela comunidade'
+	'Explore narratives mapped by the community': 'Explore as narrativas mapeadas pela comunidade',
+	'Stories layer': 'Camada de histórias',
+	"What type of layer you'd like to create?": 'Qual tipo de camada gostaria de criar?',
+	'New TileLayer': 'Nova TileLayer',
+	'Type your layer title': 'Digite o título da sua camada',
+	'Describe your layer': 'Descreva sua camada',
+	'Layer URL': 'URL da camada',
+	'E.g.': 'Exemplo',
+	'Submit': 'Enviar'
 };
