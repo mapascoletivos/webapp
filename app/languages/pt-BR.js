@@ -173,5 +173,6 @@ module.exports = {
 	"Are you sure you'd like to remove this layer from your map?": 'Você tem certeza que gostaria de remover esta camada do seu mapa?',
 	'Email change': 'Alteração de email',
 	'Type your new email': 'Digite seu novo endereço de email',
-	'Password change': 'Alteração de senha'
+	'Password change': 'Alteração de senha',
+	'Explore narratives mapped by the community': 'Explore as narrativas mapeadas pela comunidade'
 };
