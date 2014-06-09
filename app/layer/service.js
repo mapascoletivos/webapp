@@ -82,13 +82,17 @@ exports.Layer = [
 				}
 			}),
 			busy: false,
-			nextPage: function() {
+			nextPage: function(req) {
+
+				if(typeof req == 'undefined')
+					req = 'query';
+
 				var self = this;
 				Loading.disable();
 				if(!self.busy) {
 					self.busy = true;
-					this.resource.query(_.extend(params, {
-						page: params.page + 1
+					this.resource[req](_.extend(params, {
+						page: (params.page || 1) + 1
 					}), function(res) {
 						if(res.layers.length) {
 							self.busy = false;

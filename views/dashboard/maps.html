@@ -9,10 +9,10 @@
 </div>
 <div class="maps-list" ng-show="maps.length" ng-controller="MapActionsCtrl">
 	<div
-		infinite-scroll="$map.nextPage()"
+		infinite-scroll="$map.nextPage('userMaps')"
 		infinite-scroll-disabled="$map.busy"
 		infinite-scroll-distance="1"
-		infinite-scroll-immediate-check="false"
+		infinite-scroll-immediate-check="true"
 		class="container">
 		<div class="three columns" ng-show="canCreate">
 			<div class="default-item new-item row">

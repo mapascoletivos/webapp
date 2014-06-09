@@ -13,10 +13,8 @@ angular.module('yby.index', [])
 
 		$scope.$session = Session;
 
-		$scope.$watch(function() {
-			return Session.authenticated();
-		}, function(isAuth) {
-			$scope.isAuth = isAuth;
+		$scope.$watch('$session.authenticated()', function(auth) {
+			$scope.isAuth = auth;
 		});
 
 		$scope.loggedin = Session.authenticated;

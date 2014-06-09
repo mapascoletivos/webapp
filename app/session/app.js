@@ -3,6 +3,7 @@
 angular
 	.module('yby.session', [
 		'facebook',
+		'yby.settings',
 		'directive.g+signin'
 	])
 	.config([
@@ -31,11 +32,8 @@ angular
 					templateUrl: '/views/forgot_pwd.html'
 				});
 
-			var config = require('../config');
-
-			if(config.oauth && config.oauth.facebook)
-				FacebookProvider.init(config.oauth.facebook);
-
+			if(window.ybySettings.general.facebookApiKey)
+				FacebookProvider.init(window.ybySettings.general.facebookApiKey);
 		}
 	])
 	.factory('SessionService', require('./sessionService'))

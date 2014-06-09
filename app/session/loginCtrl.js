@@ -13,7 +13,20 @@ module.exports = [
 
 		$scope.$watch('$session.authenticated()', function(auth) {
 			$scope.isAuthenticated = auth;
+
+			if(auth && $location.path() == '/login/')
+				$location.path('/dashboard/');
+
 		});
+
+		if($location.path() == 'login') {
+			if(window.ybySettings.general.googleApiKey) {
+				$scope.googleClientID = window.ybySettings.googleApiKey;
+				$scope.$on('event:google-plus-signin-success', function(event, response) {
+					auth('google', response.access_token);
+				});
+			}
+		}
 
 		$scope.$watch(function() {
 			return Facebook.isReady();
@@ -28,12 +41,6 @@ module.exports = [
 			});
 
 		}
-
-		$scope.googleClientID = config.oauth.google;
-
-		$scope.$on('event:google-plus-signin-success', function(event, response) {
-			auth('google', response.access_token);
-		});
 
 		$scope.login = function(provider) {
 

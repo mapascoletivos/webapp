@@ -9,10 +9,10 @@
 </div>
 <div class="layers-list" ng-show="layers.length" ng-controller="LayerActionsCtrl">
 	<div
-		infinite-scroll="$layer.nextPage()"
+		infinite-scroll="$layer.nextPage('userLayers')"
 		infinite-scroll-disabled="$layer.busy"
 		infinite-scroll-distance="1"
-		infinite-scroll-immediate-check="false"
+		infinite-scroll-immediate-check="true"
 		class="container">
 		<div class="three columns" ng-show="canCreate">
 			<div class="default-item new-item row">

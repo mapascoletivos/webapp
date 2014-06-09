@@ -13,7 +13,7 @@
 		infinite-scroll="$map.nextPage()"
 		infinite-scroll-disabled="$map.busy"
 		infinite-scroll-distance="1"
-		infinite-scroll-immediate-check="false"
+		infinite-scroll-immediate-check="true"
 		class="container">
 		<div class="three columns" ng-repeat="map in maps | filter:search">
 			<div ng-include="templates.list" autoscroll="false"></div>

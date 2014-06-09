@@ -37,7 +37,7 @@ require('./content/app');
 require('./layer/app');
 require('./map/app');
 
-var settings = window.ybySettings = angular.extend({
+window.ybySettings = angular.extend({
 	server: 'local',
 	apiPrefix: '/api/v1',
 	language: 'en-US'
@@ -74,8 +74,8 @@ angular.module('yby', [
 	'yby.feature',
 	'yby.content'
 ])
-.value('config', settings)
-.value('apiPrefix', (settings.server == 'local' ? '' : settings.server) + settings.apiPrefix)
+.constant('config', ybySettings)
+.constant('apiPrefix', (ybySettings.server == 'local' ? '' : ybySettings.server) + ybySettings.apiPrefix)
 
 /*
  * Translation
@@ -105,7 +105,7 @@ angular.module('yby', [
 	'$httpProvider',
 	function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
-		if(settings.server !== 'local') {
+		if(ybySettings.server !== 'local') {
 			$httpProvider.defaults.useXDomain = true;
 			delete $httpProvider.defaults.headers.common['X-Requested-With'];
 		}
@@ -241,8 +241,8 @@ angular.module('yby', [
 .controller('PageCtrl', [
 	'$scope',
 	'Page',
-	'SiteSettings',
-	function($scope, Page, Site) {
+	'config',
+	function($scope, Page, config) {
 		// Page title
 		$scope.page = Page;
 		// Detect iframe
@@ -252,11 +252,23 @@ angular.module('yby', [
 
 		$scope.siteTitle = 'YBY';
 
-		Site.get().then(function(settings) {
-			$scope.ybySettings = settings;
-			console.log(settings);
-			$scope.siteTitle = settings.general.title;
-			Page.setBaseTitle($scope.siteTitle);
-		});
+		$scope.ybySettings = config;
+
+		$scope.siteTitle = $scope.ybySettings.general.title;
+		Page.setBaseTitle($scope.siteTitle);
 	}
 ]);
+
+/*
+ * Initialize appication
+ */
+
+$(document).ready(function() {
+	$('body').hide();
+	$.get(ybySettings.server + ybySettings.apiPrefix + '/settings', function(serverSettings) {
+		console.log(serverSettings);
+		ybySettings = angular.extend(ybySettings, serverSettings);
+		angular.bootstrap(document, ['yby']);
+		$('body').show();
+	}, 'json');
+});

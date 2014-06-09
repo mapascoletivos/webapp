@@ -18,9 +18,11 @@
 				</div>
 			</form>
 		</div>
-		<div class="social-networks" ng-hide="ybySettings.general.onlyInvitedUsers">
-			<a ng-show="facebookReady" class="facebook" title="Facebook" href="javascript:void(0);" ng-click="login('facebook')"><span class="lsf">&#xE047;</span> <span translate>Login with facebook</span></a>
-			<google-plus-signin clientid="{{googleClientID}}" language="{{ybySettings.language}}"></google-plus-signin>
+		<div class="social-login">
+			<div class="social-networks" ng-hide="ybySettings.general.onlyInvitedUsers">
+				<a ng-show="facebookReady" class="facebook" title="Facebook" href="javascript:void(0);" ng-click="login('facebook')"><span class="lsf">&#xE047;</span> <span translate>Login with facebook</span></a>
+				<google-plus-signin clientid="{{googleClientID}}" language="{{ybySettings.language}}"></google-plus-signin>
+			</div>
 		</div>
 	</div>
 </section>

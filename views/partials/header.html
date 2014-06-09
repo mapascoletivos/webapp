@@ -1,0 +1,33 @@
+<header id="mast-header">
+	<div class="container">
+		<div class="four columns">
+			<h1><a class="brand" href="/">{{siteTitle}}</a>
+			</h1>
+		</div>
+		<!-- <div class="three columns">
+			<div id="lang" ng-controller="TranslateCtrl">
+				<ul>
+					<li ng-click="changeLanguage('en-US')">English</li>
+					<li ng-click="changeLanguage('pt-BR')">Português</li>
+				</ul>
+			</div>
+		</div> -->
+		<div class="eight columns">
+			<ul id="mast-nav" ng-controller="LoginCtrl">
+				<li><a href="/explore" title="Explorar" translate>Explore</a></li>
+				<li ng-show="isAuthenticated"><a href="/dashboard" title="{{'Dashboard' | translate}}">
+					<span class="lsf">&#xe055;</span>
+					<span translate>Dashboard</span>
+				</a></li>
+				<li ng-show="isAuthenticated"><a href="javascript:void(0);" title="Sair" ng-click="logout()">
+					<span class="lsf">&#xE088;</span>
+					<span translate>Logout</span>
+				</a></li>
+				<li ng-hide="isAuthenticated"><a href="/login" title="Entrar">
+					<span class="lsf">&#xE087;</span>
+					<span translate>Login</span>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</header>
