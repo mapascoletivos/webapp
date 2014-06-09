@@ -26,6 +26,7 @@
 
 	},
 	"dependencies": {
+		"angular": "latest",
 		"underscore": "latest",
 		"less": "latest",
 		"leaflet": "latest",
@@ -53,7 +54,6 @@
 		"watch-less": "latest"
 	},
 	"napa": {
-		"angular": "angular/bower-angular",
 		"angular-cookies": "angular/bower-angular-cookies",
 		"angular-translate": "angular-translate/bower-angular-translate",
 		"angular-route": "angular/bower-angular-route",

@@ -5,7 +5,7 @@ window.grvtr = require('grvtr');
 window.markdown = require("markdown").markdown;
 window.Eventable = require('eventablejs');
 
-require('angular/angular');
+require('angular');
 require('angular-cookies/angular-cookies');
 require('angular-translate/angular-translate');
 require('angular-route/angular-route');
