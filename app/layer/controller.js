@@ -17,10 +17,9 @@ exports.LayerCtrl = [
 	'Maki',
 	'Content',
 	'MessageService',
-	'LoadingService',
 	'MapService',
 	'MapView',
-	function($scope, $rootScope, $location, $state, $stateParams, $q, $translate, Page, Layer, Feature, Maki, Content, Message, Loading, MapService, MapView) {
+	function($scope, $rootScope, $location, $state, $stateParams, $q, $translate, Page, Layer, Feature, Maki, Content, Message, MapService, MapView) {
 
 		$scope.$layer = Layer;
 		$scope.$feature = Feature;

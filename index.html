@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="/css/colorpicker.css" />
 	<link rel="stylesheet" href="/css/app.css" />
 </head>
-<body>
+<body style="display:none;">
 	<ng-include src="'/views/partials/header.html'"></ng-include>
 	<div id="messages" ng-controller="MessageCtrl">
 		<div class="message-content animte-show" ng-repeat="message in messages" ng-show="message.text">
@@ -31,7 +31,7 @@
 	</div>
 	<div class="ui-view" autoscroll="false">
 	</div>
-	<div id="loading" loading-status-message>
+	<div id="loading" loading-status-message ng-class="{active: loads.length}">
 		<div class="loading-message" translate>Loading</div>
 	</div>
 	<footer id="colophon" class="clearfix">

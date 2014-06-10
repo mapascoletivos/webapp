@@ -265,9 +265,9 @@ angular.module('yby', [
 
 $(document).ready(function() {
 	$('body').hide();
-	$.get(ybySettings.server + ybySettings.apiPrefix + '/settings', function(serverSettings) {
-		console.log(serverSettings);
-		ybySettings = angular.extend(ybySettings, serverSettings);
+	$.get(window.ybySettings.server + window.ybySettings.apiPrefix + '/settings', function(serverSettings) {
+		window.ybySettings = angular.extend(window.ybySettings, serverSettings);
+		window.ybySettings.language = serverSettings.general.language;
 		angular.bootstrap(document, ['yby']);
 		$('body').show();
 	}, 'json');

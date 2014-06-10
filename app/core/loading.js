@@ -16,46 +16,34 @@ angular.module('yby.loadingStatus', [])
 	'$translate',
 	function($translate) {
 
-		var active = false;
-		var dfltMessage = $translate.instant('Loading');
-		var message = angular.copy(dfltMessage);
-		var enabled = true;
+		var loads = [];
 
 		return {
-			show: function(text) {
-				var self = this;
-				if(enabled) {
-					if(typeof text !== 'undefined')
-						message = text;
-					active = true;
-					setTimeout(function() {
-						if(active)
-							self.hide();
-					}, 3000);
-					return active;
-				}
-			},
-			hide: function() {
-				if(enabled) {
-					message = dfltMessage;
-					active = false;
-					return active;
-				}
-			},
 			get: function() {
-				return active;
+				return loads;
 			},
-			setMessage: function(text) {
-				message = text;
+			add: function(text, id) {
+				if(typeof id == 'undefined')
+					id = Math.random();
+
+				var load = {
+					_id: id,
+					msg: text
+				};
+
+				loads.push(load);
+				loads = loads; // trigger digest?
+				return load._id;
 			},
-			getMessage: function() {
-				return message;
+			remove: function(id) {
+				//delete loads[loads.length];
+				loads = loads.filter(function(load) { return load._id !== id; });
+				loads = loads; // trigger digest?
+				return loads;
 			},
 			disable: function() {
-				enabled = false;
 			},
 			enable: function() {
-				enabled = true;
 			}
 		}
 
@@ -67,20 +55,13 @@ angular.module('yby.loadingStatus', [])
 	function(service) {
 		return {
 			link: function($scope, $element, attrs) {
-				var show = function() {
-					$element.addClass('active').find('.loading-message').html(service.getMessage());
-				};
-				var hide = function() {
-					$element.removeClass('active');
-				};
-				$scope.$service = service;
-				$scope.$watch('$service.get()', function(active) {
-					if(active)
-						show();
-					else
-						hide();
+				$scope.$watch(function() {
+					return service.get();
+				}, function(loads) {
+					$scope.loads = loads;
 				});
-			}
+			},
+			template: '<div class="loading-message"><span ng-repeat="load in loads" ng-show="load.msg">{{load.msg}}<br/></span></div>'
 		};
 	}
 ])
@@ -92,40 +73,27 @@ angular.module('yby.loadingStatus', [])
 	'$translate',
 	'LoadingService',
 	function($q, $rootScope, $timeout, $translate, service) {
-		var loadingMessage = $translate.instant('Loading');
-		var activeRequests = 0;
-		var started = function() {
-			if(activeRequests==0) {
-				service.setMessage(loadingMessage);
-				service.show();
-				$rootScope.$broadcast('loadingStatusActive', loadingMessage);
-			}    
-			activeRequests++;
-		};
-		var ended = function() {
-			activeRequests--;
-			if(activeRequests==0) {
-				service.hide();
-				$rootScope.$broadcast('loadingStatusInactive', loadingMessage);
-			}
-		};
 		return {
 			request: function(config) {
 
 				if(config.loadingMessage)
-					loadingMessage = config.loadingMessage;
-				else
-					loadingMessage = $translate.instant('Loading');
+					config.loadingId = service.add(config.loadingMessage);
 
-				started();
 				return config || $q.when(config);
 			},
 			response: function(response) {
-				ended();
+
+				if(response.config.loadingId)
+					service.remove(response.config.loadingId);
+
 				return response || $q.when(response);
 			},
 			responseError: function(rejection) {
-				ended();
+
+
+				if(rejection.config.loadingId)
+					service.remove(rejection.config.loadingId);
+
 				return $q.reject(rejection);
 			}
 		};
