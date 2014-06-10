@@ -43,6 +43,15 @@ angular
 		'$q',
 		'$window',
 		function($rootScope, $q, $window) {
+
+			if($window.sessionStorage.accessToken) {
+				$.ajaxSetup({
+					beforeSend: function(req) {
+						req.setRequestHeader("Authorization", 'Bearer ' + $window.sessionStorage.accessToken);
+					}
+				});
+			}
+
 			return {
 				request: function(config) {
 					config.headers = config.headers || {};
