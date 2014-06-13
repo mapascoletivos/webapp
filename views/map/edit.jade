@@ -1,0 +1,124 @@
+.map-editor-container
+	.editor-container
+		#editor
+			.editor-content
+				.edit-header.map-head
+					h2(translate='') Map
+					textarea.edit-title.no-canvas(type='text', ng-model='map.title', placeholder='{{"Map title" | translate}}', disable-enter-key='$event', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic='')
+				.content
+					#map-edit
+						ul.map-editor-tabs.layer-objects-nav
+							li(ng-class='mapObj("settings")', ng-click='setMapObj("settings")')
+								.tab-content
+									a(title='{{"Settings" | translate}}', href='javascript:void(0);')
+										span.lsf 
+										span.label(ng-show='mapObj("settings")')
+											span(translate='') Settings
+							li(ng-class='mapObj("layer")', ng-click='setMapObj("layer")')
+								.tab-content
+									a(title='{{"Layers" | translate}}', href='javascript:void(0);')
+										span.lsf 
+										span.label(ng-show='mapObj("layer")')
+											span(translate='') Layers
+										span.layer-length.tab-tip(ng-show='map.layers.length')
+											| {{map.layers.length}}
+							li(ng-class='mapObj("mapOptions")', ng-click='setMapObj("mapOptions")')
+								.tab-content
+									a(title='{{"Map options" | translate}}', href='javascript:void(0);')
+										span.lsf 
+										span.label(ng-show='mapObj("mapOptions")')
+											span(translate='') Map options
+						div(ng-show='mapObj("settings")', ng-controller='MapActionsCtrl')
+							#settings
+								table.options-table
+									tbody
+										tr
+											th(translate='') Description
+											td
+												textarea.edit-description.no-canvas(type='text', ng-model='map.description', disable-enter-key='$event', placeholder='{{"Description" | translate}}', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic='')
+										tr
+											th(translate='') Tags
+											td
+												input(type='text', ng-model='map.tags', placeholder='{{"Comma separated tags" | translate}}')
+										tr
+											th(translate='') Privacy
+											td
+												ul.radio-list
+													li(ng-class='{active: map.visibility == "Visible"}', ng-click='map.visibility = "Visible"')
+														span.lsf 
+														span(translate='') Public
+													li(ng-class='{active: map.visibility == "Private"}', ng-click='map.visibility = "Private"')
+														span.lsf 
+														span(translate='') Private
+								a.button.button-red.button-delete(href='javascript:void(0);', ng-click='delete(map)', ng-hide='map.isDraft')
+									span.lsf 
+									span(translate='') Remove this map permanently
+						div(ng-show='mapObj("layer")')
+							#map-layers.map-editor-subcontent
+								.layers-list
+									.map-layers(ng-show='layers.length')
+										p.tip(translate='') Drag the layers to change the order of exhibition.
+										ul.obj-list(ui-sortable='sortLayer', ng-model='layers')
+											li.sortable(ng-repeat='layer in layers', ng-click='focusLayer(layer)')
+												p.actions
+													a.lsf.view-layer(href='/layers/{{layer._id}}', target='_blank', title='{{"View layer" | translate}}') 
+													a.lsf.remove-layer(href='javascript:void(0);', title='{{"Remove layer" | translate}}', ng-click='toggleLayer(layer)') 
+												| {{layer.title}}
+												span.author(ng-show='layer.creator._id != user._id')
+													span(translate='') by
+													| {{layer.creator.name}}
+									input.filter(type='text', ng-model='layerSearch', placeholder='{{"Search public layers in the community" | translate}}')
+									ul.obj-list.available-layers(ng-show='availableLayers.length')
+										li.add(ng-repeat='layer in availableLayers | filter:layerSearch', ng-hide='hasLayer(layer)')
+											p.actions
+												a.lsf.view-layer(href='/layers/{{layer._id}}', target='_blank', title='{{"View layer" | translate}}') 
+												a.lsf.add-button(href='javascript:void(0);', ng-click='toggleLayer(layer)', title='{{"Add layer" | translate}}') 
+											| {{layer.title}}
+											span.author(ng-show='layer.creator._id != user._id')
+												span(translate='') by
+												| {{layer.creator.name}}
+									p.tip(ng-hide='availableLayers.length', translate='') No layers were found
+						div(ng-show='mapObj("mapOptions")')
+							#map-options.map-editor-subcontent
+								table.options-table
+									tbody
+										tr
+											th(translate='') Center
+											td
+												.relative-input
+													input(type='text', ng-model='map.center', disabled='')
+													a.lsf.auto-input(href='javascript:void(0);', ng-click='autoInput.center()', title='{{"Use current center" | translate}}') 
+										tr
+											th(translate='') Zoom
+											td
+												.relative-input
+													input(type='number', ng-model='map.zoom')
+													a.lsf.auto-input(href='javascript:void(0);', ng-click='autoInput.zoom()', title='{{"Use current zoom" | translate}}') 
+										tr
+											th(translate='') Bounds
+											td
+												.relative-input
+													input(type='text', ng-model='map.bounds', disabled='')
+													a.lsf.auto-input(href='javascript:void(0);', ng-click='autoInput.bounds()', title='{{"Use current bounds" | translate}}') 
+										tr
+											th(translate='') Max zoom
+											td
+												.relative-input
+													input(type='text', ng-model='map.maxZoom')
+													a.lsf.auto-input(href='javascript:void(0);', ng-click='autoInput.maxZoom()', title='{{"Use current zoom" | translate}}') 
+										tr
+											th(translate='') Min zoom
+											td
+												.relative-input
+													input(type='text', ng-model='map.minZoom')
+													a.lsf.auto-input(href='javascript:void(0);', ng-click='autoInput.minZoom()', title='{{"Use current zoom" | translate}}') 
+								a.button(href='javascript:void(0);', ng-click='autoInput.all()', translate='') Lock map in current view
+		form.primary-actions(ng-controller='MapActionsCtrl', ng-submit='save(map)')
+			a.button.button-secondary(href='javascript:void(0);', ng-click='close()')
+				span(ng-hide='map.isDraft', translate='') View map
+				span(ng-show='map.isDraft', translate='') Cancel
+			a.button(href='javascript:void(0);', ng-click='save(map)')
+				span(ng-hide='map.isDraft', translate='') Save changes
+				span(ng-show='map.isDraft', translate='') Publish map
+	.map-container.object-editor(ng-controller='FeatureCtrl')
+		#map

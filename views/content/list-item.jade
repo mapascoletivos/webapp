@@ -1,0 +1,12 @@
+.content.list-item
+	h3
+		a(href='{{getUrl(content)}}') {{content.title}}
+	.meta.clearfix
+		.clearfix
+			p.author(ng-controller='UserCtrl')
+				a(href='{{profileUrl(content.creator)}}') {{content.creator.name}}
+			p.layer(ng-show='map')
+				a(href='/layers/{{content.layer._id}}/') {{content.layer.title}}
+	.excerpt(dynamic='renderBlock(content.sirTrevorData[0])')
+	p.readmore
+		a(href='{{getUrl(content)}}', translate) Read more

@@ -1,0 +1,25 @@
+.regular-page.explore-page
+		.page-header.row
+				.container
+					.six.columns
+						h1(translate) Explore narratives mapped by the community
+			section#maps
+				.page-subheader.green.anti-row.row
+					.container
+						.twelve.columns
+							h2(translate) Latest maps
+							a.button(href='/maps/', translate) View all maps
+				.container
+					.content.row(ng-controller='MapActionsCtrl')
+						.three.columns(ng-repeat='map in maps')
+							div(ng-include='templates.list', autoscroll='false')
+			section#layers
+				.page-subheader.green.anti-row.row
+					.container
+						.twelve.columns
+							h2(translate) Latest layers
+							a.button(href='/layers/', translate) View all layers
+				.container
+					.content.row(ng-controller='LayerActionsCtrl')
+						.three.columns(ng-repeat='layer in layers')
+							div(ng-include='templates.list', autoscroll='false')

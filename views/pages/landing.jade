@@ -1,0 +1,38 @@
+section#highlight.row
+	.container
+			.four.columns
+				.highlight-block.publish
+					img.icon(alt="{{ 'Publish your data' | translate }}", src='/img/icon_publish.png')
+					h2(translate) Publish your data
+					p.block-text(translate) Create layers and import geographic data
+			.four.columns
+				.highlight-block.publish
+					img.icon(alt="{{ 'Tell your stories' | translate }}", src='/img/icon_story.png')
+					h2(translate) Tell your stories
+					p.block-text(translate) Publish geolocated reports, photos and videos
+			.four.columns
+				.highlight-block.publish
+					img.icon(alt="{{ 'Visualize' | translate }}", src='/img/icon_view.png')
+					h2(translate) Visualize
+					p.block-text(translate) Create maps mixing yours and public layers
+		.links(ng-hide='ybySettings.general.onlyInvitedUsers || isAuth')
+			a.register(href='/signup')
+				strong(translate) Register
+				span(translate) and start mapping!
+.container.row
+	.six.columns(ng-show='maps')
+		section#latest-maps.home-list(ng-controller='MapActionsCtrl')
+			h2(translate) Latest maps
+			div(ng-repeat='map in maps')
+				article.home-list-item.map-item.row
+					h3
+						a(href='/maps/{{map._id}}') {{map.title}}
+					.meta.clearfix
+						p.author(ng-controller='UserCtrl')
+							a(href='{{profileUrl(map.creator)}}') {{map.creator.name}}
+					p(ng-show='map.description', dynamic='map.description')
+	.six.columns(ng-show='contents')
+		section#latest-stories.home-list(ng-controller='ContentCtrl')
+			h2(translate) Latest stories
+			div(ng-repeat='content in contents')
+				article.home-list-item.content-item(ng-include='templates.list', autoscroll='false')

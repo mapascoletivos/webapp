@@ -1,0 +1,28 @@
+.modal.new-layer-modal
+	.modal-container
+		.modal-content
+			a.close-button.lsf(href='javascript:void(0);', ng-click='close()', title='{{"Close" | translate}}') 
+			h2(translate='') New layer
+			p(translate='') What type of layer you'd like to create?
+			.layer-types-selector
+				a(href='javascript:void(0);', ng-click='newLayer("FeatureLayer")')
+					span.img-container
+						span.lsf 
+					strong
+						span(translate='') Stories layer
+				a(href='javascript:void(0);', ng-controller='DataImportCtrl')
+					div(import-input-trigger='import-data-input')
+						span.img-container
+							span.lsf 
+						span(translate='') Import data
+						span.tip(translate='') (GeoJSON, KML, CSV, GPX and OSM XML files)
+					div(style='position:absolute;height:0;visibility:hidden;')
+						input#import-data-input(type='file', import-input='')
+				a(href='javascript:void(0);', ng-click='newLayer("TileLayer", "tilelayer")')
+					span.img-container
+						span.lsf 
+					span(translate='') TileLayer
+				a(href='javascript:void(0);', ng-click='newLayer("TileLayer", "mapbox")')
+					span.img-container
+						img(src='/img/mapbox.png')
+					span(translate='') MapBox layer

@@ -1,0 +1,33 @@
+.modal.tilelayer-modal
+	.modal-container
+		.modal-content
+			a.close-button.lsf(href='javascript:void(0);', ng-click='close()', title='Fechar') 
+			h2(ng-hide='layer._id')
+				span(ng-show='layer.properties.service == "tilelayer"', translate='') New TileLayer
+				span(ng-show='layer.properties.service == "mapbox"', translate='') New MapBox layer
+			p.label
+				label(for='layer_title', translate='') Layer title
+			textarea#layer_title.edit-title.no-canvas(type='text', ng-model='layer.title', placeholder='{{"Type your layer title" | translate}}', disable-enter-key='$event', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic='')
+			p.label
+				label(for='layer_description', translate='') Description
+			textarea#layer_description.edit-description.no-canvas(type='text', ng-model='layer.description', placeholder='{{"Describe your layer" | translate}}', disable-enter-key='$event', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic='')
+			div(ng-show='layer.properties.service == "tilelayer"')
+				.input-container
+					p.label
+						label(for='tilelaye_url', translate='') Layer URL
+					input#tilelayer_url.layer-url(type='text', ng-model='layer.url', placeholder='{{"E.g." | translate}}: http://{s}.tile.osm.org/{z}/{x}/{y}.png')
+			div(ng-show='layer.properties.service == "mapbox"')
+				.input-container
+					p.label
+						label(for='mapbox_id', translate='') MapBox ID
+					input#mapbox_id.layer-url(type='text', ng-model='layer.url', placeholder='{{"E.g."| translate}}: examples.map-9ijuk24y')
+			.privacy-settings.clearfix
+				p.label(translate='') Privacy
+				ul.radio-list
+					li(ng-class='{active: layer.visibility == "Visible"}', ng-click='layer.visibility = "Visible"')
+						span.lsf 
+						span(translate='') Public
+					li(ng-class='{active: layer.visibility == "Private"}', ng-click='layer.visibility = "Private"')
+						span.lsf 
+						span(translate='') Private
+			button(ng-click='saveTileLayer(layer)', translate='') Submit

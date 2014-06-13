@@ -1,0 +1,314 @@
+.map-editor-container(ng-controller='LayerActionsCtrl')
+	.editor-container
+		#editor
+			.editor-content
+				.edit-header.layer-head
+					h2(translate='') Layer
+					div(ng-show='isOwner(layer)')
+						textarea.edit-title.no-canvas(type='text', ng-model='layer.title', placeholder='{{"Layer title" | translate}}', disable-enter-key='$event', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic='')
+					div(ng-hide='isOwner(layer)')
+						h3 {{layer.title}}
+						p(ng-show='layer.description') {{layer.description}}
+				.content
+					#layer-edit
+						ul.map-editor-tabs.layer-objects-nav
+							li(ng-class='layerObj("settings")', ng-show='isOwner(layer)', ng-click='setLayerObj("settings")')
+								.tab-content
+									a(title='{{"Settings" | translate}}', href='javascript:void(0);')
+										span.lsf 
+										span.label(ng-show='layerObj("settings")', translate='')
+											| Settings
+							li(ng-class='layerObj("feature")', ng-click='setLayerObj("feature")')
+								.tab-content
+									a(title='{{"Locations" | translate}}', href='javascript:void(0);')
+										span.mcf 
+										span.label(ng-show='layerObj("feature")', translate='')
+											| Locations
+										span.feature-length.tab-tip(ng-show='layer.features.length')
+											| {{layer.features.length}}
+							li(ng-class='layerObj("content")', ng-click='setLayerObj("content")')
+								.tab-content
+									a(title='{{"Content" | translate}}', href='javascript:void(0);')
+										span.lsf 
+										span.label(ng-show='layerObj("content")', translate='')
+											| Content
+										span.content-length.tab-tip(ng-show='layer.contents.length')
+											| {{layer.contents.length}}
+							li(ng-class='layerObj("styles")', ng-show='isOwner(layer)', ng-click='setLayerObj("styles")')
+								.tab-content
+									a(title='{{"Styles" | translate}}', href='javascript:void(0);')
+										span.lsf 
+										span.label(ng-show='layerObj("styles")', translate='')
+											| Styles
+						div(ng-show='layerObj("settings") && isOwner(layer)')
+							#settings
+								table.options-table
+									tbody
+										tr
+											th(translate='') Description
+											td
+												textarea.edit-description.no-canvas(type='text', ng-model='layer.description', disable-enter-key='$event', placeholder='{{"Description" | translate}}', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic='')
+										tr
+											th(translate='') Tags
+											td
+												input(type='text', ng-model='layer.tags', placeholder='{{"Comma separated tags" | translate}}')
+										tr
+											th(translate='') Collaborators
+											td
+												input(type='text', placeholder='{{"Enter your collaborator email" | translate}}', ng-model='newContributor', ui-keypress='{"enter":"addContributor(newContributor, layer)"}')
+												ul.contributor-list.multiple-selection(ng-show='layer.contributors.length')
+													li(ng-repeat='contributor in layer.contributors')
+														| {{contributor.email}}
+														a.lsf.remove(href='javascript:void(0);', title='{{"Remover colaborador" | translate}}', ng-click='removeContributor(contributor, layer)')
+															| 
+													a.lsf.remove(href='javascript:void(0);', title='{{"Remover colaborador" | translate}}', ng-click='removeContributor(contributor, layer)')
+												a.lsf.remove(href='javascript:void(0);', title='{{"Remover colaborador" | translate}}', ng-click='removeContributor(contributor, layer)')
+										tr
+											th(translate='') Privacy
+											td
+												ul.radio-list
+													li(ng-class='{active: layer.visibility == "Visible"}', ng-click='layer.visibility = "Visible"')
+														span.lsf 
+														span(translate='') Public
+													li(ng-class='{active: layer.visibility == "Private"}', ng-click='layer.visibility = "Private"')
+														span.lsf 
+														span(translate='') Private
+								a.button.button-red.button-delete(href='javascript:void(0);', ng-click='delete(layer)', ng-hide='layer.isDraft')
+									span.lsf 
+									span(translate='') Remove this layer permanently
+						div(ng-show='layerObj("styles") && isOwner(layer)')
+							#layer-styles.feature-style.map-editor-subcontent
+								.button-group
+									.button-item
+										a.button(href='javascript:void(0);', ng-click='editingStyle = "Point"', ng-class='{active: editingStyle == "Point" || !editingStyle}')
+											span.mcf 
+											span(translate='') Points
+									.button-item
+										a.button(href='javascript:void(0);', ng-click='editingStyle = "LineString"', ng-class='{active: editingStyle == "LineString"}')
+											span.mcf 
+											span(translate='') Lines
+									.button-item
+										a.button(href='javascript:void(0);', ng-click='editingStyle = "Polygon"', ng-class='{active: editingStyle == "Polygon"}')
+											span.mcf 
+											span(translate='') Polygons
+								a.button.preview(ng-click='previewLayer()', translate='') Preview changes
+								.marker-styles(ng-show='editingStyle == "Point" || !editingStyle')
+									.style-editor
+										p.label(translate='') Marker color
+										.colorpicker-container
+											.colorpicker-box(colorpicker='', colorpicker-parent='true', style='background:{{layer.styles.Point["marker-color"]}};', ng-model='layer.styles.Point["marker-color"]')
+										p.label(translate='') Size
+										.size-picker
+											span(ng-click='layer.styles.Point["marker-size"] = "small"', title='Pequeno')
+												img(src='http://a.tiles.mapbox.com/v3/marker/pin-s+444.png')
+											span(ng-click='layer.styles.Point["marker-size"] = "medium"', title='Médio')
+												img(src='http://a.tiles.mapbox.com/v3/marker/pin-m+444.png')
+											span(ng-click='layer.styles.Point["marker-size"] = "large"', title='Grande')
+												img(src='http://a.tiles.mapbox.com/v3/marker/pin-l+444.png')
+										p.label(translate='') Icon
+										.marker-icon.clearfix
+											ul
+												li
+													a.maki-sprite.blank(href='javascript:void(0);', ng-click='layer.styles.Point["marker-symbol"] = ""', title='Nenhum')
+												li(ng-repeat='icon in maki')
+													a.maki-sprite(href='javascript:void(0);', ng-click='layer.styles.Point["marker-symbol"] = icon.icon', style='{{makiSprite(icon.icon)}}', title='{{icon.name}}')
+								.polygon-styles(ng-show='editingStyle == "Polygon"')
+									.style-editor
+										p.label(translate='') Area color
+										.colorpicker-container
+											.colorpicker-box(colorpicker='', colorpicker-parent='true', style='background:{{layer.styles.Polygon.fill}};', ng-model='layer.styles.Polygon.fill')
+										p.label(translate='') Area opacity
+										div(ui-slider='', min='0.00', max='1.00', step='0.01', use-decimals='', ng-model='layer.styles.Polygon["fill-opacity"]')
+										p.label(translate='') Border color
+										.colorpicker-container
+											.colorpicker-box(colorpicker='', colorpicker-parent='true', style='background:{{layer.styles.Polygon.stroke}};', ng-model='layer.styles.Polygon.stroke')
+										p.label(translate='') Border opacity
+										div(ui-slider='', min='0.00', max='1.00', step='0.01', use-decimals='', ng-model='layer.styles.Polygon["stroke-opacity"]')
+										p.label(translate='') Border size
+										div(ui-slider='', min='0', max='20', step='1', ng-model='layer.styles.Polygon["stroke-width"]')
+								.line-styles(ng-show='editingStyle == "LineString"')
+									.style-editor
+										p.label(translate='') Line color
+										.colorpicker-container
+											.colorpicker-box(colorpicker='', colorpicker-parent='true', style='background:{{layer.styles.LineString.stroke}};', ng-model='layer.styles.LineString.stroke')
+										p.label(translate='') Line opacity
+										div(ui-slider='', min='0.00', max='1.00', step='0.01', use-decimals='', ng-model='layer.styles.LineString["stroke-opacity"]')
+										p.label(translate='') Line width
+										div(ui-slider='', min='0', max='20', step='1', ng-model='layer.styles.LineString["stroke-width"]')
+						div(ng-controller='FeatureCtrl', ng-show='layerObj(objType)')
+							#layer-features.map-editor-subcontent
+								.features-list
+									.button-group
+										.button-item
+											a.button.add-new(href='javascript:void(0);', ng-click='new()')
+												span.lsf 
+												span(translate='') Add new location
+										.button-item(ng-controller='DataImportCtrl')
+											a.button.import(href='javascript:void(0);', import-input-trigger='import-data-input')
+												span.img-container
+													span.lsf 
+												span(translate='') Import data
+												span.tip(translate='') (GeoJSON, TopoJSON, KML, CSV, GPX and OSM XML files)
+											div(style='position:absolute;height:0;visibility:hidden;')
+												input#import-data-input(type='file', import-input='')
+									input.filter(type='text', ng-model='search', placeholder='{{"Find on the list" | translate}}')
+									ul.obj-list
+										li.clearfix(ng-repeat='feature in features | filter:search', ng-class='{disabled: !canEdit(feature, layer)}', ng-click='edit(feature, layer)')
+											span.type.mcf(ng-show='feature.geometry.type == "Point"') 
+											span.type.mcf(ng-show='feature.geometry.type == "Polygon"') 
+											span.type.mcf(ng-show='feature.geometry.type == "LineString"') 
+											span.locked.lsf(ng-show='!canEdit(feature, layer)') 
+											h4 {{feature.title}}
+											p.author(ng-show='layer.contributors.length')
+												span(translate='') by
+												| {{feature.creator.name}}
+						div(ng-controller='ContentCtrl', ng-show='layerObj(objType)')
+							#layer-content.map-editor-subcontent
+								a.button.add-new(href='javascript:void(0);', ng-click='new()')
+									span.lsf 
+									span(translate='') Add new content
+								input.filter(type='text', ng-model='search', placeholder='{{"Find on the list" | translate}}')
+								ul.obj-list
+									li(ng-repeat='item in contents | filter:search', ng-class='{disabled: !canEdit(item, layer)}', ng-click='edit(item, layer)')
+										span.locked.lsf(ng-show='!canEdit(item, layer)') 
+										h4 {{item.title}}
+										p.author(ng-show='layer.contributors.length')
+											span(translate='') by
+											| {{item.creator.name}}
+		form.primary-actions(ng-submit='save(layer)')
+			a.button.button-secondary(href='javascript:void(0);', ng-click='close()')
+				span(ng-hide='layer.isDraft', translate='') View layer
+				span(ng-show='layer.isDraft', translate='') Cancel
+			a.button(href='javascript:void(0);', ng-click='save(layer)', ng-show='isOwner(layer)')
+				span(ng-hide='layer.isDraft', translate='') Save changes
+				span(ng-show='layer.isDraft', translate='') Publish layer
+	.map-container.object-editor(ng-controller='FeatureEditCtrl', ng-class='{editing: editing.geometry.coordinates}', ng-hide='sharedData.editingContent()')
+		.new-feature(ng-hide='!editing || editing.geometry.type')
+			.available-types
+				.new-type
+					p(translate='') Choose the type of geometry you would like to add:
+					ul
+						li(ng-click='newFeature("Point")')
+							span.mcf 
+							span(translate='') Point
+						li(ng-click='newFeature("LineString")')
+							span.mcf 
+							span(translate='') Line
+						li(ng-click='newFeature("Polygon")')
+							span.mcf 
+							span(translate='') Polygon (area)
+				.geocode
+					p(translate='') Or search and use a location:
+					.location-editor
+						input.geocode(type='text', ui-keypress='{"enter": "geocode()"}', ng-model='_data.geocode', placeholder='{{"Type a location" | translate}}')
+						a.search-button.button.button-small(href='javascript:void(0);', ng-click='geocode()')
+							span.lsf 
+							span(translate='') Search
+						.geocode-results
+							ul
+								li(ng-repeat='result in _data.geocodeResults')
+									a.mcf(href='javascript:void(0);', title='{{"Use this location as a point" | translate}}', ng-click='setNominatimFeature(result)') 
+									a.mcf(href='javascript:void(0);', title='{{"Use this location as a polygon" | translate}}', ng-show='result.geojson.type === "Polygon"', ng-click='setNominatimFeature(result, "geojson")') 
+									a.mcf(href='javascript:void(0);', title='{{"Use this location as a line" | translate}}', ng-show='result.geojson.type === "LineString"', ng-click='setNominatimFeature(result, "geojson")') 
+									| {{result.display_name}}
+		.start-tip(ng-show='editing.geometry.type == "Point" && !editing.geometry.coordinates')
+			span(ng-show='editing.geometry.type == "Point"', translate='') Click on the map to add your marker
+		#edit-feature(ng-show='editing.geometry.coordinates', ng-animate='"top-down"')
+			form(ng-submit='save()')
+				.feature-settings
+					h3(translate='') Location
+					textarea.edit-title.no-canvas(placeholder='{{"Location title" | translate}}', ng-model='editing.title', disable-enter-key='$event', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic='')
+					textarea.edit-description.no-canvas(placeholder='{{"Location description" | translate}}', ng-model='editing.description', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic='')
+				.editing-tools(ng-class='{editing: tool}')
+					ul.tools-list
+						li.feature-data-label(ng-class='{active: tool == "feature-data"}')
+							a(href='javascript:void(0);', title='{{"Location data" | translate}}', ng-click='setTool("feature-data")')
+								span.lsf 
+						li.feature-style-label(ng-class='{active: tool == "feature-style"}')
+							a(href='javascript:void(0);', title='{{"Location style" | translate}}', ng-click='setTool("feature-style")')
+								span.lsf 
+						li.remove-label(ng-show='editing._id')
+							a(href='javascript:void(0);', title='{{"Remove this feature" | translate}}', ng-click='delete()')
+								span.lsf 
+						li.save-label
+							a(href='javascript:void(0);', title='{{"Save" | translate}}', ng-click='save()')
+								span.lsf 
+					.tools-editor(ng-show='tool')
+						.feature-data(ng-show='tool == "feature-data"')
+							p(translate='') Add/edit data
+							table
+								tbody
+									tr(ng-repeat='prop in properties track by prop._id', ng-hide='isReservedProperty(prop.key)')
+										td.prop-key
+											input(ng-model='prop.key')
+										td.prop-value
+											input(ng-model='prop.val')
+										td.action.action-remove(ng-click='removeProperty(prop._id)', title='{{"Remove property" | translate}}')
+											span.lsf 
+							a.button(ng-click='addProperty()', translate='') New property
+						.feature-style(ng-show='tool == "feature-style"')
+							a.button(href='javascript:void(0);', ng-click='editing.styles = false', ng-show='editing.properties.customStyle', translate='') Use layer styles
+							.marker-styles(ng-show='editing.geometry.type == "Point"')
+								p.label(translate='') Marker color
+								.colorpicker-container
+									.colorpicker-box(colorpicker='', colorpicker-parent='true', style='background:{{editing.styles["marker-color"]}};', ng-model='editing.styles["marker-color"]')
+								p.label(translate='') Size
+								.size-picker
+									span(ng-click='editing.styles["marker-size"] = "small"', title='Pequeno')
+										img(src='http://a.tiles.mapbox.com/v3/marker/pin-s+444.png')
+									span(ng-click='editing.styles["marker-size"] = "medium"', title='Médio')
+										img(src='http://a.tiles.mapbox.com/v3/marker/pin-m+444.png')
+									span(ng-click='editing.styles["marker-size"] = "large"', title='Grande')
+										img(src='http://a.tiles.mapbox.com/v3/marker/pin-l+444.png')
+								p.label(translate='') Icon
+								.marker-icon
+									ul
+										li
+											a.maki-sprite.blank(href='javascript:void(0);', ng-click='editing.styles["marker-symbol"] = ""', title='Nenhum')
+										li(ng-repeat='icon in maki')
+											a.maki-sprite(href='javascript:void(0);', ng-click='editing.styles["marker-symbol"] = icon.icon', style='{{makiSprite(icon.icon)}}', title='{{icon.name}}')
+							.polygon-styles(ng-show='editing.geometry.type == "Polygon"')
+								p.label(translate='') Area color
+								.colorpicker-container
+									.colorpicker-box(colorpicker='', colorpicker-parent='true', style='background:{{editing.styles.fill}};', ng-model='editing.styles.fill')
+								p.label(translate='') Area opacity
+								div(ui-slider='', min='0.00', max='1.00', step='0.01', use-decimals='', ng-model='editing.styles["fill-opacity"]')
+							.line-styles(ng-show='editing.geometry.type == "Polygon" || editing.geometry.type == "LineString"')
+								p.label(translate='') Border color
+								.colorpicker-container
+									.colorpicker-box(colorpicker='', colorpicker-parent='true', style='background:{{editing.styles.stroke}};', ng-model='editing.styles.stroke')
+								p.label(translate='') Border opacity
+								div(ui-slider='', min='0.00', max='1.00', step='0.01', use-decimals='', ng-model='editing.styles["stroke-opacity"]')
+								p.label(translate='') Border width
+								div(ui-slider='', min='0', max='20', step='1', ng-model='editing.styles["stroke-width"]')
+		#layer-map
+	.content-editor.object-editor(ng-controller='ContentEditCtrl', ng-show='editing')
+		form(ng-submit='save()')
+			.editing-tools(ng-class='{editing: tool}')
+				ul.tools-list
+					li.content-features-label(ng-class='{active: tool == "content-features"}')
+						a(href='javascript:void(0);', title='Locais deste conteúdo', ng-click='setTool("content-features")')
+							span.mcf 
+							span.feature-length(ng-show='editing.features') {{editing.features.length}}
+					li.remove-label(ng-show='editing._id')
+						a(href='javascript:void(0);', title='{{"Remove permanently" | translate}}', ng-click='delete()')
+							span.lsf 
+					li.save-label
+						a(href='javascript:void(0);', title='{{"Save" | translate}}', ng-click='save()')
+							span.lsf 
+					li.revert-label(ng-show='isRevertable()')
+						a(href='javascript:void(0);', title='{{"Revert changes" | translate}}', ng-click='revert()')
+							span.lsf 
+				.tools-editor(ng-show='tool')
+					.content-features(ng-show='tool == "content-features"')
+						p(translate='') Select one or more locations related to this content
+						input.filter(type='text', ng-model='filterFeature', placeholder='{{"Filter from the list" | translate}}')
+						a.clear-selection(href='javascript:void(0);', ng-click='clearFeatures()', ng-show='editing.features', translate='') Clear selection
+						ul.feature-list
+							li(ng-repeat='feature in layer.features | filter:filterFeature', ng-class='{selected:hasFeature(feature._id)}', ng-click='toggleFeature(feature._id)') {{feature.title}}
+			#content-edit-body.content-settings
+				.content-title
+					h3(translate='') Content
+					textarea.edit-title.no-canvas(placeholder='Título', ng-model='editing.title', disable-enter-key='$event', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic='')
+				.content-body
+					textarea(sir-trevor-editor='', ng-model='editing.sirTrevor')

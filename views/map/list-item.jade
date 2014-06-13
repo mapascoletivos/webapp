@@ -1,0 +1,18 @@
+.default-item.row(ng-controller='MapActionsCtrl')
+  h3
+    a(href='/maps/{{map._id}}') {{map.title}}
+  p.author(ng-show='!user')
+    a(ng-controller='UserCtrl', href='{{profileUrl(map.creator)}}')
+      span(translate='') by
+      | {{map.creator.name}}
+  p(ng-show='map.description', dynamic='map.description')
+  .actions
+    a(href='/maps/{{map._id}}/edit', title='{{"Edit" | translate}}', ng-show='canEdit(map)')
+      span.lsf 
+      span.label(translate='') Edit
+    a(href='/maps/{{map._id}}', title='{{"View" | translate}}')
+      span.lsf 
+      span.label(translate='') View
+    a(href='javascript:void(0);', ng-click='delete(map)', title='{{"Remove permanently" | translate}}', ng-show='canEdit(map)')
+      span.lsf 
+      span.label(translate='') Delete

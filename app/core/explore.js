@@ -10,7 +10,7 @@ angular.module('yby.explore', [])
 			.state('explore', {
 				url: '/explore/',
 				controller: 'ExploreCtrl',
-				templateUrl: '/views/explore.html'
+				templateUrl: '/views/pages/explore.html'
 			});
 
 	}

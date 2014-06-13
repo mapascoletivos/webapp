@@ -1,0 +1,11 @@
+div.feature.list-item
+	h3
+		a(href='{{baseUrl}}/feature/{{feature._id}}', ng-click='focus(feature)') {{feature.title}}
+	div.meta.clearfix
+		div.clearfix
+			p.author(ng-controller='UserCtrl')
+				a(href='{{profileUrl(feature.creator)}}') {{feature.creator.name}}
+			p.layer(ng-show='map')
+				a(href='/layers/{{feature.layer._id}}/') {{feature.layer.title}}
+	div.excerpt
+		div(dynamic='description(feature)')

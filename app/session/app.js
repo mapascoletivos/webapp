@@ -15,21 +15,21 @@ angular
 				.state('login', {
 					url: '/login/',
 					controller: 'LoginCtrl',
-					templateUrl: '/views/login.html'
+					templateUrl: '/views/auth/login.html'
 				});
 
 			$stateProvider
 				.state('signup', {
 					url: '/signup/',
 					controller: 'LoginCtrl',
-					templateUrl: '/views/signup.html'
+					templateUrl: '/views/auth/signup.html'
 				});
 
 			$stateProvider
 				.state('forgotPwd', {
 					url: '/forgot-password/',
 					controller: 'LoginCtrl',
-					templateUrl: '/views/forgot_pwd.html'
+					templateUrl: '/views/auth/forgot_pwd.html'
 				});
 
 			if(window.ybySettings.general.facebookApiKey)

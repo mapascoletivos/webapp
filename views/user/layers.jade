@@ -1,0 +1,20 @@
+.page-subheader.anti-row.row
+	.container
+		.twelve.columns
+			h2(translate='') Layers
+			input.filter(ng-show='layers.length', type='text', ng-model='search', placeholder='{{"Type your search" | translate}}')
+			p(ng-show='layers.length', translate='profileTotalLayers', translate-values='{userName: user.name, total: totalLayer}')
+			p(ng-hide='layers.length')
+				| {{user.name}}
+				span(translate='') haven't created any layers.
+.layers-list(ng-show='layers.length', ng-controller='LayerActionsCtrl')
+	.container(infinite-scroll='$layer.nextPage()', infinite-scroll-disabled='$layer.busy', infinite-scroll-distance='1', infinite-scroll-immediate-check='true')
+		.three.columns(ng-repeat='layer in layers | filter:search')
+			div(ng-include='templates.list', autoscroll='false')
+.create-layer(ng-hide='layers.length')
+	.container
+		.twelve.columns
+			.info-box
+				p
+					| {{user.name}}
+					span(translate='') haven't created any layers.

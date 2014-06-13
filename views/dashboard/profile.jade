@@ -1,0 +1,19 @@
+div(ng-controller='UserCtrl')
+	.page-subheader.anti-row.row
+		.container
+			.twelve.columns
+				h2(translate) Profile
+				a.button(href='javascript:void(0);', ng-click='openPwdModal(user)', translate) Change password
+				a.button(href='javascript:void(0);', ng-click='openEmailModal(user)', translate) Change email
+	#profile-editor
+		.container
+			form(ng-submit='save(user)')
+				.row
+					.seven.columns
+						.profile-edit-form
+							p.label(translate) Full name
+							textarea.no-canvas.user-name(ng-model='user.name', disable-enter-key='$event', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic)
+							p.label(translate) Biography
+							textarea.no-canvas.user-bio(ng-model='user.bio', placeholder='{{"Tell us something about you" | translate}}', spellcheck='false', autocorrect='off', autocapitalize='off', msd-elastic)
+							p
+								a.button(ng-click='save(user)', translate) Save profile

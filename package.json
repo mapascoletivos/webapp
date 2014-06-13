@@ -18,12 +18,8 @@
 		}
 	],
 	"scripts": {
-		"build": "npm run bundle && mkdir -p dist && ./node_modules/.bin/browserify -t brfs -r csv2geojson app/app.js | ./node_modules/.bin/uglifyjs -mt > dist/app.js",
-		"bundle": "mkdir -p lib && ./node_modules/.bin/browserify app/vendor.js | ./node_modules/.bin/uglifyjs -mt > lib/vendor.js",
-		"install": "cp ./node_modules/maki/www/images/maki-sprite.png ./img/maki-sprite.png && ./node_modules/.bin/napa && npm run build",
-		"watch": "./node_modules/.bin/watchify -t brfs -r csv2geojson app/app.js -o dist/app.js | ./node_modules/.bin/watch-less -d css -e .css",
-		"start": "./node_modules/.bin/nodemon server.js"
-
+		"install": "mkdir -p public && ./node_modules/.bin/napa",
+		"start": "node server.js"
 	},
 	"dependencies": {
 		"angular": "latest",
@@ -42,17 +38,18 @@
 		"jquery-ui-browserify": "latest",
 		"markdown": "latest",
 		"grvtr": "latest",
-		"browserify": "3.33.1",
-		"uglify-js": "latest",
 		"eventablejs": "latest",
 		"napa": "latest",
 		"express": "latest",
-		"prerender-node": "latest",
-		"nodemon": "latest"
+		"prerender-node": "latest"
 	},
 	"devDependencies": {
-		"watchify": "0.6.2",
-		"watch-less": "latest"
+		"grunt": "latest",
+		"grunt-contrib-copy": "latest",
+		"grunt-browserify": "latest",
+		"grunt-contrib-uglify": "latest",
+		"grunt-contrib-less": "latest",
+		"grunt-contrib-jade": "latest"
 	},
 	"napa": {
 		"angular-cookies": "angular/bower-angular-cookies",
@@ -78,5 +75,6 @@
 		"yby",
 		"angular",
 		"openstreetmap"
-	]
+	],
+	"engine": "node >= 0.10"
 }

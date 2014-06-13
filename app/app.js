@@ -116,7 +116,7 @@ angular.module('yby', [
 			.state('home', {
 				url: '/',
 				controller: 'IndexCtrl',
-				templateUrl: '/views/landing.html',
+				templateUrl: '/views/pages/landing.html',
 				resolve: {
 					'MapData': [
 						'$q',
@@ -263,7 +263,7 @@ angular.module('yby', [
  * Initialize appication
  */
 
-$(document).ready(function() {
+$(document).ready(_.once(function() {
 	$('body').hide();
 	$.get(window.ybySettings.server + window.ybySettings.apiPrefix + '/settings', function(serverSettings) {
 		window.ybySettings = angular.extend(window.ybySettings, serverSettings);
@@ -271,4 +271,4 @@ $(document).ready(function() {
 		angular.bootstrap(document, ['yby']);
 		$('body').show();
 	}, 'json');
-});
+}));

@@ -1,0 +1,10 @@
+.modal.share-modal.share-map
+	.modal-container
+		.modal-content
+			a.close-button.lsf(href='javascript:void(0);', ng-click='close()', title='{{"Close" | translate}}') 
+			h2
+				span(translate='') Share
+				| {{map.title}}
+			.social
+				a.facebook.lsf(href='javascript:void(0);', title='{{"Share on Facebook" | translate}}', ng-click='socialWindow(social.facebook, "facebook")') 
+				a.twitter.lsf(href='javascript:void(0);', title='{{"Share on Twitter" | translate}}', ng-click='socialWindow(social.twitter, "twitter")') 

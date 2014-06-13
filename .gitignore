@@ -1,6 +1,4 @@
 node_modules
-app/config.js
-dist/app.js
-lib/vendor.js
-
-.htaccess
+public
+/app/config.js
+/themes/**/*

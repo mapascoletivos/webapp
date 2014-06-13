@@ -1,0 +1,8 @@
+.modal.share-modal
+	.modal-container
+		.modal-content
+			a.close-button.lsf(href='javascript:void(0);', ng-click='closeEmailModal()', title='Fechar') 
+			.change-email-form
+				h4(translate='') Email change
+				input(type='text', placeholder='{{"Type your new email" | translate}}', ng-model='user.newEmail')
+				a.button(ng-click='changeEmail(user)', translate='') Send email confirmation

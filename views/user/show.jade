@@ -1,0 +1,25 @@
+.regular-page.profile-page
+	.page-header.profile-header.row
+		.container
+			.two.columns
+				img(src='{{user.gravatar(240)}}', alt='{{user.name}}')
+			.five.columns
+				h1
+					span.user-name {{user.name}}
+				ul.profile-actions.header-actions
+					li(ng-class='{active: currentState === "user"}')
+						a(href='/user/{{user._id}}')
+							span.lsf 
+							span(translate='') About
+					li(ng-class='{active: currentState === "layers"}')
+						a(href='/user/{{user._id}}/layers')
+							span.lsf 
+							span(translate='') Layers
+					li(ng-class='{active: currentState === "maps"}')
+						a(href='/user/{{user._id}}/maps')
+							span.lsf 
+							span(translate='') Maps
+	div(ui-view='', autoscroll='false')
+		.container
+			.twelve.columns
+				p.bio(ng-show='user.bio') {{user.bio}}

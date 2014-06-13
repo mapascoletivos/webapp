@@ -1,0 +1,16 @@
+doctype html
+html(ng-controller='PageCtrl', ng-class='{embedded: embedded}')
+
+	include ../includes/head
+
+	body(style='display: none;')
+
+		include ../includes/header
+
+		include ../includes/messages
+
+		.ui-view(autoscroll='false')
+
+		include ../includes/loading
+
+		include ../includes/footer

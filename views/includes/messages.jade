@@ -1,0 +1,4 @@
+#messages(ng-controller='MessageCtrl')
+	.message-content.animte-show(ng-repeat='message in messages', ng-show='message.text')
+		a.close-button(ng-click='close(message)', href='javascript:void(0);', translate) Close
+		p(ng-class='message.status') {{message.text}}

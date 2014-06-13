@@ -1,0 +1,54 @@
+.map-view.layer-view(ng-controller='MapViewCtrl', ng-class='{withSidebar: mapView.sidebar()}')
+	.map-header
+		#layer-info.map-info(ng-class='{withBackButton: mapView.backLink()}')
+			a.back.lsf(title='Voltar', href='javascript:void(0);', ng-click='mapView.goBack()', ng-show='mapView.backLink()')
+				span 
+			h1 {{layer.title}}
+			p.author(ng-controller='UserCtrl')
+				span(translate='') by
+				a(href='{{profileUrl(layer.creator)}}') {{layer.creator.name}}
+	#layer-controls.map-controls(ng-controller='LayerActionsCtrl')
+		ul
+			li(ng-show='canEdit(layer)')
+				a(href='javascript:void(0);', ng-click='edit(layer)', title='{{"Edit" | translate}}')
+					span.lsf 
+					span.label(translate='') Edit
+			li(ng-show='canEdit(layer)')
+				a(href='javascript:void(0);', ng-click='delete(layer)', title='{{"Delete permanently" | translate}}')
+					span.lsf 
+					span.label(translate='') Delete
+			li(ng-show='layer.visibility !== "Private" || canEdit(layer)')
+				a(href='javascript:void(0);', ng-click='share(layer)', title='{{"Share" | translate}}')
+					span.lsf 
+					span.label(translate='') Share
+	div(ng-controller='FeatureCtrl')
+		.map-container
+			#layer-map
+		#map-sidebar(ng-controller='ContentCtrl', ng-show='mapView.sidebar()')
+			.map-sidebar-content
+				#layer-info.sidebar-block.main-info(ng-show='layer.description && !feature && !content')
+					p.label(translate='') About this layer
+					p(dynamic='layer.description')
+				div(ng-show='feature', ng-controller='FeatureCtrl')
+					.sidebar-block.label-block
+						h3
+							span(translate='') Location
+							a.close(href='{{baseUrl}}', translate='') Return to the map
+					#feature-info.single-feature.sidebar-block(ng-include='templates.show')
+				#posts(ng-show='contents.length')
+					div(ng-show='content')
+						.sidebar-block.label-block
+							h3
+								span(translate='') Content
+								a.close(href='{{baseUrl}}', translate='') Return to the map
+						.single-post.sidebar-block.active(ng-include='templates.show')
+					div(ng-hide='content')
+						.sidebar-block.label-block
+							h3(translate='') Layer stories
+						ul.content-list
+							li.sidebar-block(ng-repeat='content in contents', ng-include='templates.list')
+				#features(ng-show='!contents.length && !feature && features.length', ng-controller='FeatureCtrl')
+					.sidebar-block.label-block
+						h3(translate='') Locations
+					ul.feature-list
+						li.sidebar-block(ng-repeat='feature in features', ng-include='templates.list')

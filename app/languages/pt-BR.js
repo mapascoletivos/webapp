@@ -203,5 +203,17 @@ module.exports = {
 	'Loading layer': 'Carregando camada',
 	'Loading map': 'Carregando mapa',
 	'Loading layers': 'Carregando camadas',
-	'Loading maps': 'Carregando mapas'
+	'Loading maps': 'Carregando mapas',
+	'Return to the map': 'Retornar ao mapa',
+	'Password recovery': 'Recuperação de senha',
+	'Your email address or username:': 'Seu email ou nome de usuário',
+	'Email or username': 'Email ou nome de usuário',
+	'Recover': 'Recuperar',
+	'Login': 'Entrar',
+	'Password': 'Senha',
+	'Register': 'Registrar',
+	'Regsistration': 'Cadastro',
+	'Name': 'Nome',
+	'Your display name': 'Seu nome de exibição',
+	'Forgot my password': 'Esqueci minha senha'
 };

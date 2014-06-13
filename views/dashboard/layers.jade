@@ -1,0 +1,22 @@
+.page-subheader.anti-row.row
+	.container
+		.twelve.columns
+			h2(translate='') Layers
+			input.filter(type='text', ng-model='search', placeholder='{{"Type your search" | translate}}')
+			p(translate='userTotalLayers', translate-values='{ totalLayer: totalLayer }')
+.layers-list(ng-show='layers.length', ng-controller='LayerActionsCtrl')
+	.container(infinite-scroll='$layer.nextPage("userLayers")', infinite-scroll-disabled='$layer.busy', infinite-scroll-distance='1', infinite-scroll-immediate-check='true')
+		.three.columns(ng-show='canCreate')
+			.default-item.new-item.row
+				h3
+					a(href='javascript:void(0);', ng-click='new()')
+						span.lsf 
+						span(translate='') Create new layer
+		.three.columns(ng-repeat='layer in layers | filter:search')
+			div(ng-include='templates.list', autoscroll='false')
+.create-layer(ng-hide='layers.length', ng-show='canCreate')
+	.container
+		.twelve.columns
+			.info-box.new-item(ng-controller='LayerActionsCtrl')
+				p
+					a(href='javascript:void(0);', ng-click='new()', title='{{"New layer" | translate}}', translate='') You haven't created layers yet. Click here to create your first.

@@ -1,0 +1,10 @@
+section#login
+		.login-content
+				h1(translate) Password recovery
+				.login-form
+					form.form-horizontal(role='form', ng-submit='recoverPwd()')
+						.form-group
+							label.col-sm-2.control-label(for='name', translate) Your email address or username:
+							.col-sm-10
+								input#name.form-control(ng-model='user.emailOrUsername', placeholder='{{\'Email or username\' | translate}}', type='text', autocomplete='off')
+						input.btn.btn-primary(type='submit', value='{{\'Recover\' | translate}}')

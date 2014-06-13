@@ -1,0 +1,21 @@
+section#login
+		.login-content
+				h1(translate) Login
+				.login-form
+					form.form-horizontal(role='form', ng-submit='login()')
+						.form-group
+							label(for='email', translate) Email
+							input#email(type='email', ng-model='credentials.email', placeholder='{{\'Email\' | translate}}')
+						.form-group
+							label(for='password', translate) Password
+							input#password(type='password', placeholder='{{\'Password\' | translate}}', ng-model='credentials.password')
+						input(type='submit', value='{{\'Login\' | translate}}')
+						.form-group.action-group
+							a.signup(href='/signup', translate, ng-hide='ybySettings.general.onlyInvitedUsers') Register
+							a(href='/forgot-password', translate) Forgot my password
+				.social-login
+					.social-networks(ng-hide='ybySettings.general.onlyInvitedUsers')
+						a.facebook(ng-show='facebookReady', title='Facebook', href='javascript:void(0);', ng-click='login(\'facebook\')')
+							span.lsf &#xE047;
+							span(translate) Login with facebook
+						google-plus-signin(clientid='{{googleClientID}}', language='{{ybySettings.language}}')

@@ -1,0 +1,24 @@
+.regular-page.dashboard-page
+	.page-header.dashboard-header.row
+		.container
+			.six.columns
+				h1(ng-controller='UserCtrl')
+					img(src='{{user.gravatar()}}', alt='{{userName}}')
+					span(translate='') Dashboard
+					span.user-name {{userName}}
+					a.profile-link(href='{{profileUrl(user)}}', translate='') View profile
+			.six.columns
+				ul.profile-actions.header-actions
+					li(ng-class='{active: currentState === "layers"}')
+						a(href='/dashboard/layers')
+							span.lsf 
+							span(translate='') Layers
+					li(ng-class='{active: currentState === "maps"}', ng-show='canCreate')
+						a(href='/dashboard/maps')
+							span.lsf 
+							span(translate='') Maps
+					li(ng-class='{active: currentState === "profile"}')
+						a(href='/dashboard/profile')
+							span.lsf 
+							span(translate='') My profile
+	.row(ui-view='', autoscroll='false')
