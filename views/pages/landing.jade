@@ -1,24 +1,25 @@
 section#highlight.row
 	.container
-			.four.columns
-				.highlight-block.publish
-					img.icon(alt="{{ 'Publish your data' | translate }}", src='/img/icon_publish.png')
-					h2(translate) Publish your data
-					p.block-text(translate) Create layers and import geographic data
-			.four.columns
-				.highlight-block.publish
-					img.icon(alt="{{ 'Tell your stories' | translate }}", src='/img/icon_story.png')
-					h2(translate) Tell your stories
-					p.block-text(translate) Publish geolocated reports, photos and videos
-			.four.columns
-				.highlight-block.publish
-					img.icon(alt="{{ 'Visualize' | translate }}", src='/img/icon_view.png')
-					h2(translate) Visualize
-					p.block-text(translate) Create maps mixing yours and public layers
-		.links(ng-hide='ybySettings.general.onlyInvitedUsers || isAuth')
-			a.register(href='/signup')
-				strong(translate) Register
-				span(translate) and start mapping!
+		.four.columns
+			.highlight-block.publish
+				img.icon(alt="{{ 'Publish your data' | translate }}", src='/img/icon_publish.png')
+				h2(translate) Publish your data
+				p.block-text(translate) Create layers and import geographic data
+		.four.columns
+			.highlight-block.publish
+				img.icon(alt="{{ 'Tell your stories' | translate }}", src='/img/icon_story.png')
+				h2(translate) Tell your stories
+				p.block-text(translate) Publish geolocated reports, photos and videos
+		.four.columns
+			.highlight-block.publish
+				img.icon(alt="{{ 'Visualize' | translate }}", src='/img/icon_view.png')
+				h2(translate) Visualize
+				p.block-text(translate) Create maps mixing yours and public layers
+	.links(ng-hide='ybySettings.general.onlyInvitedUsers || isAuth')
+		a.register(href='/signup')
+			strong(translate) Register
+			&nbsp;
+			span(translate) and start mapping!
 .container.row
 	.six.columns(ng-show='maps')
 		section#latest-maps.home-list(ng-controller='MapActionsCtrl')

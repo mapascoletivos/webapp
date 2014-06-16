@@ -212,6 +212,7 @@ module.exports = {
 	'Login': 'Entrar',
 	'Password': 'Senha',
 	'Register': 'Registrar',
+	'and start mapping!': 'e começar a mapear!',
 	'Regsistration': 'Cadastro',
 	'Name': 'Nome',
 	'Your display name': 'Seu nome de exibição',

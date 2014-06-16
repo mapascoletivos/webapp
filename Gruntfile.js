@@ -1,6 +1,5 @@
 var config = require('./app/config'),
-	fs = require('fs'),
-	_ = require('underscore');
+	fs = require('fs');
 
 module.exports = function(grunt) {
 
@@ -50,8 +49,12 @@ module.exports = function(grunt) {
 		}
 	};
 
-	// Theme files
+	// Theme tasks
 	if(config.theme && fs.existsSync('themes/' + config.theme)) {
+
+		if(fs.existsSync('themes/' + config.theme + '/views-data.js')) {
+			conf.jade.compile.options.data = require('./themes/' + config.theme + '/views-data.js');
+		}
 
 		conf.jade.compile.files.push({
 			expand: true,
@@ -59,6 +62,11 @@ module.exports = function(grunt) {
 			src: ['**/*.jade'],
 			dest: 'public/views',
 			ext: '.html'
+		});
+
+		conf.copy.main.files.push({
+			src: 'themes/' + config.theme + '/public',
+			dest: 'public'
 		});
 
 	}
