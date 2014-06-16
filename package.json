@@ -28,6 +28,7 @@
 		"grunt-contrib-uglify": "latest",
 		"grunt-contrib-less": "latest",
 		"grunt-contrib-jade": "latest",
+		"grunt-contrib-clean": "latest",
 		"angular": "latest",
 		"underscore": "latest",
 		"less": "latest",
