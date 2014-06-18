@@ -16,6 +16,7 @@ require('./core/loading');
 require('./core/message');
 require('./core/explore');
 require('./core/dashboard');
+require('./core/pages');
 
 /*
  * Common modules
@@ -72,7 +73,8 @@ angular.module('yby', [
 	'yby.map',
 	'yby.layer',
 	'yby.feature',
-	'yby.content'
+	'yby.content',
+	'yby.pages',
 ])
 .constant('config', ybySettings)
 .constant('apiPrefix', (ybySettings.server == 'local' ? '' : ybySettings.server) + ybySettings.apiPrefix)
@@ -229,6 +231,9 @@ angular.module('yby', [
 		 */
 		window.ybyHistory = [];
 		$rootScope.$on('$stateChangeSuccess', function() {
+
+			$('html,body').animate({scrollTop:0}, 200);
+
 			if(window._gaq) {
 				window._gaq.push(['_trackPageview', $location.path()]);
 			}
