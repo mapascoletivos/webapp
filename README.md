@@ -4,7 +4,7 @@ This a default YBY client. Built on Angular.js, it's an application that connect
 
 ## Installing
 
-Install Node.js, setup a [Yby server](http://github.com/oeco/yby-client) and clone this repository.
+Install Node.js, setup a [Yby server](http://github.com/oeco/yby) and clone this repository.
 
 Copy `app/config.example.js` to `app/config.js` and set configuration options.
 
