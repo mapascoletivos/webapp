@@ -12,6 +12,10 @@ Install dependencies:
 
     npm install
 
+Compile using grunt:
+
+	grunt
+
 You should run this command every time `config.js` is changed, to compile the libraries.
 
 Then, start the server:
