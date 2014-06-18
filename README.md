@@ -12,7 +12,11 @@ Install dependencies:
 
     npm install
 
-Compile using grunt:
+Install grunt client:
+
+	npm install -g grunt-cli
+
+Compile:
 
 	grunt
 
