@@ -14,7 +14,7 @@
 						span(translate='') Create new map
 		.three.columns(ng-repeat='map in maps | filter:search')
 			div(ng-include='templates.list', autoscroll='false')
-.create-map(ng-hide='maps.length', ng-show='canCreate')
+.create-map(ng-show='canCreate && !maps.length')
 	.container
 		.twelve.columns
 			.info-box.new-item

@@ -14,7 +14,7 @@
 						span(translate='') Create new layer
 		.three.columns(ng-repeat='layer in layers | filter:search')
 			div(ng-include='templates.list', autoscroll='false')
-.create-layer(ng-hide='layers.length', ng-show='canCreate')
+.create-layer(ng-show='canCreate && !layers.length')
 	.container
 		.twelve.columns
 			.info-box.new-item(ng-controller='LayerActionsCtrl')
