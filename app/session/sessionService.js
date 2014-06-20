@@ -64,12 +64,14 @@ module.exports = [
 							delete $window.sessionStorage[key];
 						}
 						$location.path('/login/');
+						gapi.auth.signOut();
 					})
 					.error(function() {
 						for(var key in $window.sessionStorage) {
 							delete $window.sessionStorage[key];
 						}
 						$location.path('/login/');
+						gapi.auth.signOut();
 					});
 			},
 			authenticated: function() {
