@@ -268,7 +268,7 @@ angular.module('yby', [
  * Initialize appication
  */
 
-$(document).ready(_.once(function() {
+$(document).ready(function() {
 	$('body').hide();
 	$.get(window.ybySettings.server + window.ybySettings.apiPrefix + '/settings', function(serverSettings) {
 		window.ybySettings = angular.extend(window.ybySettings, serverSettings);
@@ -276,4 +276,4 @@ $(document).ready(_.once(function() {
 		angular.bootstrap(document, ['yby']);
 		$('body').show();
 	}, 'json');
-}));
+});
