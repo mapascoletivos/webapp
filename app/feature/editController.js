@@ -505,11 +505,11 @@ exports.FeatureEditCtrl = [
 
 		var unHookSetStyles = $scope.$on('feature.edit.start', function(event, feature) {
 
-			if(feature && feature.properties && feature.geometry && feature.geometry.type && defaultStyles) {
-				if(!feature.properties.customStyle) {
-					feature.styles = _.extend(feature.styles || {}, defaultStyles[feature.geometry.type]);
-				} else {
+			if(feature && feature.geometry && feature.geometry.type && defaultStyles) {
+				if(feature.properties && feature.properties.customStyle) {
 					feature.styles = feature.properties;
+				} else {
+					feature.styles = _.extend(feature.styles || {}, defaultStyles[feature.geometry.type]);
 				}
 				$scope.editing.styles = feature.styles;
 			}
