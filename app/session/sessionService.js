@@ -62,7 +62,13 @@ module.exports = [
 					.success(function() {
 						for(var key in $window.sessionStorage) {
 							delete $window.sessionStorage[key];
-						}	
+						}
+						$location.path('/login/');
+					})
+					.error(function() {
+						for(var key in $window.sessionStorage) {
+							delete $window.sessionStorage[key];
+						}
 						$location.path('/login/');
 					});
 			},
