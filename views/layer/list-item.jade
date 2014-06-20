@@ -4,6 +4,7 @@
 	p.author(ng-show='!user', ng-controller='UserCtrl')
 		a(href='{{profileUrl(layer.creator)}}')
 			span(translate='') by
+			| &nbsp;
 			| {{layer.creator.name}}
 	p(ng-show='layer.description', dynamic='layer.description')
 	.actions

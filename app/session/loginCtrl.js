@@ -19,9 +19,17 @@ module.exports = [
 
 		});
 
-		if($location.path() == 'login') {
+		var auth = function(provider, token) {
+
+			Session.tokenAuth(token, provider, function(data) {
+				$location.path('/dashboard');
+			});
+
+		}
+
+		if($location.path() == '/login/') {
 			if(window.ybySettings.general.googleApiKey) {
-				$scope.googleClientID = window.ybySettings.googleApiKey;
+				$scope.googleClientID = window.ybySettings.general.googleApiKey;
 				$scope.$on('event:google-plus-signin-success', function(event, response) {
 					auth('google', response.access_token);
 				});
@@ -33,14 +41,6 @@ module.exports = [
 		}, function(ready) {
 			$scope.facebookReady = ready;
 		});
-
-		var auth = function(provider, token) {
-
-			Session.tokenAuth(token, provider, function(data) {
-				$location.path('/dashboard');
-			});
-
-		}
 
 		$scope.login = function(provider) {
 
