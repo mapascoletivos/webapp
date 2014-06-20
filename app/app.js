@@ -255,7 +255,7 @@ angular.module('yby', [
 			$scope.embedded = true;
 		}
 
-		$scope.siteTitle = 'YBY';
+		$scope.siteTitle = '';
 
 		$scope.ybySettings = config;
 
