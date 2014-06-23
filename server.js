@@ -1,13 +1,9 @@
 var express = require('express');
 var app = express();
 
-app.configure(function() {
+app.use(require('prerender-node'));
 
-	app.use(require('prerender-node'));
-
-	app.use('/', express.static(__dirname + '/public'));
-
-});
+app.use('/', express.static(__dirname + '/public'));
 
 app.get('/*', function(req, res) {
 	res.sendfile('public/views/layouts/default.html');
