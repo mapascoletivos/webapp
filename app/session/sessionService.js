@@ -15,6 +15,13 @@ module.exports = [
 			for(var key in data) {
 				$window.sessionStorage[key] = data[key];
 			}
+
+			$.ajaxSetup({
+				beforeSend: function(req) {
+					req.setRequestHeader("Authorization", 'Bearer ' + $window.sessionStorage.accessToken);
+				}
+			});
+
 			$rootScope.$broadcast('session.logged.in');
 			if(typeof callback === 'function')
 				callback(data);

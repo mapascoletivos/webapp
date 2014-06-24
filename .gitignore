@@ -2,3 +2,4 @@ node_modules
 public
 /app/config.js
 /themes/**/*
+npm-debug.log
