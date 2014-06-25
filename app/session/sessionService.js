@@ -1,24 +1,24 @@
 'use strict';
 
 module.exports = [
-	'$window',
+	'$cookies',
 	'$q',
 	'$http',
 	'$rootScope',
 	'$location',
 	'apiPrefix',
 	'config',
-	function($window, $q, $http, $rootScope, $location, apiPrefix, config) {
+	function($cookies, $q, $http, $rootScope, $location, apiPrefix, config) {
 
 		var login = function(data, callback) {
 
 			for(var key in data) {
-				$window.sessionStorage[key] = data[key];
+				$cookies[key] = data[key];
 			}
 
 			$.ajaxSetup({
 				beforeSend: function(req) {
-					req.setRequestHeader("Authorization", 'Bearer ' + $window.sessionStorage.accessToken);
+					req.setRequestHeader("Authorization", 'Bearer ' + $cookies.accessToken);
 				}
 			});
 
@@ -67,27 +67,27 @@ module.exports = [
 				$http
 					.get(apiPrefix + '/access_token/logout')
 					.success(function() {
-						for(var key in $window.sessionStorage) {
-							delete $window.sessionStorage[key];
+						for(var key in $cookies) {
+							delete $cookies[key];
 						}
 						$location.path('/login/');
 						gapi.auth.signOut();
 					})
 					.error(function() {
-						for(var key in $window.sessionStorage) {
-							delete $window.sessionStorage[key];
+						for(var key in $cookies) {
+							delete $cookies[key];
 						}
 						$location.path('/login/');
 						gapi.auth.signOut();
 					});
 			},
 			authenticated: function() {
-				return !! $window.sessionStorage.accessToken;
+				return !! $cookies.accessToken;
 			},
 			user: function(val) {
 				if(val)
-					$window.sessionStorage = _.extend($window.sessionStorage, val);
-				return $window.sessionStorage;
+					$cookies = _.extend($cookies, val);
+				return $cookies;
 			}
 		};
 	}

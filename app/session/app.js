@@ -41,13 +41,13 @@ angular
 	.factory('authInterceptor', [
 		'$rootScope',
 		'$q',
-		'$window',
-		function($rootScope, $q, $window) {
+		'$cookies',
+		function($rootScope, $q, $cookies) {
 
-			if($window.sessionStorage.accessToken) {
+			if($cookies.accessToken) {
 				$.ajaxSetup({
 					beforeSend: function(req) {
-						req.setRequestHeader("Authorization", 'Bearer ' + $window.sessionStorage.accessToken);
+						req.setRequestHeader("Authorization", 'Bearer ' + $cookies.accessToken);
 					}
 				});
 			}
@@ -55,9 +55,9 @@ angular
 			return {
 				request: function(config) {
 					config.headers = config.headers || {};
-					if ($window.sessionStorage.accessToken) {
+					if ($cookies.accessToken) {
 						//config.withCredentials = true;
-						config.headers.Authorization = 'Bearer ' + $window.sessionStorage.accessToken;
+						config.headers.Authorization = 'Bearer ' + $cookies.accessToken;
 					}
 					return config || $q.when(config);
 				}
