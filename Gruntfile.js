@@ -23,6 +23,13 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		less: {
+			compile: {
+				files: {
+					'public/css/app.css': 'css/app.less'
+				}
+			}
+		},
 		copy: {
 			main: {
 				files: [
@@ -51,6 +58,21 @@ module.exports = function(grunt) {
 		clean: {
 			build: {
 				src: 'tmp'
+			}
+		},
+		watch: {
+			options: {livereload: true},
+			scripts: {
+				files: 'app/**/*.js',
+				tasks: ['browserify']
+			},
+			jade: {
+				files: 'views/**/*.jade',
+				tasks: ['jade']
+			},
+			css: {
+				files: 'css/**/*.less',
+				tasks: ['less']
 			}
 		}
 	};
@@ -88,18 +110,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-browserify');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-jade');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.registerTask(
-		'default', 
-		'Compiles everything.', 
-		['browserify', 'uglify', 'copy', 'jade', 'clean' ]
-	);
-
-	grunt.registerTask(
-		'scripts',
+		'javascript',
 		'Compile scripts.',
 		['browserify', 'uglify']
 	);
@@ -107,7 +124,19 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'views',
 		'Compile views.',
-		['copy', 'jade', 'clean']
+		['copy', 'jade', 'clean', 'less']
+	);
+
+	grunt.registerTask(
+		'build',
+		'Build everything',
+		['javascript', 'views']
+	);
+
+	grunt.registerTask(
+		'default', 
+		'Compiles everything.', 
+		['build', 'watch']
 	);
 
 }

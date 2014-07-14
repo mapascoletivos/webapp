@@ -25,6 +25,7 @@
 		"grunt": "latest",
 		"grunt-contrib-copy": "latest",
 		"grunt-browserify": "latest",
+		"grunt-contrib-watch": "latest",
 		"grunt-contrib-uglify": "latest",
 		"grunt-contrib-less": "latest",
 		"grunt-contrib-jade": "latest",
