@@ -3,3 +3,5 @@ public
 /app/config.js
 /themes/**/*
 npm-debug.log
+dist/
+lib/

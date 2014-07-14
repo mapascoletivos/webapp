@@ -28,7 +28,7 @@ module.exports = [
 		}
 
 		if($location.path() == '/login/') {
-			if(window.ybySettings.general.googleApiKey) {
+			if(window.ybySettings.general.googleApiKey && window.ybySettings.general.googleApiKey.length > 0) {
 				$scope.googleClientID = window.ybySettings.general.googleApiKey;
 				$scope.$on('event:google-plus-signin-success', function(event, response) {
 					auth('google', response.access_token);

@@ -32,7 +32,7 @@ angular
 					templateUrl: '/views/auth/forgot_pwd.html'
 				});
 
-			if(window.ybySettings.general.facebookApiKey)
+			if(window.ybySettings.general.facebookApiKey && window.ybySettings.general.facebookApiKey.length > 0)
 				FacebookProvider.init(window.ybySettings.general.facebookApiKey);
 		}
 	])
