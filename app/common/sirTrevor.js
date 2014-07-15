@@ -1,5 +1,7 @@
 'use strict';
 
+require('../content/sirtrevor-blocks/yby-image-block.js')
+
 /*
  * Sir Trevor
  */
@@ -12,7 +14,8 @@ angular.module('yby.sirTrevor', [])
 		return {
 			link: function(scope, element, attrs) {
 				SirTrevor.setDefaults({
-					uploadUrl: apiPrefix + '/images'
+					uploadUrl: apiPrefix + '/images',
+					uploadedImagesUrl: window.ybySettings.general.cdnUrl + '/images'
 				});
 				scope.sirTrevor = new SirTrevor.Editor({
 					el: jQuery(element),
@@ -20,7 +23,7 @@ angular.module('yby.sirTrevor', [])
 						'Embedly',
 						'Text',
 						'List',
-						'Image',
+						'YbyImage',
 						'Video'
 					],
 					defaultType: 'Text',
@@ -65,7 +68,7 @@ angular.module('yby.sirTrevor', [])
 							rendered += '<div class="list">' + markdown.toHTML(block.data.text) + '</div>';
 							break;
 						case 'image':
-							rendered += '<div class="image"><img src="' + block.data.file.url + '" /></div>';
+							rendered += '<div class="image"><img src={{apiPrefix}}"' + block.data.filename + '" /></div>';
 							break;
 						case 'video':
 							rendered += '<div class="video" fit-vids>' + videoProviders[block.data.source].html
