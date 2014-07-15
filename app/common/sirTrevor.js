@@ -67,8 +67,9 @@ angular.module('yby.sirTrevor', [])
 						case 'list':
 							rendered += '<div class="list">' + markdown.toHTML(block.data.text) + '</div>';
 							break;
-						case 'image':
-							rendered += '<div class="image"><img src={{apiPrefix}}"' + block.data.filename + '" /></div>';
+						case 'yby_image':
+							var cdnUrl = window.ybySettings.general.cdnUrl;
+							rendered += '<div class="image"><img src="'+ cdnUrl + '/images/' + block.data.files.default + '" /></div>';
 							break;
 						case 'video':
 							rendered += '<div class="video" fit-vids>' + videoProviders[block.data.source].html

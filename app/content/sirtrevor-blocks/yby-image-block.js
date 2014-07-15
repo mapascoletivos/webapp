@@ -4,7 +4,7 @@
 
 SirTrevor.Blocks.YbyImage = SirTrevor.Block.extend({
 
-  type: "yby-image",
+  type: "yby_image",
   title: function() { return i18n.t('blocks:image:title'); },
 
   droppable: true,
