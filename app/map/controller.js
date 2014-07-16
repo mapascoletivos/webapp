@@ -31,23 +31,23 @@ exports.MapCtrl = [
 
 		$scope.$map = Map;
 
-		// New map
-		if($location.path() == '/maps/new/') {
+		$scope.initMap = function(mapId, options) {
 
-			var draft = new Map.resource({
-				title: 'Untitled',
-				center: [0,0],
-				zoom: 2
-			});
-			draft.$save(function(draft) {
-				$location.path('/maps/' + draft._id + '/edit/').replace();
-			}, function(err) {
-				// TODO error handling
-			});
+			MapService.destroy();
 
-		} else if($stateParams.mapId) {
+			var features = $scope.features = null;
+			var contents = $scope.contents = null;
+
+			options = options || {};
+
+			if(!mapId)
+				return false;
 
 			var origMap;
+
+			$scope.isEditing = function() {
+				return $location.path().indexOf('edit') !== -1;
+			}
 
 			$scope.activeObj = 'settings';
 
@@ -67,11 +67,7 @@ exports.MapCtrl = [
 
 			}
 
-			$scope.isEditing = function() {
-				return $location.path().indexOf('edit') !== -1;
-			}
-
-			Map.resource.get({mapId: $stateParams.mapId}, function(map) {
+			Map.resource.get({mapId: mapId}, function(map) {
 
 				MapView.sidebar(true);
 
@@ -435,6 +431,32 @@ exports.MapCtrl = [
 					}
 				}
 
+			});
+
+		}
+
+		// New map
+		if($location.path() == '/maps/new/') {
+
+			var draft = new Map.resource({
+				title: 'Untitled',
+				center: [0,0],
+				zoom: 2
+			});
+			draft.$save(function(draft) {
+				$location.path('/maps/' + draft._id + '/edit/').replace();
+			}, function(err) {
+				// TODO error handling
+			});
+
+		} else if($stateParams.mapId) {
+
+			$rootScope.baseUrl = undefined;
+
+			$scope.initMap($stateParams.mapId);
+
+			$scope.$on('data.ready', function(event, map) {
+				Page.setTitle(map.title);
 			});
 
 		} else {
