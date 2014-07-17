@@ -7,8 +7,8 @@ module.exports = function(grunt) {
 		browserify: {
 			js: {
 				files: {
-					'public/app.js': 'app/app.js',
-					'public/lib/vendor.js': 'app/vendor.js'
+					'public/app.js': 'tmp/app/app.js',
+					'public/lib/vendor.js': 'tmp/app/vendor.js'
 				}
 			}
 		},
@@ -33,11 +33,12 @@ module.exports = function(grunt) {
 		copy: {
 			main: {
 				files: [
-					{ src: 'css/**', dest: 'public/' },
+					{ src: 'css/**/*.css', dest: 'public/' },
 					{ src: 'img/**', dest: 'public/' },
 					{ src: 'font/**', dest: 'public/' },
 					{ src: 'node_modules/maki/www/images/maki-sprite.png', dest: 'public/img/maki-sprite.png' },
-					{ expand: true, cwd: 'views', src: '**/*.jade', dest: 'tmp/views' }
+					{ expand: true, cwd: 'views', src: '**/*.jade', dest: 'tmp/views' },
+					{ expand: true, cwd: 'app', src: '**/*.js', dest: 'tmp/app' }
 				]
 			}
 		},
@@ -64,11 +65,11 @@ module.exports = function(grunt) {
 			options: {livereload: true},
 			scripts: {
 				files: 'app/**/*.js',
-				tasks: ['browserify']
+				tasks: ['copy','browserify']
 			},
 			jade: {
 				files: 'views/**/*.jade',
-				tasks: ['jade']
+				tasks: ['copy','jade']
 			},
 			css: {
 				files: 'css/**/*.less',
@@ -85,6 +86,13 @@ module.exports = function(grunt) {
 		if(fs.existsSync(viewsDataPath)) {
 			conf.jade.compile.options.data = require(viewsDataPath);
 		}
+
+		conf.copy.main.files.push({
+			expand: true,
+			cwd: 'themes/' + config.theme + '/app',
+			src: '**/*.js',
+			dest: 'tmp/app'
+		});
 
 		conf.copy.main.files.push({
 			expand: true,
@@ -118,19 +126,19 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'javascript',
 		'Compile scripts.',
-		['browserify', 'uglify']
+		['browserify']
 	);
 
 	grunt.registerTask(
 		'views',
 		'Compile views.',
-		['copy', 'jade', 'clean', 'less']
+		['jade', 'clean', 'less']
 	);
 
 	grunt.registerTask(
 		'build',
 		'Build everything',
-		['javascript', 'views']
+		['copy', 'javascript', 'views']
 	);
 
 	grunt.registerTask(

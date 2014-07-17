@@ -60,6 +60,8 @@ exports.MapActionsCtrl = [
 
 		$scope.save = function(map) {
 
+			delete map.fetchedLayers;
+
 			if(map.bounds) {
 				map.southWest = map.bounds[0];
 				map.northEast = map.bounds[1];

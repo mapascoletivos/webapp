@@ -276,13 +276,22 @@ exports.MapCtrl = [
 					});
 					Content.set(contents);
 					Feature.set(features);
-					$rootScope.$broadcast('data.ready', $scope.map);
 
-					$scope.$on('features.updated', function(event, features) {
+					$scope.map.fetchedLayers = $scope.layers;
 
-						filterFeatures(features);
+					var prevFeatures;
+
+					$scope.$on('map.features.updated', function(event, features) {
+
+						if(!angular.equals(features, prevFeatures)) {
+							filterFeatures(features);
+						}
+
+						prevFeatures = features;
 
 					});
+
+					$rootScope.$broadcast('data.ready', $scope.map);
 				};
 
 				var filterFeatures = function(features) {
