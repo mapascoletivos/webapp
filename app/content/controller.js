@@ -166,7 +166,7 @@ exports.ContentCtrl = [
 			if($rootScope.baseUrl)
 				$scope.baseUrl = $rootScope.baseUrl;
 			else
-				$scope.baseUrl = '/layers/' + content.layer;
+				$scope.baseUrl = '/layers/' + content.layer._id;
 
 			return $scope.baseUrl + '/content/' + content._id;
 

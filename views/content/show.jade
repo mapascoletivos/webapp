@@ -7,7 +7,7 @@ div.single-content
 			a(href='/layers/{{content.layer._id}}/') {{content.layer.title}}
 		p.features(ng-show='content.featureObjs.length', title='{{"Locations" | translate}}')
 			span.feature(ng-repeat='feature in content.featureObjs')
-				a(href='{{baseUrl}}/feature/{{feature._id}}', ng-click='focus(feature)') {{feature.title}}
+				a(href='{{baseUrl}}/feature/{{feature._id}}', ng-click='focus(feature)') {{feature.title}} 
 	div.content-body
 		div(ng-repeat='block in content.sirTrevorData')
 			div(dynamic='renderBlock(block)')

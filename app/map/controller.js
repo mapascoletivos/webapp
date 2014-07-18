@@ -71,13 +71,11 @@ exports.MapCtrl = [
 
 				MapView.sidebar(true);
 
-				Page.setTitle(map.title);
-
 				origMap = map;
 
 				$scope.map = angular.copy(map);
 
-				$rootScope.baseUrl = '/maps/' + map._id;
+				$scope.baseUrl = (typeof $rootScope.baseUrl == 'string') ? $rootScope.baseUrl : '/maps/' + map._id;
 
 				var mapOptions = _.extend({
 					center: $scope.map.center ? $scope.map.center : [0,0],
@@ -223,17 +221,19 @@ exports.MapCtrl = [
 
 							marker.on('click', function() {
 
-								if(!$scope.isEditing()) {
+								// if(!$scope.isEditing()) {
 
-									$state.go('singleMap.feature', {
-										featureId: marker.mcFeature._id
-									});
+								// 	$state.go('singleMap.feature', {
+								// 		featureId: marker.mcFeature._id
+								// 	});
 
-								} else {
+								// } else {
 
-									// Do something?
+								// 	// Do something?
 
-								}
+								// }
+
+								$rootScope.$broadcast('map.feature.click', marker);
 
 							});
 
@@ -460,12 +460,28 @@ exports.MapCtrl = [
 
 		} else if($stateParams.mapId) {
 
-			$rootScope.baseUrl = undefined;
+			$rootScope.baseUrl = '/maps/' + $stateParams.mapId;
 
 			$scope.initMap($stateParams.mapId);
 
 			$scope.$on('data.ready', function(event, map) {
 				Page.setTitle(map.title);
+			});
+
+			$scope.$on('map.feature.click', function(event, marker) { 
+
+				if(!$scope.isEditing()) {
+
+					$state.go('singleMap.feature', {
+						featureId: marker.mcFeature._id
+					});
+
+				} else {
+
+					// Do something?
+
+				}
+
 			});
 
 		} else {
