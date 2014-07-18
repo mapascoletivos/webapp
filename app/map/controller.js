@@ -79,10 +79,10 @@ exports.MapCtrl = [
 
 				$rootScope.baseUrl = '/maps/' + map._id;
 
-				var mapOptions = {
+				var mapOptions = _.extend({
 					center: $scope.map.center ? $scope.map.center : [0,0],
 					zoom: $scope.map.zoom ? $scope.map.zoom : 2
-				};
+				}, options);
 
 				if(!$scope.isEditing()) {
 					mapOptions = _.extend(mapOptions, {

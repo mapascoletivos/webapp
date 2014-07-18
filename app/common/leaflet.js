@@ -11,7 +11,7 @@ angular.module('yby.leaflet', [])
 	function($translate) {
 
 		var map = false,
-			featureLayer = L.featureGroup(),
+			featureLayer,
 			groups = [],
 			features = [],
 			hiddenFeatures = [],
@@ -22,7 +22,13 @@ angular.module('yby.leaflet', [])
 
 		return {
 			init: function(id, config) {
+				this.config = config;
 				this.destroy();
+				if(config.markerCluster) {
+					featureLayer = new L.MarkerClusterGroup();
+				} else {
+					featureLayer = L.featureGroup();
+				}
 				//config = _.extend({ infoControl: tr, attributionControl: true }, config);
 				map = L.mapbox.map(id, null, config);
 				map.whenReady(function() {
@@ -103,7 +109,12 @@ angular.module('yby.leaflet', [])
 				} else {
 					var self = this;
 					var features = [];
-					var featureLayer = L.featureGroup();
+					var featureLayer;
+					if(this.config.markerCluster) {
+						featureLayer = new L.MarkerClusterGroup();
+					} else {
+						featureLayer = L.featureGroup();
+					}
 					featureLayer.mcLayer = layer;
 					groups.push(featureLayer);
 					angular.forEach(layer.features, function(f) {

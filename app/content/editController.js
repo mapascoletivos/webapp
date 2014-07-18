@@ -32,6 +32,12 @@ exports.ContentEditCtrl = [
 
 		$scope.$watch('$content.edit()', function(editing) {
 			$scope.editing = editing;
+			if($scope.editing.sirTrevorData) {
+				var sTString = {
+					data: angular.copy($scope.editing.sirTrevorData)
+				};
+				$scope.editing.sirTrevor = JSON.stringify(sTString);
+			}
 		});
 
 		$scope.$watch('editing', function(editing) {
@@ -57,9 +63,6 @@ exports.ContentEditCtrl = [
 
 			// Store content (SirTrevor data)
 			$scope.editing.sirTrevorData = $scope.sirTrevor.dataStore.data;
-
-			// Store stringified data
-			$scope.editing.sirTrevor = $scope.sirTrevor.el.value;
 
 			if($scope.editing && $scope.editing._id) {
 
