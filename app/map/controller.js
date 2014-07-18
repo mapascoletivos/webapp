@@ -95,6 +95,7 @@ exports.MapCtrl = [
 				if($scope.isEditing()) {
 
 					var destroyConfirmation = $rootScope.$on('$stateChangeStart', function(event) {
+						delete $scope.map.fetchedLayers;
 						if(!angular.equals($scope.map, origMap))
 							if(!confirm($translate.instant('Leave without saving changes?')))
 								event.preventDefault();
@@ -324,7 +325,7 @@ exports.MapCtrl = [
 					});
 
 					if(map && features.length !== markers.length) {
-						//map.fitBounds(filteredGroup.getBounds());
+						map.fitBounds(filteredGroup.getBounds());
 					}
 					else {
 						map.setView($scope.map.center, $scope.map.zoom);
