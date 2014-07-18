@@ -9,5 +9,5 @@ div.single-content
 			span.feature(ng-repeat='feature in content.featureObjs')
 				a(href='{{baseUrl}}/feature/{{feature._id}}', ng-click='focus(feature)') {{feature.title}} 
 	div.content-body
-		div(ng-repeat='block in content.sirTrevorData')
+		div(ng-repeat='block in content.sections')
 			div(dynamic='renderBlock(block)')

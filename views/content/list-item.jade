@@ -7,6 +7,6 @@
 				a(href='{{profileUrl(content.creator)}}') {{content.creator.name}}
 			p.layer(ng-show='map')
 				a(href='/layers/{{content.layer._id}}/') {{content.layer.title}}
-	.excerpt(dynamic='renderBlock(content.sirTrevorData[0])')
+	.excerpt(dynamic='renderBlock(content.sections[0])')
 	p.readmore
 		a(href='{{getUrl(content)}}', translate) Read more
