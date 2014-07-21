@@ -68,8 +68,10 @@ exports.ContentEditCtrl = [
 
 				Content.resource.update({contentId: $scope.editing._id}, $scope.editing, function(content) {
 
-					$scope.editing = angular.copy(content);
 					original = angular.copy(content);
+
+					// Update editing content to saved data
+					Content.edit(angular.copy(content));
 
 					// Replace content in local features
 					angular.forEach($scope.contents, function(c, i) {
