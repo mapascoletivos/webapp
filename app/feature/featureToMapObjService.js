@@ -10,7 +10,7 @@ module.exports = function(feature, options, map) {
 			feature.properties = {};
 		}
 
-		var coordinates = angular.copy(feature.geometry.coordinates);
+		var coordinates = _.extend(feature.geometry.coordinates, {});
 		var leafletCoordinates = coordinates;
 
 		if(feature.geometry.type == 'Polygon') {
