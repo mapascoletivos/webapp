@@ -10,12 +10,12 @@ module.exports = function(feature, options, map) {
 			feature.properties = {};
 		}
 
-		var coordinates =  feature.geometry.coordinates.slice(0);
+		var coordinates =  angular.copy(feature.geometry.coordinates);
 		var leafletCoordinates = coordinates;
 
 		if(feature.geometry.type == 'Polygon') {
 
-			var leafletCoordinates = [];
+			leafletCoordinates = [];
 			_.each(coordinates[0], function(latlng) {
 				// Clear Y value
 				latlng.splice(2,1);
