@@ -34,14 +34,14 @@ exports.ContentEditCtrl = [
 			$scope.editing = editing;
 			if($scope.editing.sections) {
 				var sTString = {
-					data: angular.copy($scope.editing.sections)
+					data: $scope.editing.sections.slice(0)
 				};
 				$scope.editing.sirTrevor = JSON.stringify(sTString);
 			}
 		});
 
 		$scope.$watch('editing', function(editing) {
-			original = angular.copy(editing);
+			original = _.extend(editing, {});
 			$scope.tool = false;
 		});
 
@@ -68,10 +68,10 @@ exports.ContentEditCtrl = [
 
 				Content.resource.update({contentId: $scope.editing._id}, $scope.editing, function(content) {
 
-					original = angular.copy(content);
+					original = _.extend(content, {});
 
 					// Update editing content to saved data
-					Content.edit(angular.copy(content));
+					Content.edit(_.extend(content, {}));
 
 					// Replace content in local features
 					angular.forEach($scope.contents, function(c, i) {
@@ -95,14 +95,14 @@ exports.ContentEditCtrl = [
 
 				content.$save(function(content) {
 
-					original = angular.copy(content);
+					original = _.extend(content, {});
 
 					// Locally push new content
 					$scope.contents.push(content);
 					Content.set($scope.contents);
 
 					// Update editing content to saved data
-					Content.edit(angular.copy(content));
+					Content.edit(_.extend(content, {}));
 
 					Message.message({
 						status: 'ok',
@@ -188,7 +188,7 @@ exports.ContentEditCtrl = [
 			if(!$scope.editing.features)
 				$scope.editing.features = [];
 
-			var features = angular.copy($scope.editing.features);
+			var features = $scope.editing.features.slice(0);
 
 			if($scope.hasFeature(featureId)) {
 				features = features.filter(function(f) { return f !== featureId });
@@ -227,7 +227,7 @@ exports.ContentEditCtrl = [
 
 		$scope.revert = function() {
 
-			$scope.editing = angular.copy(original);
+			$scope.editing = _.extend(original, {});
 
 		}
 

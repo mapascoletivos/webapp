@@ -50,14 +50,14 @@ angular.module('yby.dashboard', [])
 		});
 
 		var setUser = function(u) {
-			var user = angular.copy(u);
+			var user = _.extend(u, {});
 			if(user) {
 				User.resource.get({
 					userId: user._id
 				}, function(res) {
 
 					$scope.user = res;
-					$scope.userName = angular.copy($scope.user.name);
+					$scope.userName = _.extend($scope.user.name, {});
 
 				});
 

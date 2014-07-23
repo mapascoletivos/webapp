@@ -104,7 +104,7 @@ exports.FeatureCtrl = [
 
 			if(feature && feature.description) {
 
-				var description = angular.copy(feature.description);
+				var description = _.extend(feature, {}).description;
 
 				description = description.replace(new RegExp('{{', 'g'), '<%= ');
 				description = description.replace(new RegExp('}}', 'g'), ' %>');
@@ -208,7 +208,7 @@ exports.FeatureCtrl = [
 
 				if($scope.canEdit(feature, layer)) {
 
-					Feature.edit(angular.copy(feature));
+					Feature.edit(_.extend(feature, {}));
 
 					setTimeout(function() {
 						window.dispatchEvent(new Event('resize'));

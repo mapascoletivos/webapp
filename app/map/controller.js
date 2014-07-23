@@ -73,7 +73,7 @@ exports.MapCtrl = [
 
 				origMap = map;
 
-				$scope.map = angular.copy(map);
+				$scope.map = _.extend(map, {});
 
 				$scope.baseUrl = (typeof $rootScope.baseUrl == 'string') ? $rootScope.baseUrl : '/maps/' + map._id;
 
@@ -112,46 +112,47 @@ exports.MapCtrl = [
 					}, function(res) {
 
 						$scope.userLayers = res.layers;
-						$scope.availableLayers = angular.copy($scope.userLayers);
+						$scope.availableLayers = $scope.userLayers.slice(0);
 
 					});
 
+					$scope.layerSearch = '';
+
+					$scope.$watch('layerSearch', _.debounce(function(text) {
+
+						if(text) {
+
+							Layer.resource.query({
+								search: text
+							}, function(res) {
+
+								if(res.layers) {
+
+									$scope.availableLayers = res.layers;
+
+								}
+
+							});
+
+						} else {
+
+							$timeout(function() {
+								if($scope.userLayers.length)
+									$scope.availableLayers = $scope.userLayers.slice(0);
+							}, 100);
+
+						}
+
+					}, 300));
+
 				}
-
-				$scope.layerSearch = '';
-
-				$scope.$watch('layerSearch', _.debounce(function(text) {
-
-					if(text) {
-
-						Layer.resource.query({
-							search: text
-						}, function(res) {
-
-							if(res.layers) {
-
-								$scope.availableLayers = res.layers;
-
-							}
-
-						});
-
-					} else {
-
-						$timeout(function() {
-							$scope.availableLayers = angular.copy($scope.userLayers);
-						}, 100);
-
-					}
-
-				}, 300));
 
 				$scope.toggleLayer = function(layer) {
 
 					if(!$scope.map.layers)
 						$scope.map.layers = [];
 
-					var mapLayers = angular.copy($scope.map.layers);
+					var mapLayers = _$scope.map.layers.slice(0);
 
 					if($scope.hasLayer(layer)) {
 						if($scope.isEditing() && confirm($translate.instant("Are you sure you'd like to remove this layer from your map?")))
@@ -417,7 +418,7 @@ exports.MapCtrl = [
 				$scope.$on('map.save.success', function(event, map) {
 					Page.setTitle(map.title);
 					origMap = map;
-					$scope.map = angular.copy(map);
+					$scope.map = _.extend(map, {});
 				});
 
 				$scope.$on('map.delete.success', function() {

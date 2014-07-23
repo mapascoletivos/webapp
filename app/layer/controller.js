@@ -32,7 +32,7 @@ exports.LayerCtrl = [
 			// Repopulate map if feature in scope has changed
 			if(!angular.equals(mapFeatures, features) || force === true) {
 
-				mapFeatures = _.extend(features, {});
+				mapFeatures = features.slice(0);
 
 				MapService.clearFeatures();
 
@@ -168,7 +168,7 @@ exports.LayerCtrl = [
 					}
 
 					// Init features
-					Feature.set(_.extend($scope.layer.features, {}));
+					Feature.set($scope.layer.features.slice(0));
 					populateMap($scope.layer.features, $scope.layer, true);
 					
 					setTimeout(function() {

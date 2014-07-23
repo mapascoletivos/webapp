@@ -143,7 +143,7 @@ exports.ContentCtrl = [
 
 			if($scope.canEdit(content, layer)) {
 
-				Content.edit(angular.copy(content));
+				Content.edit(_.extend(content, {}));
 
 				setTimeout(function() {
 					window.dispatchEvent(new Event('resize'));

@@ -91,7 +91,7 @@ exports.DataImportCtrl = [
 					if(feature.geometry.type == 'GeometryCollection' && feature.geometry.geometries) {
 
 						angular.forEach(feature.geometry.geometries, function(geometry) {
-							var collectionFeature = angular.copy(feature);
+							var collectionFeature = _.extend(feature, {});
 							collectionFeature.geometry = geometry;
 							features.push(collectionFeature);
 						});

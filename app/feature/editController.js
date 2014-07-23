@@ -49,8 +49,8 @@ exports.FeatureEditCtrl = [
 			$scope.tool = false;
 			$scope.marker = false;
 			$scope._data = {};
-			$scope.editing = angular.copy(editing);
-			originalEditing = angular.copy(editing);
+			$scope.editing = _.extend(editing, {});
+			originalEditing = _.extend(editing, {});
 			if(draw) {
 				draw.disable();
 			}
@@ -244,7 +244,7 @@ exports.FeatureEditCtrl = [
 						});
 						Feature.edit(false);
 					} else {
-						Feature.edit(angular.copy($scope.editing));
+						Feature.edit(_.extend($scope.editing, {}));
 					}
 
 				});
@@ -260,7 +260,7 @@ exports.FeatureEditCtrl = [
 					Feature.set($scope.features);
 
 					// Update editing feature to saved data
-					Feature.edit(angular.copy(feature));
+					Feature.edit(_.extend(feature, {}));
 
 					$rootScope.$broadcast('features.updated');
 
@@ -461,7 +461,7 @@ exports.FeatureEditCtrl = [
 						properties[prop.key] = prop.val;
 					});
 				}
-				$scope.editing.properties = angular.copy(properties);
+				$scope.editing.properties = _.extend(properties, {});
 			}
 		};
 
@@ -526,7 +526,7 @@ exports.FeatureEditCtrl = [
 
 			if($scope.editing && $scope.editing.geometry && $scope.editing.geometry.coordinates) {
 
-				var dS = angular.copy(defaultStyles[$scope.editing.geometry.type]);
+				var dS = _.extend(defaultStyles[$scope.editing.geometry.type], {});
 
 				if(styles === false) {
 					$scope.editing.styles = dS;

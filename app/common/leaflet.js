@@ -118,7 +118,7 @@ angular.module('yby.leaflet', [])
 					featureLayer.mcLayer = layer;
 					groups.push(featureLayer);
 					angular.forEach(layer.features, function(f) {
-						var properties = angular.copy(layer.styles[f.geometry.type]);
+						var properties = _.extend(layer.styles[f.geometry.type], {});
 						_.extend(properties, f.properties || {});
 						f.properties = properties;
 						var feature = featureToMapObj(f, null, self.get());
