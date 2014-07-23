@@ -32,7 +32,7 @@ exports.LayerCtrl = [
 			// Repopulate map if feature in scope has changed
 			if(!angular.equals(mapFeatures, features) || force === true) {
 
-				mapFeatures = angular.copy(features);
+				mapFeatures = _.extend(features, {});
 
 				MapService.clearFeatures();
 
@@ -40,9 +40,9 @@ exports.LayerCtrl = [
 
 					angular.forEach(features, function(feature) {
 
-						var f = angular.copy(feature);
+						var f = _.extend(feature, {});
 
-						var properties = angular.copy(layer.styles[f.geometry.type]);
+						var properties = _.extend(layer.styles[f.geometry.type], {});
 
 						_.extend(properties, f.properties || {});
 
@@ -168,7 +168,7 @@ exports.LayerCtrl = [
 					}
 
 					// Init features
-					Feature.set(angular.copy($scope.layer.features));
+					Feature.set(_.extend($scope.layer.features, {}));
 					populateMap($scope.layer.features, $scope.layer, true);
 					
 					setTimeout(function() {
@@ -209,8 +209,8 @@ exports.LayerCtrl = [
 					};
 
 					var destroyConfirmation = $rootScope.$on('$stateChangeStart', function(event) {
-						var editing = angular.copy($scope.layer);
-						var original = angular.copy(origLayer);
+						var editing = _.extend($scope.layer, {});
+						var original = _.extend(origLayer, {});
 						delete editing.features;
 						delete editing.contents;
 						delete original.features;
@@ -300,8 +300,8 @@ exports.LayerCtrl = [
 
 					$scope.$on('layer.save.success', function(event, layer) {
 						Page.setTitle(layer.title);
-						origLayer = angular.copy(layer);
-						$scope.layer = angular.copy(layer);
+						origLayer = _.extend(layer, {});
+						$scope.layer = _.extend(layer, {});
 						populateMap($scope.layer.features, $scope.layer, true, false);
 					});
 					
