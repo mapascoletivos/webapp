@@ -126,7 +126,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'javascript',
 		'Compile scripts.',
-		['browserify']
+		['browserify', 'uglify']
 	);
 
 	grunt.registerTask(

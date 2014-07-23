@@ -124,8 +124,8 @@ exports.LayerCtrl = [
 					};
 				}
 
-				origLayer = angular.copy(layer);
-				$scope.layer = angular.copy(layer);
+				origLayer = _.extend(layer, {});
+				$scope.layer = _.extend(layer, {});
 
 				$scope.$watch('layer.styles', function() {
 					Layer.edit($scope.layer); // trigger digest
