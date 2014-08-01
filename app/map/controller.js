@@ -152,7 +152,7 @@ exports.MapCtrl = [
 					if(!$scope.map.layers)
 						$scope.map.layers = [];
 
-					var mapLayers = _$scope.map.layers.slice(0);
+					var mapLayers = $scope.map.layers.slice(0);
 
 					if($scope.hasLayer(layer)) {
 						if($scope.isEditing() && confirm($translate.instant("Are you sure you'd like to remove this layer from your map?")))
