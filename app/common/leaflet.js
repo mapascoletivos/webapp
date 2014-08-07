@@ -13,13 +13,16 @@ angular.module('yby.leaflet', [])
 
 		var baseLayerUrl = $window.ybySettings.general.baseLayerUrl || 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
-		var	baseLayer = L.mapbox.tileLayer(baseLayerUrl),
+		var	baseLayer = false,
 			baseGridLayer = false,
 			baseGridControl = false;
 
 		if(baseLayerUrl.indexOf('http') !== 0) {
+			baseLayer = L.mapbox.tileLayer(baseLayerUrl);
 			baseGridLayer = L.mapbox.gridLayer(baseLayerUrl);
 			baseGridControl = L.mapbox.gridControl(baseGridLayer);
+		} else {
+			baseLayer = L.tileLayer(baseLayerUrl);
 		}
 
 		var map = false,
@@ -208,10 +211,12 @@ angular.module('yby.leaflet', [])
 			},
 			destroy: function() {
 				this.clearAll();
-				baseLayer = L.mapbox.tileLayer(baseLayerUrl);
 				if(baseLayerUrl.indexOf('http') !== 0) {
+					baseLayer = L.mapbox.tileLayer(baseLayerUrl);
 					baseGridLayer = L.mapbox.gridLayer(baseLayerUrl);
 					baseGridControl = L.mapbox.gridControl(baseGridLayer);
+				} else {
+					baseLayer = L.tileLayer(baseLayerUrl);
 				}
 				legendControl = L.mapbox.legendControl();
 				if(map instanceof L.Map)
