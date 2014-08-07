@@ -8,14 +8,25 @@ angular.module('yby.leaflet', [])
 
 .factory('MapService', [
 	'$translate',
-	function($translate) {
+	'$window',
+	function($translate, $window) {
+
+		var baseLayerUrl = $window.ybySettings.general.baseLayerUrl || 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+		var	baseLayer = L.mapbox.tileLayer(baseLayerUrl),
+			baseGridLayer = false,
+			baseGridControl = false;
+
+		if(baseLayerUrl.indexOf('http') !== 0) {
+			baseGridLayer = L.mapbox.gridLayer(baseLayerUrl);
+			baseGridControl = L.mapbox.gridControl(baseGridLayer);
+		}
 
 		var map = false,
 			featureLayer,
 			groups = [],
 			features = [],
 			hiddenFeatures = [],
-			baseLayer = L.mapbox.tileLayer('infoamazonia.h17kafbd'),
 			legendControl = L.mapbox.legendControl();
 
 		var featureToMapObj = require('../feature/featureToMapObjService');
@@ -33,6 +44,12 @@ angular.module('yby.leaflet', [])
 				map = L.mapbox.map(id, null, config);
 				map.whenReady(function() {
 					map.addLayer(baseLayer);
+					if(baseGridLayer) {
+						map.addLayer(baseGridLayer)
+					}
+					if(baseGridControl) {
+						map.addControl(baseGridControl);
+					}
 					map.addLayer(featureLayer);
 					map.addControl(legendControl);
 					if(!map.infoControl) {
@@ -191,7 +208,11 @@ angular.module('yby.leaflet', [])
 			},
 			destroy: function() {
 				this.clearAll();
-				baseLayer = L.mapbox.tileLayer('infoamazonia.h17kafbd');
+				baseLayer = L.mapbox.tileLayer(baseLayerUrl);
+				if(baseLayerUrl.indexOf('http') !== 0) {
+					baseGridLayer = L.mapbox.gridLayer(baseLayerUrl);
+					baseGridControl = L.mapbox.gridControl(baseGridLayer);
+				}
 				legendControl = L.mapbox.legendControl();
 				if(map instanceof L.Map)
 					map.remove();
