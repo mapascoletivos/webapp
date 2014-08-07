@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 		copy: {
 			main: {
 				files: [
-					{ src: 'css/**/*.css', dest: 'public/' },
+					{ src: ['css/**', '!css/**/*.less'], dest: 'public/' },
 					{ src: 'img/**', dest: 'public/' },
 					{ src: 'font/**', dest: 'public/' },
 					{ src: 'node_modules/maki/www/images/maki-sprite.png', dest: 'public/img/maki-sprite.png' },
