@@ -1,80 +1,80 @@
 {
-	"name": "yby-client",
-	"description": "Just another YBY client",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/oeco/yby-client.git"
-	},
-	"version": "0.1.0",
-	"author": "Ecolab <gustavo.faleiros@gmail.com>",
-	"contributors": [
-		{
-			"name": "Miguel Peixe",
-			"email": "miguel@cardume.art.br"
-		},
-		{
-			"name": "Vitor George",
-			"email": "vitor.george@gmail.com"
-		}
-	],
-	"scripts": {
-		"install": "mkdir -p public && ./node_modules/.bin/napa",
-		"start": "node server.js"
-	},
-	"dependencies": {
-		"grunt": "latest",
-		"grunt-contrib-copy": "latest",
-		"grunt-browserify": "latest",
-		"grunt-contrib-watch": "latest",
-		"grunt-contrib-uglify": "latest",
-		"grunt-contrib-less": "latest",
-		"grunt-contrib-jade": "latest",
-		"grunt-contrib-clean": "latest",
-		"angular": "latest",
-		"underscore": "latest",
-		"less": "latest",
-		"leaflet": "latest",
-		"leaflet-draw": "latest",
-		"leaflet.markercluster": "latest",
-		"mapbox.js": "1.6.4",
-		"maki": "latest",
-		"brfs": "0.0.8",
-		"togeojson": "0.5.0",
-		"csv2geojson": "3.6.1",
-		"osmtogeojson": "2.0.4",
-		"jquery": "latest",
-		"jquery-ui-browserify": "latest",
-		"markdown": "latest",
-		"grvtr": "latest",
-		"eventablejs": "latest",
-		"napa": "latest",
-		"express": "latest",
-		"prerender-node": "latest"
-	},
-	"napa": {
-		"angular-cookies": "angular/bower-angular-cookies",
-		"angular-translate": "angular-translate/bower-angular-translate",
-		"angular-route": "angular/bower-angular-route",
-		"angular-sanitize": "angular/bower-angular-sanitize",
-		"angular-resource": "angular/bower-angular-resource",
-		"angular-animate": "angular/bower-angular-animate",
-		"angular-elastic": "monospaced/angular-elastic",
-		"angular-fitvids": "jimmyhillis/angular-fitvids",
-		"angular-ui-utils": "angular-ui/ui-utils",
-		"angular-ui-router": "angular-ui/ui-router",
-		"angular-ui-sortable": "angular-ui/ui-sortable",
-		"angular-ui-slider": "angular-ui/ui-slider",
-		"angular-modal": "miguelpeixe/angular-modal",
-		"angular-facebook": "Ciul/angular-facebook",
-		"angular-gplus": "sirkitree/angular-directive.g-signin",
-		"ngInfiniteScroll": "BinaryMuse/ngInfiniteScroll-bower",
-		"sir-trevor": "madebymany/sir-trevor-js",
-		"bootstrap-colorpicker": "buberdds/angular-bootstrap-colorpicker"
-	},
-	"keywords": [
-		"yby",
-		"angular",
-		"openstreetmap"
-	],
-	"engine": "node >= 0.10"
+  "name": "yby-client",
+  "description": "Just another YBY client",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oeco/yby-client.git"
+  },
+  "version": "0.1.0",
+  "author": "Ecolab <gustavo.faleiros@gmail.com>",
+  "contributors": [
+    {
+      "name": "Miguel Peixe",
+      "email": "miguel@cardume.art.br"
+    },
+    {
+      "name": "Vitor George",
+      "email": "vitor.george@gmail.com"
+    }
+  ],
+  "scripts": {
+    "install": "mkdir -p public && ./node_modules/.bin/napa",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "angular": "^1.2.23",
+    "brfs": "^1.2.0",
+    "csv2geojson": "^3.7.1",
+    "eventablejs": "^1.0.4",
+    "express": "^4.8.7",
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^3.0.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-jade": "^0.12.0",
+    "grunt-contrib-less": "^0.11.4",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grvtr": "^0.1.3",
+    "jquery": "^2.1.1",
+    "jquery-ui-browserify": "^1.11.0-pre-seelio",
+    "leaflet": "^0.7.3",
+    "leaflet-draw": "^0.2.3",
+    "leaflet.markercluster": "^0.4.0",
+    "less": "^1.7.4",
+    "maki": "^0.4.2",
+    "mapbox.js": "^2.0.1",
+    "markdown": "^0.5.0",
+    "napa": "^0.4.1",
+    "osmtogeojson": "^2.0.5",
+    "prerender-node": "^1.0.6",
+    "togeojson": "^0.8.0",
+    "underscore": "^1.7.0"
+  },
+  "napa": {
+    "angular-cookies": "angular/bower-angular-cookies",
+    "angular-translate": "angular-translate/bower-angular-translate",
+    "angular-route": "angular/bower-angular-route",
+    "angular-sanitize": "angular/bower-angular-sanitize",
+    "angular-resource": "angular/bower-angular-resource",
+    "angular-animate": "angular/bower-angular-animate",
+    "angular-elastic": "monospaced/angular-elastic",
+    "angular-fitvids": "jimmyhillis/angular-fitvids",
+    "angular-ui-utils": "angular-ui/ui-utils",
+    "angular-ui-router": "angular-ui/ui-router",
+    "angular-ui-sortable": "angular-ui/ui-sortable",
+    "angular-ui-slider": "angular-ui/ui-slider",
+    "angular-modal": "miguelpeixe/angular-modal",
+    "angular-facebook": "Ciul/angular-facebook",
+    "angular-gplus": "sirkitree/angular-directive.g-signin",
+    "ngInfiniteScroll": "BinaryMuse/ngInfiniteScroll-bower",
+    "sir-trevor": "madebymany/sir-trevor-js",
+    "bootstrap-colorpicker": "buberdds/angular-bootstrap-colorpicker"
+  },
+  "keywords": [
+    "yby",
+    "angular",
+    "openstreetmap"
+  ],
+  "engine": "node >= 0.10"
 }
