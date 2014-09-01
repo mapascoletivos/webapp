@@ -14,7 +14,6 @@ require('angular-ui-router/release/angular-ui-router');
 require('angular-ui-utils/modules/keypress/keypress');
 require('angular-ui-sortable/src/sortable');
 require('angular-ui-slider/src/slider');
-require('angular-animate/angular-animate');
 require('angular-modal/modal');
 require('angular-resource/angular-resource');
 require('angular-sanitize/angular-sanitize');

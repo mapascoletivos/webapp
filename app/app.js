@@ -55,7 +55,6 @@ angular.module('yby', [
 	'ui.slider',
 	'monospaced.elastic',
 	'ngRoute',
-	'ngAnimate',
 	'infinite-scroll',
 	'colorpicker.module',
 	'yby.settings',
