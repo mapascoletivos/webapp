@@ -43,7 +43,7 @@
     "leaflet.markercluster": "^0.4.0",
     "less": "^1.7.4",
     "maki": "^0.4.2",
-    "mapbox.js": "^2.0.1",
+    "mapbox.js": "1.6.4",
     "markdown": "^0.5.0",
     "napa": "^0.4.1",
     "osmtogeojson": "^2.0.5",
