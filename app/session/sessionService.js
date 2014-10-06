@@ -1,24 +1,24 @@
 'use strict';
 
 module.exports = [
-	'$cookies',
+	'ipCookie',
 	'$q',
 	'$http',
 	'$rootScope',
 	'$location',
 	'apiPrefix',
 	'config',
-	function($cookies, $q, $http, $rootScope, $location, apiPrefix, config) {
+	function(ipCookie, $q, $http, $rootScope, $location, apiPrefix, config) {
 
 		var login = function(data, callback) {
 
-			for(var key in data) {
-				$cookies[key] = data[key];
-			}
+			console.log(data);
+
+			ipCookie('session', data, { expires: 21, path: '/' });
 
 			$.ajaxSetup({
 				beforeSend: function(req) {
-					req.setRequestHeader("Authorization", 'Bearer ' + $cookies.accessToken);
+					//req.setRequestHeader("Authorization", 'Bearer ' + $cookies.accessToken);
 				}
 			});
 
@@ -67,27 +67,24 @@ module.exports = [
 				$http
 					.get(apiPrefix + '/access_token/logout')
 					.success(function() {
-						for(var key in $cookies) {
-							delete $cookies[key];
-						}
+						ipCookie.remove('session');
 						$location.path('/login/');
 						gapi.auth.signOut();
 					})
 					.error(function() {
-						for(var key in $cookies) {
-							delete $cookies[key];
-						}
+						ipCookie.remove('session');
 						$location.path('/login/');
 						gapi.auth.signOut();
 					});
 			},
 			authenticated: function() {
-				return !! $cookies.accessToken;
+				return !! ipCookie('session');
+				return false;
 			},
 			user: function(val) {
 				if(val)
-					$cookies = _.extend($cookies, val);
-				return $cookies;
+					ipCookie('session', _.extend(ipCookie('session'), val), { expires: 21, path: '/' });
+				return ipCookie('session');
 			}
 		};
 	}

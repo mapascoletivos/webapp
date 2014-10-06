@@ -52,7 +52,7 @@
     "underscore": "^1.7.0"
   },
   "napa": {
-    "angular-cookies": "angular/bower-angular-cookies",
+    "angular-cookie": "ivpusic/angular-cookie",
     "angular-translate": "angular-translate/bower-angular-translate",
     "angular-route": "angular/bower-angular-route",
     "angular-sanitize": "angular/bower-angular-sanitize",

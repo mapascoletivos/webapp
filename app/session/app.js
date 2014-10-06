@@ -4,7 +4,8 @@ angular
 	.module('yby.session', [
 		'facebook',
 		'yby.settings',
-		'directive.g+signin'
+		'directive.g+signin',
+		'ivpusic.cookie'
 	])
 	.config([
 		'$stateProvider',
