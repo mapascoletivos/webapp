@@ -49,8 +49,8 @@ angular.module('yby.dashboard', [])
 
 		});
 
-		var setUser = function(u) {
-			var user = _.extend(u, {});
+		var setUser = function() {
+			var user = _.extend({}, $scope.$session.user());
 			if(user) {
 				User.resource.get({
 					userId: user._id
@@ -118,7 +118,7 @@ angular.module('yby.dashboard', [])
 			}
 		}
 
-		$scope.$watch('$session.user()', _.once(setUser));
+		$scope.$watch('$session.user().accessToken', _.once(setUser));
 
 		$scope.$on('user.save.success', function(event, user) {
 			setUser(user);

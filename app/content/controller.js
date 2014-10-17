@@ -18,8 +18,8 @@ exports.ContentCtrl = [
 
 		$scope.$session = Session;
 
-		$scope.$watch('$session.user()', function(user) {
-			$scope.user = user;
+		$scope.$watch('$session.user().accessToken', function(user) {
+			$scope.user = Session.user();
 		});
 
 		$scope.objType = 'content';

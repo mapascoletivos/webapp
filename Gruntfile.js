@@ -15,7 +15,8 @@ module.exports = function(grunt) {
 		uglify: {
 			build: {
 				options: {
-					mangle: false
+					mangle: true,
+					compress: true
 				},
 				files: {
 					'public/app.js': 'public/app.js',

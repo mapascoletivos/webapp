@@ -6,7 +6,6 @@ window.markdown = require("markdown").markdown;
 window.Eventable = require('eventablejs');
 
 require('angular');
-require('angular-cookies/angular-cookies');
 require('angular-cookie/angular-cookie');
 require('angular-translate/angular-translate');
 require('angular-route/angular-route');

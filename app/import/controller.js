@@ -54,8 +54,6 @@ exports.DataImportCtrl = [
 
         			var layer = Layer.edit();
 
-        			console.log(layer);
-
         			doImport(layer, gj, function() {
         				if(layer.isDraft) {
         					layer.isDraft = false;

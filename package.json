@@ -22,7 +22,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "angular": "^1.2.23",
+    "angular": "1.2.23",
     "brfs": "^1.2.0",
     "csv2geojson": "^3.7.1",
     "eventablejs": "^1.0.4",
@@ -42,7 +42,7 @@
     "leaflet-draw": "^0.2.3",
     "leaflet.markercluster": "^0.4.0",
     "less": "^1.7.4",
-    "maki": "^0.4.2",
+    "maki": "0.4.2",
     "mapbox.js": "1.6.4",
     "markdown": "^0.5.0",
     "napa": "^0.4.1",

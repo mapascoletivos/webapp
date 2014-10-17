@@ -12,13 +12,11 @@ module.exports = [
 
 		var login = function(data, callback) {
 
-			console.log(data);
-
 			ipCookie('session', data, { expires: 21, path: '/' });
 
 			$.ajaxSetup({
 				beforeSend: function(req) {
-					//req.setRequestHeader("Authorization", 'Bearer ' + $cookies.accessToken);
+					req.setRequestHeader("Authorization", 'Bearer ' + data.accessToken);
 				}
 			});
 
@@ -64,26 +62,28 @@ module.exports = [
 					});
 			},
 			logout: function() {
+				ipCookie.remove('session', { path: '/'});
+				if(typeof gapi !== 'undefined') gapi.auth.signOut();
 				$http
 					.get(apiPrefix + '/access_token/logout')
 					.success(function() {
-						ipCookie.remove('session');
 						$location.path('/login/');
-						gapi.auth.signOut();
 					})
 					.error(function() {
-						ipCookie.remove('session');
 						$location.path('/login/');
-						gapi.auth.signOut();
 					});
 			},
 			authenticated: function() {
-				return !! ipCookie('session');
-				return false;
+				if(ipCookie('session')) {
+					return true;
+				} else {
+					return false;
+				}
 			},
 			user: function(val) {
+				var session = _.clone(ipCookie('session'));
 				if(val)
-					ipCookie('session', _.extend(ipCookie('session'), val), { expires: 21, path: '/' });
+					ipCookie('session', _.extend(session, val), { expires: 21, path: '/' });
 				return ipCookie('session');
 			}
 		};

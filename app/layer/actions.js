@@ -66,9 +66,7 @@ exports.LayerActionsCtrl = [
 
 		$scope.removeContributor = function(contributor, layer) {
 
-			Layer.resource.removeContributor({layerId: layer._id, contributorId: contributor._id}, function(res) {
-				console.log(res);
-			});
+			Layer.resource.removeContributor({layerId: layer._id, contributorId: contributor._id});
 
 			$rootScope.$broadcast('layer.contributor.removed', layer);
 

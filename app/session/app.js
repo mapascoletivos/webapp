@@ -42,23 +42,25 @@ angular
 	.factory('authInterceptor', [
 		'$rootScope',
 		'$q',
-		'$cookies',
-		function($rootScope, $q, $cookies) {
+		'ipCookie',
+		function($rootScope, $q, ipCookie) {
 
-			if($cookies.accessToken) {
-				$.ajaxSetup({
-					beforeSend: function(req) {
-						req.setRequestHeader("Authorization", 'Bearer ' + $cookies.accessToken);
+			$.ajaxSetup({
+				beforeSend: function(req) {
+					var session = ipCookie('session');
+					if(session && session.accessToken) {
+						req.setRequestHeader("Authorization", 'Bearer ' + session.accessToken);
 					}
-				});
-			}
+				}
+			});
 
 			return {
 				request: function(config) {
+					var session = ipCookie('session');
 					config.headers = config.headers || {};
-					if ($cookies.accessToken) {
+					if (session && session.accessToken) {
 						//config.withCredentials = true;
-						config.headers.Authorization = 'Bearer ' + $cookies.accessToken;
+						config.headers.Authorization = 'Bearer ' + session.accessToken;
 					}
 					return config || $q.when(config);
 				}

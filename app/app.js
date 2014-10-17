@@ -48,7 +48,6 @@ window.ybySettings = angular.extend({
  * App
  */
 angular.module('yby', [
-	'ngCookies',
 	'pascalprecht.translate',
 	'ui.router',
 	'ui.keypress',
