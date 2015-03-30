@@ -5,10 +5,16 @@ module.exports = function(grunt) {
 
 	var conf = {
 		browserify: {
-			js: {
+			app: {
 				files: {
 					'public/app.js': 'tmp/app/app.js',
-					'public/lib/vendor.js': 'tmp/app/vendor.js'
+				}
+			},
+			vendor: {
+				src: 'tmp/app/vendor.js',
+				dest: 'public/lib/vendor.js',
+				options: {
+					transform: ['debowerify', 'decomponentify', 'deamdify', 'deglobalify']
 				}
 			}
 		},
@@ -127,7 +133,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'javascript',
 		'Compile scripts.',
-		['browserify', 'uglify']
+		['browserify']
 	);
 
 	grunt.registerTask(

@@ -4,6 +4,7 @@ window.L = require('leaflet');
 window.grvtr = require('grvtr');
 window.markdown = require("markdown").markdown;
 window.Eventable = require('eventablejs');
+window.SirTrevor = require('sir-trevor');
 
 require('angular');
 require('angular-cookie/angular-cookie');
@@ -28,5 +29,4 @@ require('leaflet.markercluster');
 
 require('jquery-ui-browserify');
 require('ngInfiniteScroll/ng-infinite-scroll');
-require('sir-trevor/sir-trevor.min');
 require('bootstrap-colorpicker/js/bootstrap-colorpicker-module');

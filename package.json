@@ -25,6 +25,10 @@
     "angular": "1.2.23",
     "brfs": "^1.2.0",
     "csv2geojson": "^3.7.1",
+    "deamdify": "^0.1.1",
+    "debowerify": "^1.2.0",
+    "decomponentify": "^0.1.0",
+    "deglobalify": "^0.2.0",
     "eventablejs": "^1.0.4",
     "express": "^4.8.7",
     "grunt": "^0.4.5",
@@ -48,6 +52,8 @@
     "napa": "^0.4.1",
     "osmtogeojson": "^2.0.5",
     "prerender-node": "^1.0.6",
+    "scribe-editor": "^1.0.0",
+    "sir-trevor": "latest",
     "togeojson": "^0.8.0",
     "underscore": "^1.7.0"
   },
@@ -68,7 +74,6 @@
     "angular-facebook": "Ciul/angular-facebook",
     "angular-gplus": "sirkitree/angular-directive.g-signin",
     "ngInfiniteScroll": "BinaryMuse/ngInfiniteScroll-bower",
-    "sir-trevor": "madebymany/sir-trevor-js",
     "bootstrap-colorpicker": "buberdds/angular-bootstrap-colorpicker"
   },
   "keywords": [
