@@ -68,7 +68,7 @@
     "angular-facebook": "Ciul/angular-facebook",
     "angular-gplus": "sirkitree/angular-directive.g-signin",
     "ngInfiniteScroll": "BinaryMuse/ngInfiniteScroll-bower",
-    "sir-trevor": "madebymany/sir-trevor-js",
+    "sir-trevor": "madebymany/sir-trevor-js#v0.3.3",
     "bootstrap-colorpicker": "buberdds/angular-bootstrap-colorpicker"
   },
   "keywords": [
