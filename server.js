@@ -1,3 +1,10 @@
+/**
+ * Load environment variables
+ */
+
+var dotenv = require('dotenv');
+dotenv.load();
+
 var express = require('express');
 var app = express();
 

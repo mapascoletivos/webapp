@@ -25,6 +25,7 @@
     "angular": "1.2.23",
     "brfs": "^1.2.0",
     "csv2geojson": "^3.7.1",
+    "dotenv": "^1.0.0",
     "eventablejs": "^1.0.4",
     "express": "^4.8.7",
     "grunt": "^0.4.5",
