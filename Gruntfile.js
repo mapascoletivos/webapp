@@ -88,26 +88,28 @@ module.exports = function(grunt) {
 			conf.jade.compile.options.data = require(viewsDataPath);
 		}
 
-		conf.copy.theme = [
-			{
-				expand: true,
-				cwd: 'themes/' + config.theme + '/app',
-				src: '**/*.js',
-				dest: 'tmp/app'
-			},
-			{
-				expand: true,
-				cwd: 'themes/' + config.theme + '/views',
-				src: '**/*.jade',
-				dest: 'tmp/views'
-			},
-			{
-				expand: true,
-				cwd: 'themes/' + config.theme + '/public',
-				src: '**',
-				dest: 'public'
-			}
-		];
+		conf.copy.theme = {
+			files: [
+				{
+					expand: true,
+					cwd: 'themes/' + config.theme + '/app',
+					src: '**/*.js',
+					dest: 'tmp/app'
+				},
+				{
+					expand: true,
+					cwd: 'themes/' + config.theme + '/views',
+					src: '**/*.jade',
+					dest: 'tmp/views'
+				},
+				{
+					expand: true,
+					cwd: 'themes/' + config.theme + '/public',
+					src: '**',
+					dest: 'public'
+				}
+			]
+		};
 
 	}
 
