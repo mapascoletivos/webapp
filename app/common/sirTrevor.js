@@ -49,6 +49,34 @@ angular.module('yby.sirTrevor', [])
 		};
 
 		return {
+			destroy: function(editor) {
+				// Destroy the rendered sub views
+				editor.formatBar.destroy();
+				editor.fl_block_controls.destroy();
+				editor.block_controls.destroy();
+
+				// Destroy all blocks
+				editor.block_manager.blocks.forEach(function(block) {
+					this.mediator.trigger('block:remove', block.blockID);
+				}, editor);
+
+				// Stop listening to events
+				editor.mediator.stopListening();
+				editor.stopListening();
+
+				// Remove instance
+				SirTrevor.config.instances = SirTrevor.config.instances.filter(function(instance) {
+					return instance.ID !== editor.ID;
+				}, editor);
+
+				// Clear the store
+				editor.store.reset();
+				editor.$outer.replaceWith(editor.$el.detach());
+			},
+			reinitialize: function(editor, options) {
+				this.destroy(editor);
+				editor.initialize(options || editor.options);
+			},
 			render: function(blocks) {
 				var self = this;
 				var rendered = '';

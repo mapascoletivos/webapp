@@ -48,7 +48,7 @@ exports.ContentEditCtrl = [
 		$scope.$watch('editing.sirTrevor', function(val) {
 			// Reinitialize Sir Trevor with some delay (enough to populate the model with new data)
 			setTimeout(function() {
-				$scope.sirTrevor.reinitialize();
+				SirTrevor.reinitialize($scope.sirTrevor);
 			}, 20);
 
 		});
@@ -62,7 +62,7 @@ exports.ContentEditCtrl = [
 			$scope.editing.type = 'Post';
 
 			// Store content (SirTrevor data)
-			$scope.editing.sections = $scope.sirTrevor.dataStore.data;
+			$scope.editing.sections = $scope.sirTrevor.store.retrieve().data;
 
 			if($scope.editing && $scope.editing._id) {
 

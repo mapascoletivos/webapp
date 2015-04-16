@@ -14,15 +14,15 @@ SirTrevor.Blocks.YbyImage = SirTrevor.Block.extend({
 
   loadData: function(data){
     // Create our image tag
-    this.$editor.html($('<img>', { src: SirTrevor.DEFAULTS.uploadedImagesUrl + '/' + data.files.default }));
+    this.$editor.html($('<img>', { src: SirTrevor.config.defaults.uploadedImagesUrl + '/' + data.files.default }));
   },
 
   onBlockRender: function(){
     /* Setup the upload button */
     this.$inputs.find('button').bind('click', function(ev){ ev.preventDefault(); });
-    this.$inputs.find('input').on('change', _.bind(function(ev){
+    this.$inputs.find('input').on('change', (function(ev) {
       this.onDrop(ev.currentTarget);
-    }, this));
+    }).bind(this));
   },
 
   onUploadSuccess : function(data) {
