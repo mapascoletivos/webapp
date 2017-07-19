@@ -159,7 +159,10 @@ angular.module('yby', [
 				}
 			});
 
-		$locationProvider.html5Mode(true);
+		$locationProvider.html5Mode({
+			enabled: true,
+			requireBase: false
+		});
 		$locationProvider.hashPrefix('!');
 
 		var interceptor = ['$rootScope', '$q', '$location', function(scope, $q, $location) {
@@ -187,7 +190,7 @@ angular.module('yby', [
 
 		}];
 
-		$httpProvider.responseInterceptors.push(interceptor);
+		$httpProvider.interceptors.push(interceptor);
 
 		/*
 		 * Trailing slash rule
@@ -212,7 +215,7 @@ angular.module('yby', [
 			angular.forEach(search, function(v, k){
 				params.push(k + '=' + v);
 			});
-			
+
 			return path + '/?' + params.join('&');
 		});
 

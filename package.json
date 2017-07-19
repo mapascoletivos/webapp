@@ -18,11 +18,11 @@
     }
   ],
   "scripts": {
-    "install": "mkdir -p public && ./node_modules/.bin/napa",
     "start": "node server.js"
   },
   "dependencies": {
-    "angular": "1.2.23",
+    "angular": "1.4.0",
+    "angular-ui-router": "0.2.14",
     "brfs": "^1.2.0",
     "browserify": "^9.0.8",
     "browserify-shim": "^3.8.5",
@@ -58,14 +58,13 @@
   "napa": {
     "angular-cookie": "ivpusic/angular-cookie",
     "angular-translate": "angular-translate/bower-angular-translate",
-    "angular-route": "angular/bower-angular-route",
-    "angular-sanitize": "angular/bower-angular-sanitize",
-    "angular-resource": "angular/bower-angular-resource",
-    "angular-animate": "angular/bower-angular-animate",
+    "angular-route": "angular/bower-angular-route#v1.4.0-build.3970+sha.6dd64ab",
+    "angular-sanitize": "angular/bower-angular-sanitize#v1.4.0-build.3970+sha.6dd64ab",
+    "angular-resource": "angular/bower-angular-resource#v1.4.0-build.3970+sha.6dd64ab",
+    "angular-animate": "angular/bower-angular-animate#v1.4.0-build.3970+sha.6dd64ab",
     "angular-elastic": "monospaced/angular-elastic",
     "angular-fitvids": "jimmyhillis/angular-fitvids",
-    "angular-ui-utils": "angular-ui/ui-utils",
-    "angular-ui-router": "angular-ui/ui-router",
+    "angular-ui-utils": "angular-ui/ui-utils#v0.2.3",
     "angular-ui-sortable": "angular-ui/ui-sortable",
     "angular-ui-slider": "angular-ui/ui-slider",
     "angular-modal": "miguelpeixe/angular-modal",

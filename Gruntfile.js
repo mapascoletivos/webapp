@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 			build: {
 				options: {
 					mangle: true,
-					compress: true
+					compress: {}
 				},
 				files: {
 					'public/app.js': 'public/app.js',
@@ -129,7 +129,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'javascript',
 		'Compile scripts.',
-		['browserify', 'uglify']
+		['browserify']
 	);
 
 	grunt.registerTask(
@@ -145,8 +145,8 @@ module.exports = function(grunt) {
 	);
 
 	grunt.registerTask(
-		'default', 
-		'Compiles everything.', 
+		'default',
+		'Compiles everything.',
 		['build', 'watch']
 	);
 

@@ -11,15 +11,14 @@ require('angular-cookie/angular-cookie');
 require('angular-translate/angular-translate');
 require('angular-route/angular-route');
 require('angular-elastic/elastic');
-require('angular-ui-router/release/angular-ui-router');
-require('angular-ui-utils/modules/keypress/keypress');
+require('angular-ui-router');
+require('angular-ui-utils/ui-utils');
 require('angular-ui-sortable/src/sortable');
 require('angular-ui-slider/src/slider');
 require('angular-modal/modal');
 require('angular-resource/angular-resource');
 require('angular-sanitize/angular-sanitize');
 require('angular-fitvids/angular-fitvids');
-require('angular-ui-utils/modules/utils');
 require('angular-facebook/lib/angular-facebook');
 require('angular-gplus/google-plus-signin');
 
