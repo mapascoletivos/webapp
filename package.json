@@ -6,8 +6,11 @@
     "url": "git://github.com/oeco/yby-client.git"
   },
   "version": "0.1.0",
-  "author": "Ecolab <gustavo.faleiros@gmail.com>",
   "contributors": [
+    {
+      "name": "Gustavo Faleiros",
+      "email": "gufalei@gmail.com"
+    },
     {
       "name": "Miguel Peixe",
       "email": "miguel@cardume.art.br"
@@ -18,7 +21,10 @@
     }
   ],
   "scripts": {
-    "start": "node server.js"
+    "server": "node server.js",
+    "start": "npm-run-all -p server watch",
+    "build": "NODE_ENV=development ./node_modules/.bin/grunt build",
+    "watch": "NODE_ENV=development ./node_modules/.bin/grunt"
   },
   "dependencies": {
     "angular": "1.4.0",
@@ -32,6 +38,7 @@
     "express": "^4.8.7",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.0.0",
+    "grunt-cli": "^1.3.1",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-jade": "^0.12.0",
@@ -49,6 +56,7 @@
     "mapbox.js": "1.6.4",
     "markdown": "^0.5.0",
     "napa": "^0.4.1",
+    "npm-run-all": "^4.1.3",
     "osmtogeojson": "^2.0.5",
     "prerender-node": "^1.0.6",
     "sir-trevor": "https://github.com/madebymany/sir-trevor-js/archive/v0.4.3.tar.gz",
