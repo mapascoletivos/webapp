@@ -1,6 +1,6 @@
-# YBY Client
+# Mapas Coletivos Web App
 
-This a default YBY client. Built on Angular.js, it's an application that connects to a Yby server.
+Built on Angular.js, it's an application that connects to Mapas Coletivos API service.
 
 ## Installing
 

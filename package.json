@@ -1,11 +1,15 @@
 {
-  "name": "yby-client",
-  "description": "Just another YBY client",
+  "name": "mc-webapp",
+  "description": "Mapas Coletivos Web Application",
   "repository": {
     "type": "git",
-    "url": "git://github.com/oeco/yby-client.git"
+    "url": "git://github.com/mapascoletivos/webapp.git"
   },
   "version": "0.1.0",
+  "author": {
+    "name": "Mapas Coletivos",
+    "email": "contato@mapascoletivos.com.br" 
+  },
   "contributors": [
     {
       "name": "Gustavo Faleiros",
@@ -23,8 +27,8 @@
   "scripts": {
     "server": "node server.js",
     "start": "npm-run-all -p server watch",
-    "build": "NODE_ENV=development ./node_modules/.bin/grunt build",
-    "watch": "NODE_ENV=development ./node_modules/.bin/grunt"
+    "build": "NODE_ENV=development grunt build",
+    "watch": "NODE_ENV=development grunt"
   },
   "dependencies": {
     "angular": "1.4.0",
