@@ -17,3 +17,7 @@ Start the server:
 	npm start
 
 The webapp should be available at [http://localhost:8000](http://localhost:8000).
+
+## License
+
+[MIT](LICENSE)
