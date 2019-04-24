@@ -10,6 +10,7 @@
     "name": "Mapas Coletivos",
     "email": "contato@mapascoletivos.com.br" 
   },
+  "license": "MIT",
   "contributors": [
     {
       "name": "Gustavo Faleiros",
