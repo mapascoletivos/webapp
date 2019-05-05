@@ -19,8 +19,6 @@ require('angular-modal/modal');
 require('angular-resource/angular-resource');
 require('angular-sanitize/angular-sanitize');
 require('angular-fitvids/angular-fitvids');
-require('angular-facebook/lib/angular-facebook');
-require('angular-gplus/google-plus-signin');
 
 require('mapbox.js');
 require('leaflet-draw');

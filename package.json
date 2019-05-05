@@ -81,8 +81,6 @@
     "angular-ui-sortable": "angular-ui/ui-sortable",
     "angular-ui-slider": "angular-ui/ui-slider",
     "angular-modal": "miguelpeixe/angular-modal",
-    "angular-facebook": "Ciul/angular-facebook",
-    "angular-gplus": "sirkitree/angular-directive.g-signin",
     "ngInfiniteScroll": "BinaryMuse/ngInfiniteScroll-bower",
     "bootstrap-colorpicker": "buberdds/angular-bootstrap-colorpicker"
   },

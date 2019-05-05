@@ -13,9 +13,3 @@ section#login
 						.form-group.action-group
 							a.signup(href='/signup', translate, ng-hide='ybySettings.general.onlyInvitedUsers') Register
 							a(href='/forgot-password', translate) Forgot my password
-				.social-login
-					.social-networks(ng-hide='ybySettings.general.onlyInvitedUsers')
-						a.facebook(ng-show='facebookReady', title='Facebook', href='javascript:void(0);', ng-click='login(\'facebook\')')
-							span.lsf &#xE047;
-							span(translate) Login with facebook
-						//- google-plus-signin(clientid='{{googleClientID}}', language='{{ybySettings.language}}')
