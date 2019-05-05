@@ -90,5 +90,8 @@
     "angular",
     "openstreetmap"
   ],
-  "engine": "node >= 0.10"
+  "engine": "node >= 0.10",
+  "devDependencies": {
+    "surge": "^0.20.4"
+  }
 }
