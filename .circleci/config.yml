@@ -38,6 +38,7 @@ jobs:
           name: Deploy to Surge
           command: |
             if [ "${CIRCLE_BRANCH}" == "${PRODUCTION_BRANCH}" ]; then
+              cp ./public/views/layouts/default.html ./public/index.html
               ./node_modules/surge/lib/cli.js --project ./public --domain mapascoletivos.surge.sh
             else
               echo "Not the branch you're looking for, skipping deploy"
