@@ -5,7 +5,7 @@
 				h1(translate='') Layers
 				.searchform
 					input(type='text', placeholder='{{"Type your search" | translate}}', ng-model='search')
-	.container
-		.content.row(ng-controller='LayerActionsCtrl', infinite-scroll='$layer.nextPage()', infinite-scroll-disabled='$layer.busy', infinite-scroll-distance='1', infinite-scroll-immediate-check='true')
+	.container(ng-controller='LayerActionsCtrl')
+		.content.row(infinite-scroll='$layer.nextPage()', infinite-scroll-disabled='$layer.busy', infinite-scroll-distance='1', infinite-scroll-immediate-check='true')
 			.three.columns(ng-repeat='layer in layers | filter:search')
 				div(ng-include='templates.list', autoscroll='false')

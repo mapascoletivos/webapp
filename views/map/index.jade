@@ -5,7 +5,7 @@
 				h1(translate='') Maps
 				.searchform
 					input(type='text', placeholder='{{"Type your search" | translate}}', ng-model='search')
-	.container
-		.content.row(ng-controller='MapActionsCtrl', infinite-scroll='$map.nextPage()', infinite-scroll-disabled='$map.busy', infinite-scroll-distance='1', infinite-scroll-immediate-check='true')
+	.container(ng-controller='MapActionsCtrl')
+		.content.row(infinite-scroll='$map.nextPage()', infinite-scroll-disabled='$map.busy', infinite-scroll-distance='1', infinite-scroll-immediate-check='true')
 			.three.columns(ng-repeat='map in maps | filter:search')
 				div(ng-include='templates.list', autoscroll='false')
