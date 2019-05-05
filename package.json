@@ -8,7 +8,7 @@
   "version": "0.1.0",
   "author": {
     "name": "Mapas Coletivos",
-    "email": "contato@mapascoletivos.com.br" 
+    "email": "contato@mapascoletivos.com.br"
   },
   "license": "MIT",
   "contributors": [
@@ -29,7 +29,8 @@
     "server": "node server.js",
     "start": "npm-run-all -p server watch",
     "build": "NODE_ENV=development grunt build",
-    "watch": "NODE_ENV=development grunt"
+    "watch": "NODE_ENV=development grunt",
+    "postinstall": "napa"
   },
   "dependencies": {
     "angular": "1.4.0",
