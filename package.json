@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "server": "node server.js",
-    "start": "npm-run-all -p server watch",
+    "dev": "npm-run-all -p server watch",
     "build": "NODE_ENV=development grunt build",
     "watch": "NODE_ENV=development grunt",
     "postinstall": "napa"

@@ -1,22 +1,37 @@
-# Mapas Coletivos Web App
+# Mapas Coletivos: Web Application
 
-Built on Angular.js, it's an application that connects to Mapas Coletivos API service.
+A web application for creating maps using Mapas Coleticos API.
 
-## Installing
+## Installation and Usage
 
-Pre-requisites:
+The steps below will walk you through setting up a development environment.
 
-- [Node.js](https://nodejs.org)
+### Install dependencies
 
-Clone this repository locally and install dependencies:
+Install the following on your system:
 
-    npm install
+- [Git](https://git-scm.com)
+- [nvm](https://github.com/creationix/nvm)
 
-Start the server:
+Clone this repository locally and activate required Node.js version:
 
-	npm start
+```
+nvm install
+```
 
-The webapp should be available at [http://localhost:8000](http://localhost:8000).
+Install Node.js dependencies:
+
+```
+npm install
+```
+
+### Development
+
+Start the development server:
+
+    npm run dev
+
+The app will be served at [http://localhost:8000](http://localhost:8000), refreshing automatically when changed.
 
 ## License
 
