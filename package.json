@@ -5,7 +5,7 @@
     "type": "git",
     "url": "git://github.com/mapascoletivos/webapp.git"
   },
-  "version": "0.1.0",
+  "version": "1.0.0-beta1",
   "author": {
     "name": "Mapas Coletivos",
     "email": "contato@mapascoletivos.com.br"
