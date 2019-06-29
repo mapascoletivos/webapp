@@ -7,4 +7,8 @@ section#login
 							label.col-sm-2.control-label(for='name', translate) Your email address or username:
 							.col-sm-10
 								input#name.form-control(ng-model='user.emailOrUsername', placeholder='{{\'Email or username\' | translate}}', type='text', autocomplete='off')
+						.form-group
+							label.col-sm-2.control-label(for='captcha', translate) Are you a robot?
+							.col-sm-10
+								div#recaptcha(vc-recaptcha,ng-model="user.recaptchaResponse",key="'6LdeHakUAAAAAPgNpgc8VFc581dh01ujJwpfMNck'")
 						input.btn.btn-primary(type='submit', value='{{\'Recover\' | translate}}')

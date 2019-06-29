@@ -30,7 +30,7 @@ jobs:
           name: Building site
           command: |
             if [ "${CIRCLE_BRANCH}" == "${PRODUCTION_BRANCH}" ]; then
-              npm run build           
+              ./node_modules/.bin/grunt build
             else
               echo "Skip building site"
             fi

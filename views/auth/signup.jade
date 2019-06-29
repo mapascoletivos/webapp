@@ -15,6 +15,10 @@ section#login
 							label.col-sm-2.control-label(for='password', translate) Password
 							.col-sm-10
 								input#password.form-control(ng-model='user.password', placeholder='{{\'Password\' | translate}}', type='password', autocomplete='off')
+						.form-group
+							label.col-sm-2.control-label(for='recaptcha', translate) Are you a robot?
+							.col-sm-10
+								div#recaptcha(vc-recaptcha,ng-model="user.recaptchaResponse",key="'6LdeHakUAAAAAPgNpgc8VFc581dh01ujJwpfMNck'")								
 						input.btn.btn-primary(type='submit', value='{{\'Register\' | translate}}')
 						.form-group.action-group
 							a.show-signup(href='/login', translate) Login

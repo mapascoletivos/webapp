@@ -1,6 +1,11 @@
 'use strict';
 
 /*
+ * Vendor modules
+ */
+require('angular-recaptcha');
+
+/*
  * Helpers
  */
 require('./helpers');
@@ -56,6 +61,7 @@ angular.module('yby', [
 	'ngRoute',
 	'infinite-scroll',
 	'colorpicker.module',
+	'vcRecaptcha',
 	'yby.settings',
 	'yby.mapView',
 	'yby.user',
