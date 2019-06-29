@@ -7,7 +7,7 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      - PRODUCTION_BRANCH: master
+      - STAGING_BRANCH: develop
 
     steps:
       - checkout
@@ -29,15 +29,15 @@ jobs:
       - run:
           name: Building site
           command: |
-            if [ "${CIRCLE_BRANCH}" == "${PRODUCTION_BRANCH}" ]; then
+            if [ "${CIRCLE_BRANCH}" == "${STAGING_BRANCH}" ]; then
               ./node_modules/.bin/grunt build
             else
               echo "Skip building site"
             fi
       - run:
-          name: Deploy to Surge
+          name: Deploy staging to Surge
           command: |
-            if [ "${CIRCLE_BRANCH}" == "${PRODUCTION_BRANCH}" ]; then
+            if [ "${CIRCLE_BRANCH}" == "${STAGING_BRANCH}" ]; then
               cp ./public/views/layouts/default.html ./public/index.html
               ./node_modules/surge/lib/cli.js --project ./public --domain mapascoletivos.surge.sh
             else
