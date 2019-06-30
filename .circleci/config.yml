@@ -27,15 +27,15 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
-          name: Building site
+          name: Build site
           command: |
             if [ "${CIRCLE_BRANCH}" == "${STAGING_BRANCH}" ]; then
-              ./node_modules/.bin/grunt build
+              NODE_ENV=staging ./node_modules/.bin/grunt build
             else
               echo "Skip building site"
             fi
       - run:
-          name: Deploy staging to Surge
+          name: Deploy to target environment
           command: |
             if [ "${CIRCLE_BRANCH}" == "${STAGING_BRANCH}" ]; then
               cp ./public/views/layouts/default.html ./public/index.html

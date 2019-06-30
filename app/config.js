@@ -1,9 +1,16 @@
 'use strict';
 
-var env = process.env;
+const env = process.env.NODE_ENV;
 
-module.exports = {
-	siteUrl: env.SITE_URL || 'http://localhost:8000', // Client URL. Eg: http://my-yby-service.com
-	server: env.SERVER_URL || 'http://localhost:3000', // Server URL. Eg: http://server.my-yby-service.com
-	apiPrefix: env.API_PREFIX || '/api/v1' // You probably won't change this
-};
+let config = {
+	siteUrl: 'http://localhost:8000',
+	server: 'http://localhost:3000',
+	apiPrefix: '/api/v1'
+}
+
+if (env === 'staging') {
+  config.siteUrl = 'https://mapascoletivos.surge.sh',
+  config.server = 'http://mc1-dev.herokuapp.com'
+}
+
+module.exports = config;
