@@ -38,7 +38,7 @@
     ]
   },
   "dependencies": {
-    "angular": "1.4.0",
+    "angular": "1.7.9",
     "angular-recaptcha": "^4.2.0",
     "angular-ui-router": "0.2.14",
     "brfs": "^1.2.0",
